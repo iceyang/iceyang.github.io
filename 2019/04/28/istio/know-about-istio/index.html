@@ -43,9 +43,7 @@
 <li>control plane：管理配置着代理来路由流量，配置 <em>Mixer</em> 实施策略和遥测数据。</li>
 </ul>
 <p>下面是来自Istio官网的一张架构图：</p>
-<p><img src="/img/2019042901.svg" alt></p>
-<p style="text-align: center;"><em>Istio 架构</em></p>
-
+<p><img src="/img/2019042901.svg" alt="Istio 架构"></p>
 <p>Istio的架构中，有几个重要的模块，分别是 <em>Envoy</em>， <em>Mixer</em>， <em>Pilot</em>， <em>Citadel</em>， <em>Galley</em>，下面为它们做做介绍。</p>
 <h3 id="Envoy"><a href="#Envoy" class="headerlink" title="Envoy"></a>Envoy</h3><p>Envoy在Istio架构中作为sidecar部署，代理所有服务的流量，它和业务服务部署在同一个Kubernetes Pod中。它可以完成下面这些功能：</p>
 <ul>
