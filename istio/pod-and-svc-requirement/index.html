@@ -1,0 +1,111 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta name="generator" content="Hexo 3.8.0"><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description"><title>Istio：对Pod和Service的要求 | Keep Moving</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/normalize/8.0.1/normalize.min.css"><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/pure/1.0.0/pure-min.css"><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/pure/1.0.0/grids-responsive-min.css"><link rel="stylesheet" href="//lib.baomitu.com/font-awesome/4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="//lib.baomitu.com/jquery/3.3.1/jquery.min.js"></script><link rel="icon" mask sizes="any" href="/favicon.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = 'https://hm.baidu.com/hm.js?' + '2865c3b77072dd5c6550fac9944d5313';
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();</script></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">Istio：对Pod和Service的要求</h1><a id="logo" href="/.">Keep Moving</a><p class="description">生活其实很简单，没那么复杂</p></div><div id="nav-menu"><a class="current" href="/."><i class="fa fa-home"> 首页</i></a><a href="/archives/"><i class="fa fa-archive"> 归档</i></a><a href="/learning/"><i class="fa fa-book"> 其它记录</i></a><a href="/about/"><i class="fa fa-user"> 关于</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">Istio：对Pod和Service的要求</h1><div class="post-meta">May 7, 2019<span> | </span><span class="category"><a href="/categories/Istio/">Istio</a></span></div><div class="post-content"><p><img src="/img/2019050701.jpg" alt="Photo by Michael Liao on Unsplash"></p>
+<blockquote>
+<p>Istio对需要注入的Pod和Service是有要求的，要成为服务网格中的一部分，它们需要满足下面的要求：</p>
+</blockquote>
+<ul>
+<li><em>Service端口命名</em>：Service的端口必须命名，匹配的格式为：<code>&lt;protocol&gt;[-&lt;suffix&gt;]</code>，<code>&lt;protocol&gt;</code>可以是下面的几种：<code>grpc</code>、<code>http</code>、<code>http2</code>、<code>https</code>、<code>mongo</code>、<code>redis</code>、<code>tcp</code>、<code>tls</code>、<code>udp</code>，如果没有进行命名或者命名的前缀识别不出来，那么流量都会被当成TCP流量对待，除非显示声明，比如<code>Protocol: UDP</code>声明端口是UDP端口。</li>
+<li><em>Pod端口</em>：Pod需要被代理端口都需要使用<code>containerPort</code>指定出来，否则都会绕过Istio Proxy。</li>
+<li><em>关联服务</em>：不管Pod有没有暴露端口，它需要关联至少一个Service。如果Pod关联了不止一个Service，那么在相同端口不能使用不同的协议。</li>
+<li><em>Deployment需要打上标签<em>app</em>和<em>version</em></em>：app用于识别上下文信息，version可以标识Deployment的版本信息。</li>
+<li><em>Application UID</em>：确保Pod运行的用户ID（UID）不是1337。</li>
+<li><em>NET_ADMIN能力</em>：如果集群实施了Pod安全策略，除非使用了Istio CNI Plugin，否则Pod需要具备<code>NET_ADMIN</code>能力。</li>
+</ul>
+<h2 id="被Istio使用的端口"><a href="#被Istio使用的端口" class="headerlink" title="被Istio使用的端口"></a>被Istio使用的端口</h2><p>下面的端口和协议是Istio会使用到的，需要确保服务不会与Istio冲突。</p>
+<table>
+<thead>
+<tr>
+<th>端口</th>
+<th>协议</th>
+<th>使用者</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>8060</td>
+<td>HTTP</td>
+<td>Citadel</td>
+<td>GRPC 服务</td>
+</tr>
+<tr>
+<td>9090</td>
+<td>HTTP</td>
+<td>Prometheus</td>
+<td>Prometheus</td>
+</tr>
+<tr>
+<td>9091</td>
+<td>HTTP</td>
+<td>Mixer</td>
+<td>决策/遥测</td>
+</tr>
+<tr>
+<td>9093</td>
+<td>HTTP</td>
+<td>Citadel</td>
+<td></td>
+</tr>
+<tr>
+<td>15000</td>
+<td>TCP</td>
+<td>Envoy</td>
+<td>Envoy管理端口(命令/诊断)</td>
+</tr>
+<tr>
+<td>15001</td>
+<td>TCP</td>
+<td>Envoy</td>
+<td>Envoy</td>
+</tr>
+<tr>
+<td>15004</td>
+<td>HTTP</td>
+<td>Mixer, Pilot</td>
+<td>决策/遥测 - mTLS</td>
+</tr>
+<tr>
+<td>15010</td>
+<td>HTTP</td>
+<td>Pilot</td>
+<td>Pilot服务 - XDS pilot - 发现</td>
+</tr>
+<tr>
+<td>15011</td>
+<td>TCP</td>
+<td>Pilot</td>
+<td>Pilot服务 - mTLS - 代理 - 发现</td>
+</tr>
+<tr>
+<td>15014</td>
+<td>HTTP</td>
+<td>Citadel, Mixer, Pilot</td>
+<td>控制面板监控</td>
+</tr>
+<tr>
+<td>15030</td>
+<td>TCP</td>
+<td>Prometheus</td>
+<td>Prometheus</td>
+</tr>
+<tr>
+<td>15090</td>
+<td>HTTP</td>
+<td>Mixer</td>
+<td>代理</td>
+</tr>
+<tr>
+<td>42422</td>
+<td>TCP</td>
+<td>Mixer</td>
+<td>遥测 - Prometheus</td>
+</tr>
+</tbody>
+</table>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://istio.io/docs/setup/kubernetes/prepare/requirements/" target="_blank" rel="noopener">Pods and Services</a></p>
+</div><div class="tags"><a href="/tags/istio/">istio</a><a href="/tags/service-mesh/">service mesh</a><a href="/tags/kubernetes/">kubernetes</a><a href="/tags/sidecar/">sidecar</a></div><div class="post-nav"><a class="pre" href="/kubernetes/managing-compute-resources-for-containers/">Kubernetes：管理Pod的计算资源</a><a class="next" href="/istio/five-traffic-type-in-istio/">Istio：五种流量管理配置资源</a></div></div></div></div><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="text" name="q" maxlength="20" placeholder="Search"><input type="hidden" name="sitesearch" value="httsp://keepmoving.ren"></form></div><div class="widget"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Devops/">Devops</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Istio/">Istio</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Kubernetes/">Kubernetes</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nginx/">Nginx</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Node-js/">Node.js</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/">Programming</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/">工具</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/">数据库</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/生活点滴/">生活点滴</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/系统架构/">系统架构</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> 标签</i></div><div class="tagcloud"><a href="/tags/linux/" style="font-size: 15px;">linux</a> <a href="/tags/git/" style="font-size: 15px;">git</a> <a href="/tags/istio/" style="font-size: 15px;">istio</a> <a href="/tags/service-mesh/" style="font-size: 15px;">service mesh</a> <a href="/tags/kubernetes/" style="font-size: 15px;">kubernetes</a> <a href="/tags/sidecar/" style="font-size: 15px;">sidecar</a> <a href="/tags/缓存/" style="font-size: 15px;">缓存</a> <a href="/tags/cache/" style="font-size: 15px;">cache</a> <a href="/tags/性能优化/" style="font-size: 15px;">性能优化</a> <a href="/tags/java/" style="font-size: 15px;">java</a> <a href="/tags/jdk/" style="font-size: 15px;">jdk</a> <a href="/tags/mac/" style="font-size: 15px;">mac</a> <a href="/tags/k8s/" style="font-size: 15px;">k8s</a> <a href="/tags/ios/" style="font-size: 15px;">ios</a> <a href="/tags/gitblit/" style="font-size: 15px;">gitblit</a> <a href="/tags/ssh/" style="font-size: 15px;">ssh</a> <a href="/tags/操作系统/" style="font-size: 15px;">操作系统</a> <a href="/tags/nginx/" style="font-size: 15px;">nginx</a> <a href="/tags/websocket/" style="font-size: 15px;">websocket</a> <a href="/tags/nodejs/" style="font-size: 15px;">nodejs</a> <a href="/tags/socket-io/" style="font-size: 15px;">socket.io</a> <a href="/tags/npm/" style="font-size: 15px;">npm</a> <a href="/tags/多线程/" style="font-size: 15px;">多线程</a> <a href="/tags/并发/" style="font-size: 15px;">并发</a> <a href="/tags/vim/" style="font-size: 15px;">vim</a> <a href="/tags/mysql/" style="font-size: 15px;">mysql</a> <a href="/tags/database/" style="font-size: 15px;">database</a> <a href="/tags/事务/" style="font-size: 15px;">事务</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/istio/traffic-management/">Istio：流量管理</a></li><li class="post-list-item"><a class="post-list-link" href="/kubernetes/managing-compute-resources-for-containers/">Kubernetes：管理Pod的计算资源</a></li><li class="post-list-item"><a class="post-list-link" href="/istio/pod-and-svc-requirement/">Istio：对Pod和Service的要求</a></li><li class="post-list-item"><a class="post-list-link" href="/istio/five-traffic-type-in-istio/">Istio：五种流量管理配置资源</a></li><li class="post-list-item"><a class="post-list-link" href="/istio/know-about-istio/">Istio：初识Istio</a></li><li class="post-list-item"><a class="post-list-link" href="/nginx/gzip-module/">Nginx开启gzip优化数据传输</a></li><li class="post-list-item"><a class="post-list-link" href="/java/manage-jdk-on-mac/">在Mac OS X管理Java的版本</a></li><li class="post-list-item"><a class="post-list-link" href="/nodejs/npm-link/">使用npm link调试node.js模块</a></li><li class="post-list-item"><a class="post-list-link" href="/kubernetes/use-pod-probe/">使用Pod探针让服务更可靠</a></li><li class="post-list-item"><a class="post-list-link" href="/nginx/no-live-upstream/">Nginx出现no live upstream问题</a></li></ul></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">Copyright © 2019 <a href="/." rel="nofollow">Keep Moving.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/pagecho"> Cho.</a></div></div></div><a class="show" id="rocket" href="#top"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script type="text/javascript" src="//lib.baomitu.com/fancybox/3.5.2/jquery.fancybox.min.js" async></script><script type="text/javascript" src="/js/fancybox.js?v=0.0.0" async></script><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/fancybox/3.5.2/jquery.fancybox.min.css"><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script></div></body></html>
