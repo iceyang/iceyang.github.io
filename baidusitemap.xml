@@ -1,100 +1,100 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>httsp://keepmoving.ren/istio/know-about-istio/</loc>
+    <loc>https://keepmoving.ren/istio/know-about-istio/</loc>
     <lastmod>2019-05-13</lastmod>
   </url>  <url>
-    <loc>httsp://keepmoving.ren/istio/five-traffic-type-in-istio/</loc>
+    <loc>https://keepmoving.ren/istio/five-traffic-type-in-istio/</loc>
     <lastmod>2019-05-13</lastmod>
   </url>  <url>
-    <loc>httsp://keepmoving.ren/istio/traffic-management/</loc>
+    <loc>https://keepmoving.ren/istio/traffic-management/</loc>
     <lastmod>2019-05-13</lastmod>
   </url>  <url>
-    <loc>httsp://keepmoving.ren/kubernetes/managing-compute-resources-for-containers/</loc>
+    <loc>https://keepmoving.ren/kubernetes/managing-compute-resources-for-containers/</loc>
     <lastmod>2019-05-09</lastmod>
   </url>  <url>
-    <loc>httsp://keepmoving.ren/istio/pod-and-svc-requirement/</loc>
+    <loc>https://keepmoving.ren/istio/pod-and-svc-requirement/</loc>
     <lastmod>2019-05-07</lastmod>
   </url>  <url>
-    <loc>httsp://keepmoving.ren/nginx/gzip-module/</loc>
+    <loc>https://keepmoving.ren/nginx/gzip-module/</loc>
     <lastmod>2019-04-26</lastmod>
   </url>  <url>
-    <loc>httsp://keepmoving.ren/nginx/proxy-set-header-with-if/</loc>
+    <loc>https://keepmoving.ren/nginx/proxy-set-header-with-if/</loc>
     <lastmod>2019-04-25</lastmod>
   </url>  <url>
-    <loc>httsp://keepmoving.ren/java/manage-jdk-on-mac/</loc>
+    <loc>https://keepmoving.ren/java/manage-jdk-on-mac/</loc>
     <lastmod>2019-04-24</lastmod>
   </url>  <url>
-    <loc>httsp://keepmoving.ren/life/ios10-macOS-Sierra/</loc>
+    <loc>https://keepmoving.ren/life/ios10-macOS-Sierra/</loc>
     <lastmod>2019-04-22</lastmod>
   </url>  <url>
-    <loc>httsp://keepmoving.ren/nodejs/npm-link/</loc>
+    <loc>https://keepmoving.ren/nodejs/npm-link/</loc>
     <lastmod>2019-04-20</lastmod>
   </url>  <url>
-    <loc>httsp://keepmoving.ren/architecture/meeting-cache-system/</loc>
+    <loc>https://keepmoving.ren/architecture/meeting-cache-system/</loc>
     <lastmod>2019-04-18</lastmod>
   </url>  <url>
-    <loc>httsp://keepmoving.ren/tools/my_vim_usage/</loc>
+    <loc>https://keepmoving.ren/tools/my_vim_usage/</loc>
     <lastmod>2019-04-18</lastmod>
   </url>  <url>
-    <loc>httsp://keepmoving.ren/tools/chrome_shortcuts/</loc>
+    <loc>https://keepmoving.ren/tools/chrome_shortcuts/</loc>
     <lastmod>2019-04-18</lastmod>
   </url>  <url>
-    <loc>httsp://keepmoving.ren/programming/thread-safty/</loc>
+    <loc>https://keepmoving.ren/programming/thread-safty/</loc>
     <lastmod>2019-04-18</lastmod>
   </url>  <url>
-    <loc>httsp://keepmoving.ren/linux/ssh-timeout/</loc>
+    <loc>https://keepmoving.ren/linux/ssh-timeout/</loc>
     <lastmod>2019-04-18</lastmod>
   </url>  <url>
-    <loc>httsp://keepmoving.ren/linux/top_util/</loc>
+    <loc>https://keepmoving.ren/linux/top_util/</loc>
     <lastmod>2019-04-18</lastmod>
   </url>  <url>
-    <loc>httsp://keepmoving.ren/life/2016-guoqing/</loc>
+    <loc>https://keepmoving.ren/life/2016-guoqing/</loc>
     <lastmod>2019-04-18</lastmod>
   </url>  <url>
-    <loc>httsp://keepmoving.ren/kubernetes/only-one-pod-each-node/</loc>
+    <loc>https://keepmoving.ren/kubernetes/only-one-pod-each-node/</loc>
     <lastmod>2019-04-18</lastmod>
   </url>  <url>
-    <loc>httsp://keepmoving.ren/kubernetes/something-record/</loc>
+    <loc>https://keepmoving.ren/kubernetes/something-record/</loc>
     <lastmod>2019-04-18</lastmod>
   </url>  <url>
-    <loc>httsp://keepmoving.ren/database/mysql/transation-isolation/</loc>
+    <loc>https://keepmoving.ren/database/mysql/transation-isolation/</loc>
     <lastmod>2019-04-18</lastmod>
   </url>  <url>
-    <loc>httsp://keepmoving.ren/database/mysql/how-to-execute-update-sql/</loc>
+    <loc>https://keepmoving.ren/database/mysql/how-to-execute-update-sql/</loc>
     <lastmod>2019-04-18</lastmod>
   </url>  <url>
-    <loc>httsp://keepmoving.ren/database/mysql/how-to-execute-select-sql/</loc>
+    <loc>https://keepmoving.ren/database/mysql/how-to-execute-select-sql/</loc>
     <lastmod>2019-04-18</lastmod>
   </url>  <url>
-    <loc>httsp://keepmoving.ren/database/mysql/about-index/</loc>
+    <loc>https://keepmoving.ren/database/mysql/about-index/</loc>
     <lastmod>2019-04-18</lastmod>
   </url>  <url>
-    <loc>httsp://keepmoving.ren/kubernetes/use-pod-probe/</loc>
+    <loc>https://keepmoving.ren/kubernetes/use-pod-probe/</loc>
     <lastmod>2019-04-18</lastmod>
   </url>  <url>
-    <loc>httsp://keepmoving.ren/devops/use-gitblit-with-nginx/</loc>
+    <loc>https://keepmoving.ren/devops/use-gitblit-with-nginx/</loc>
     <lastmod>2019-04-13</lastmod>
   </url>  <url>
-    <loc>httsp://keepmoving.ren/nginx/no-live-upstream/</loc>
+    <loc>https://keepmoving.ren/nginx/no-live-upstream/</loc>
     <lastmod>2019-04-13</lastmod>
   </url>  <url>
-    <loc>httsp://keepmoving.ren/nodejs/check-if-function-is-a-generator/</loc>
+    <loc>https://keepmoving.ren/nodejs/check-if-function-is-a-generator/</loc>
     <lastmod>2019-03-27</lastmod>
   </url>  <url>
-    <loc>httsp://keepmoving.ren/nginx/about-proxy-set-header/</loc>
+    <loc>https://keepmoving.ren/nginx/about-proxy-set-header/</loc>
     <lastmod>2019-03-23</lastmod>
   </url>  <url>
-    <loc>httsp://keepmoving.ren/nodejs/socketio-with-k8s/</loc>
+    <loc>https://keepmoving.ren/nodejs/socketio-with-k8s/</loc>
     <lastmod>2019-03-16</lastmod>
   </url>  <url>
-    <loc>httsp://keepmoving.ren/nginx/x-accel-redirect-with-nginx/</loc>
+    <loc>https://keepmoving.ren/nginx/x-accel-redirect-with-nginx/</loc>
     <lastmod>2019-03-10</lastmod>
   </url>  <url>
-    <loc>httsp://keepmoving.ren/nodejs/node-version-change/</loc>
+    <loc>https://keepmoving.ren/nodejs/node-version-change/</loc>
     <lastmod>2019-03-09</lastmod>
   </url>  <url>
-    <loc>httsp://keepmoving.ren/nginx/proxy-websocket/</loc>
+    <loc>https://keepmoving.ren/nginx/proxy-websocket/</loc>
     <lastmod>2019-03-09</lastmod>
   </url>
 </urlset>
