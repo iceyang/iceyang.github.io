@@ -9,12 +9,20 @@
 <p>当进行个人开发，或项目规模不大时，只需要工作在<code>master</code>分支下，代码提交和变动都在主分支便足够了。</p>
 <p>而在多组员、多项目的环境下时，如果没有比较好的协作流程，会存在许多问题，比如较多的版本冲突、版本不好控制等等。<code>GitFlow</code>作为最早被广泛采用的一种工作流程，便是为了解决这些问题。它最早发表于<a href="https://nvie.com/posts/a-successful-git-branching-model/" target="_blank" rel="noopener">A successful Git branching model</a>。</p>
 <p>在<code>GitFlow</code>之后，还有<code>Github Flow</code>和<code>Gitlab Flow</code>，它们都是对前者的改进，以适应不同的开发环境，本文主要阐述的是<code>GitFlow</code>。</p>
+<h2 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h2><p><code>GitFlow</code>存在5个分支：</p>
+<ul>
+<li>长期分支：<code>master</code>和<code>develop</code></li>
+<li>短期分支：<code>feature</code>、<code>release</code>、<code>hotfix</code></li>
+</ul>
+<p><code>master</code>和<code>develop</code>是需要同时维护的两个长期分支。<code>master</code>主要用于发布版本，从<code>master</code>拿到的，都是稳定的发布版。<code>develop</code>主要用于开发，存放的是最新的开发版。</p>
+<p><code>feature</code>是功能分支，每个新功能都应该创建一个<code>feature</code>分支，从<code>develop</code>派生出来，当<code>feature</code>完成时，要合并回<code>develop</code>分支，同时结束它的生命周期。</p>
+<p><code>release</code>是发布分支，当功能开发完善，准备发布一个新版本时，从<code>develop</code>分支派生出一个<code>release</code>分支，在这个分支上，不再添加功能，只修复测试出现的bug。当发布时机到了，<code>release</code>要合并到<code>master</code>和<code>develop</code>分支，同时打上版本标签。</p>
+<p><code>hotfix</code>是热修复分支，当线上环境出现bug时，需要从对应<code>master</code>分支派生<code>hotfix</code>分支，进行快速修复，修复完成后，合并回<code>master</code>，打上版本标签，同时合并到<code>develop</code>分支，以确保修复的问题不会在后续的版本出现。</p>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
 <li><a href="https://nvie.com/posts/a-successful-git-branching-model/" target="_blank" rel="noopener">A successful Git branching model</a></li>
 <li><a href="https://www.jianshu.com/p/9a76e9aa9534" target="_blank" rel="noopener">Git Flow工作流程</a></li>
 <li>[极客时间 - 左耳听风 - 20 | Git协同工作流，你该怎么选？]</li>
 <li><a href="http://www.ruanyifeng.com/blog/2015/12/git-workflow.html" target="_blank" rel="noopener">Git 工作流程</a></li>
-<li><a href="http://marcgg.com/blog/2016/02/22/git-flow-heroku-pipelines/" target="_blank" rel="noopener">Simple Git Flow With Heroku Pipelines</a></li>
 </ul>
 </div><div class="tags"><a href="/tags/git/">git</a><a href="/tags/git-flow/">git-flow</a></div><div class="post-nav"><a class="next" href="/istio/traffic-management/">Istio：流量管理</a></div><div id="container"></div><link rel="stylesheet" type="text/css" href="//unpkg.com/gitalk/dist/gitalk.css?v=0.0.0"><script type="text/javascript" src="//cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.js?v=0.0.0"></script><script type="text/javascript" src="//unpkg.com/gitalk/dist/gitalk.min.js?v=0.0.0"></script><script>var gitalk = new Gitalk({
   clientID: '6ad6eee4b6354355459d',
