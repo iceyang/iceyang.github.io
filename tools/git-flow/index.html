@@ -9,7 +9,7 @@
 <p>当进行个人开发，或项目规模不大时，只需要工作在<code>master</code>分支下，代码提交和变动都在主分支便足够了。</p>
 <p>而在多组员、多项目的环境下时，如果没有比较好的协作流程，会存在许多问题，比如较多的版本冲突、版本不好控制等等。<code>GitFlow</code>作为最早被广泛采用的一种工作流程，便是为了解决这些问题。它最早发表于<a href="https://nvie.com/posts/a-successful-git-branching-model/" target="_blank" rel="noopener">A successful Git branching model</a>。</p>
 <p>在<code>GitFlow</code>之后，还有<code>Github Flow</code>和<code>Gitlab Flow</code>，它们都是对前者的改进，以适应不同的开发环境，本文主要阐述的是<code>GitFlow</code>。</p>
-<h2 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h2><p><code>GitFlow</code>存在5个分支：</p>
+<h2 id="GitFlow特点"><a href="#GitFlow特点" class="headerlink" title="GitFlow特点"></a>GitFlow特点</h2><p><code>GitFlow</code>存在5个分支：</p>
 <ul>
 <li>长期分支：<code>master</code>和<code>develop</code></li>
 <li>短期分支：<code>feature</code>、<code>release</code>、<code>hotfix</code></li>
@@ -18,6 +18,12 @@
 <p><code>feature</code>是功能分支，每个新功能都应该创建一个<code>feature</code>分支，从<code>develop</code>派生出来，当<code>feature</code>完成时，要合并回<code>develop</code>分支，同时结束它的生命周期。</p>
 <p><code>release</code>是发布分支，当功能开发完善，准备发布一个新版本时，从<code>develop</code>分支派生出一个<code>release</code>分支，在这个分支上，不再添加功能，只修复测试出现的bug。当发布时机到了，<code>release</code>要合并到<code>master</code>和<code>develop</code>分支，同时打上版本标签。</p>
 <p><code>hotfix</code>是热修复分支，当线上环境出现bug时，需要从对应<code>master</code>分支派生<code>hotfix</code>分支，进行快速修复，修复完成后，合并回<code>master</code>，打上版本标签，同时合并到<code>develop</code>分支，以确保修复的问题不会在后续的版本出现。</p>
+<blockquote>
+<p>三个短期分支在完成了它们自身的任务后，都没有了存在的必要，所以在合并回<code>master</code>和<code>develop</code>之后，都可以删除。</p>
+</blockquote>
+<h2 id="gitflow插件"><a href="#gitflow插件" class="headerlink" title="gitflow插件"></a>gitflow插件</h2><p>从上面的特点我们知道，<code>GitFlow</code>工作流的主要特点在于要维护5个分支，分支间的切换十分频繁而且繁琐，庆幸的是，开源社区已经有贡献者提供了插件使用，在终端下，可以安装<a href="https://github.com/nvie/gitflow" target="_blank" rel="noopener">gitflow</a>插件。</p>
+<h3 id="如何使用"><a href="#如何使用" class="headerlink" title="如何使用"></a>如何使用</h3><p>TODO</p>
+<h2 id="Sourcetree"><a href="#Sourcetree" class="headerlink" title="Sourcetree"></a>Sourcetree</h2><p>或者你喜欢使用GUI工具，知名的有<code>Sourcetree</code>，它也内置了<code>Gitflow</code>工作流程的功能。</p>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
 <li><a href="https://nvie.com/posts/a-successful-git-branching-model/" target="_blank" rel="noopener">A successful Git branching model</a></li>
 <li><a href="https://www.jianshu.com/p/9a76e9aa9534" target="_blank" rel="noopener">Git Flow工作流程</a></li>
