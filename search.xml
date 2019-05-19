@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>今日喵片</title>
+      <link href="/life/20190519-lulu/"/>
+      <url>/life/20190519-lulu/</url>
+      
+        <content type="html"><![CDATA[<p><img src="/img/2019051901.jpg" alt></p><p><img src="/img/2019051902.jpg" alt></p><p>喵星人总是这么治愈。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 生活点滴 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 喵星人 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Git协作：GitFlow工作流与使用说明</title>
       <link href="/tools/git-flow/"/>
       <url>/tools/git-flow/</url>

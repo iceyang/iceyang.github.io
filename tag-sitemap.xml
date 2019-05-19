@@ -3,6 +3,13 @@
 
 
     <url>
+        <loc>https://keepmoving.ren/tags/%E5%96%B5%E6%98%9F%E4%BA%BA/</loc>
+        <lastmod>2019-05-19T14:57:31.390Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>https://keepmoving.ren/tags/k8s/</loc>
         <lastmod>2019-05-19T13:42:42.720Z</lastmod>
         <changefreq>weekly</changefreq>
