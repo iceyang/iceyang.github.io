@@ -3,50 +3,50 @@
 
 
     <url>
-        <loc>https://keepmoving.ren/tags/git-flow/</loc>
-        <lastmod>2019-05-19T05:35:34.896Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://keepmoving.ren/tags/git/</loc>
-        <lastmod>2019-05-19T05:35:34.896Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://keepmoving.ren/tags/sidecar/</loc>
-        <lastmod>2019-05-13T14:53:08.117Z</lastmod>
+        <loc>https://keepmoving.ren/tags/k8s/</loc>
+        <lastmod>2019-05-19T13:42:42.720Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>https://keepmoving.ren/tags/kubernetes/</loc>
-        <lastmod>2019-05-13T14:53:08.117Z</lastmod>
+        <lastmod>2019-05-19T13:42:42.720Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://keepmoving.ren/tags/sidecar/</loc>
+        <lastmod>2019-05-19T13:41:58.805Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>https://keepmoving.ren/tags/service-mesh/</loc>
-        <lastmod>2019-05-13T14:53:08.117Z</lastmod>
+        <lastmod>2019-05-19T13:41:58.805Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>https://keepmoving.ren/tags/istio/</loc>
-        <lastmod>2019-05-13T14:53:08.117Z</lastmod>
+        <lastmod>2019-05-19T13:41:58.805Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>https://keepmoving.ren/tags/k8s/</loc>
-        <lastmod>2019-05-09T15:43:33.511Z</lastmod>
+        <loc>https://keepmoving.ren/tags/git-flow/</loc>
+        <lastmod>2019-05-19T05:30:00.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://keepmoving.ren/tags/git/</loc>
+        <lastmod>2019-05-19T05:30:00.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>

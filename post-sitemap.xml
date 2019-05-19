@@ -8,8 +8,24 @@
     </url>
 
     <url>
+        <loc>https://keepmoving.ren/kubernetes/managing-compute-resources-for-containers/</loc>
+        <lastmod>2019-05-19T13:42:42.720Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://keepmoving.ren/istio/traffic-management/</loc>
+        <lastmod>2019-05-19T13:41:58.805Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>https://keepmoving.ren/tools/git-flow/</loc>
-        <lastmod>2019-05-19T05:35:34.896Z</lastmod>
+        <lastmod>2019-05-19T05:30:00.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -26,22 +42,6 @@
     <url>
         <loc>https://keepmoving.ren/istio/five-traffic-type-in-istio/</loc>
         <lastmod>2019-05-13T14:52:32.443Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://keepmoving.ren/istio/traffic-management/</loc>
-        <lastmod>2019-05-13T14:52:19.118Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://keepmoving.ren/kubernetes/managing-compute-resources-for-containers/</loc>
-        <lastmod>2019-05-09T15:43:33.511Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 

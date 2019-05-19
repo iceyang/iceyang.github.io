@@ -1,0 +1,890 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search> 
+  
+  
+    
+    <entry>
+      <title>Git协作：GitFlow工作流与使用说明</title>
+      <link href="/tools/git-flow/"/>
+      <url>/tools/git-flow/</url>
+      
+        <content type="html"><![CDATA[<p><img src="/img/2019051801.svg" alt="GitFlow"></p><p><code>git</code>作为当下最流行的版本控制工具，它存在于互联网的各个位置。</p><p>当进行个人开发，或项目规模不大时，只需要工作在<code>master</code>分支下，代码提交和变动都在主分支便足够了。</p><p>而在多组员、多项目的环境下时，如果没有比较好的协作流程，会存在许多问题，比如较多的版本冲突、版本不好控制等等。<code>GitFlow</code>作为最早被广泛采用的一种工作流程，便是为了解决这些问题。它最早发表于<a href="https://nvie.com/posts/a-successful-git-branching-model/" target="_blank" rel="noopener">A successful Git branching model</a>。</p><p>在<code>GitFlow</code>之后，还有<code>Github Flow</code>和<code>Gitlab Flow</code>，它们都是对前者的改进，以适应不同的开发环境，本文主要阐述的是<code>GitFlow</code>。</p><h2 id="GitFlow特点"><a href="#GitFlow特点" class="headerlink" title="GitFlow特点"></a>GitFlow特点</h2><p><code>GitFlow</code>存在5个分支：</p><ul><li>长期分支：<code>master</code>和<code>develop</code></li><li>短期分支：<code>feature</code>、<code>release</code>、<code>hotfix</code></li></ul><p><code>master</code>和<code>develop</code>是需要同时维护的两个长期分支。<code>master</code>主要用于发布版本，从<code>master</code>拿到的，都是稳定的发布版。<code>develop</code>主要用于开发，存放的是最新的开发版。</p><p><code>feature</code>是功能分支，每个新功能都应该创建一个<code>feature</code>分支，从<code>develop</code>派生出来，当<code>feature</code>完成时，要合并回<code>develop</code>分支，同时结束它的生命周期。</p><p><code>release</code>是发布分支，当功能开发完善，准备发布一个新版本时，从<code>develop</code>分支派生出一个<code>release</code>分支，在这个分支上，不再添加功能，只修复测试出现的bug。当发布时机到了，<code>release</code>要合并到<code>master</code>和<code>develop</code>分支，同时打上版本标签。</p><p><code>hotfix</code>是热修复分支，当线上环境出现bug时，需要从对应<code>master</code>分支派生<code>hotfix</code>分支，进行快速修复，修复完成后，合并回<code>master</code>，打上版本标签，同时合并到<code>develop</code>分支，以确保修复的问题不会在后续的版本出现。</p><blockquote><p>三个短期分支在完成了它们自身的任务后，都没有了存在的必要，所以在合并回<code>master</code>和<code>develop</code>之后，都可以删除。</p></blockquote><h2 id="实践"><a href="#实践" class="headerlink" title="实践"></a>实践</h2><p>从上面的特点我们知道，<code>GitFlow</code>工作流的主要特点在于要维护5个分支，分支间的切换十分频繁而且繁琐，庆幸的是，开源社区已经有贡献者提供了插件使用，在终端下，可以安装<a href="https://github.com/nvie/gitflow" target="_blank" rel="noopener">gitflow</a>插件。</p><p>下面的操作都建立在安装完插件的基础上完成。</p><h3 id="插件概览"><a href="#插件概览" class="headerlink" title="插件概览"></a>插件概览</h3><p>安装完插件后，我们执行下<code>git flow</code>命令，可以看到下面的使用提示：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"> ~/project/test/gitflow/ git flow</span><br><span class="line">usage: git flow &lt;subcommand&gt;</span><br><span class="line"></span><br><span class="line">Available subcommands are:</span><br><span class="line">   init      Initialize a new git repo with support for the branching model.</span><br><span class="line">   feature   Manage your feature branches.</span><br><span class="line">   release   Manage your release branches.</span><br><span class="line">   hotfix    Manage your hotfix branches.</span><br><span class="line">   support   Manage your support branches.</span><br><span class="line">   version   Shows version information.</span><br><span class="line"></span><br><span class="line">Try 'git flow &lt;subcommand&gt; help' for details.</span><br></pre></td></tr></table></figure><ul><li>init：将项目初始化成一个支持gitflow模型的仓库</li><li>feature：管理feature功能分支</li><li>release：管理release发布分支</li><li>hotfix：管理hotfix修复分支</li><li>support：管理support分支</li></ul><h3 id="初始化gitflow仓库"><a href="#初始化gitflow仓库" class="headerlink" title="初始化gitflow仓库"></a>初始化gitflow仓库</h3><p>首先，我们要有一个git项目，然后进入到项目目录，执行<code>git flow init</code>操作，接下来会询问对各特性分支的命名，如果不需要特别命名，那么按照默认就好。</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"> ~/project/test/gitflow/ [master] git flow init</span><br><span class="line">No branches exist yet. Base branches must be created now.</span><br><span class="line">Branch name for production releases: [master]</span><br><span class="line">Branch name for "next release" development: [develop]</span><br><span class="line"></span><br><span class="line">How to name your supporting branch prefixes?</span><br><span class="line">Feature branches? [feature/]</span><br><span class="line">Release branches? [release/]</span><br><span class="line">Hotfix branches? [hotfix/]</span><br><span class="line">Support branches? [support/]</span><br><span class="line">Version tag prefix? []</span><br></pre></td></tr></table></figure><p>这样我们就建好了gitflow模型的仓库。查看<code>.git/config</code>文件我们可以得到gitflow分支的配置：</p><figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">[core]</span><br><span class="line">        <span class="attr">repositoryformatversion</span> = <span class="number">0</span></span><br><span class="line">        <span class="attr">filemode</span> = <span class="literal">true</span></span><br><span class="line">        <span class="attr">bare</span> = <span class="literal">false</span></span><br><span class="line">        <span class="attr">logallrefupdates</span> = <span class="literal">true</span></span><br><span class="line">        <span class="attr">ignorecase</span> = <span class="literal">true</span></span><br><span class="line">        <span class="attr">precomposeunicode</span> = <span class="literal">true</span></span><br><span class="line">[gitflow <span class="string">"branch"</span>]</span><br><span class="line">        <span class="attr">master</span> = master</span><br><span class="line">        <span class="attr">develop</span> = develop</span><br><span class="line">[gitflow <span class="string">"prefix"</span>]</span><br><span class="line">        <span class="attr">feature</span> = feature/</span><br><span class="line">        <span class="attr">release</span> = release/</span><br><span class="line">        <span class="attr">hotfix</span> = hotfix/</span><br><span class="line">        <span class="attr">support</span> = support/</span><br><span class="line">        <span class="attr">versiontag</span> =</span><br></pre></td></tr></table></figure><h3 id="新建功能分支（Feature）"><a href="#新建功能分支（Feature）" class="headerlink" title="新建功能分支（Feature）"></a>新建功能分支（Feature）</h3><p>通过命令<code>git flow feature start feature-helloworld</code>新建一个名字叫<code>feature-helloworld</code>的功能分支：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"> ~/project/test/gitflow/ [develop] git flow feature start feature-helloworld</span><br><span class="line">Switched to a new branch 'feature/feature-helloworld'</span><br><span class="line"></span><br><span class="line">Summary of actions:</span><br><span class="line">- A new branch 'feature/feature-helloworld' was created, based on 'develop'</span><br><span class="line">- You are now on branch 'feature/feature-helloworld'</span><br><span class="line"></span><br><span class="line">Now, start committing on your feature. When done, use:</span><br><span class="line"></span><br><span class="line">     git flow feature finish feature-helloworld</span><br></pre></td></tr></table></figure><p>接下来我们新建一个文件<code>index.js</code>，程序打印出<code>hello gitflow</code>：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"> ~/project/test/gitflow/ [feature/feature-helloworld] echo "console.log('hello gitflow.');" &gt; index.js</span><br><span class="line"> ~/project/test/gitflow/ [feature/feature-helloworld] node index.js</span><br><span class="line">hello gitflow.</span><br></pre></td></tr></table></figure><p>然后<code>commit</code>到版本库中，通过<code>git flow feature finish</code>完成feature分支。</p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"> ~/project/test/gitflow/ [feature/feature-helloworld] git add .</span><br><span class="line"> ~/project/test/gitflow/ [feature/feature-helloworld+] git <span class="keyword">commit</span> -m <span class="string">'hello gitflow'</span></span><br><span class="line">[feature/feature-helloworld <span class="number">3e9</span>f1f0] hello gitflow</span><br><span class="line"> <span class="number">2</span> files <span class="keyword">changed</span>, <span class="number">2</span> insertions(+)</span><br><span class="line"> <span class="keyword">create</span> <span class="keyword">mode</span> <span class="number">100644</span> README.md</span><br><span class="line"> <span class="keyword">create</span> <span class="keyword">mode</span> <span class="number">100644</span> index.js</span><br><span class="line"> ~/<span class="keyword">project</span>/<span class="keyword">test</span>/gitflow/ [feature/feature-helloworld] git flow feature <span class="keyword">finish</span> feature-helloworld</span><br><span class="line">Switched <span class="keyword">to</span> branch <span class="string">'develop'</span></span><br><span class="line">Updating bed51b3.<span class="number">.3e9</span>f1f0</span><br><span class="line"><span class="keyword">Fast</span>-forward</span><br><span class="line"> README.md | <span class="number">1</span> +</span><br><span class="line"> index.js  | <span class="number">1</span> +</span><br><span class="line"> <span class="number">2</span> files <span class="keyword">changed</span>, <span class="number">2</span> insertions(+)</span><br><span class="line"> <span class="keyword">create</span> <span class="keyword">mode</span> <span class="number">100644</span> README.md</span><br><span class="line"> <span class="keyword">create</span> <span class="keyword">mode</span> <span class="number">100644</span> index.js</span><br><span class="line">Deleted branch feature/feature-helloworld (was <span class="number">3e9</span>f1f0).</span><br><span class="line"></span><br><span class="line">Summary <span class="keyword">of</span> actions:</span><br><span class="line">- The feature branch <span class="string">'feature/feature-helloworld'</span> was merged <span class="keyword">into</span> <span class="string">'develop'</span></span><br><span class="line">- Feature branch <span class="string">'feature/feature-helloworld'</span> has been removed</span><br><span class="line">- You <span class="keyword">are</span> <span class="keyword">now</span> <span class="keyword">on</span> branch <span class="string">'develop'</span></span><br></pre></td></tr></table></figure><p><code>feature</code>合并回<code>develop</code>分支使用的是<code>git merge --no-ff</code>，在<code>develop</code>分支下，尽管<code>feature</code>对应分支已经被我们删除，日志信息依旧存在。</p><h3 id="发布版本（Release）"><a href="#发布版本（Release）" class="headerlink" title="发布版本（Release）"></a>发布版本（Release）</h3><p>假设我们现在已经开发完成功能了，可以通过<code>realse</code>发布一个版本，操作起来跟<code>feature</code>相似。</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"> ~/project/test/gitflow/ [develop] git flow release start release-v0.1.0</span><br><span class="line">Switched to a new branch 'release/release-v0.1.0'</span><br><span class="line"></span><br><span class="line">Summary of actions:</span><br><span class="line">- A new branch 'release/release-v0.1.0' was created, based on 'develop'</span><br><span class="line">- You are now on branch 'release/release-v0.1.0'</span><br><span class="line"></span><br><span class="line">Follow-up actions:</span><br><span class="line">- Bump the version number now!</span><br><span class="line">- Start committing last-minute fixes in preparing your release</span><br><span class="line">- When done, run:</span><br><span class="line"></span><br><span class="line">     git flow release finish 'release-v0.1.0'</span><br></pre></td></tr></table></figure><p>通过上面的操作，我们建立了一个版本v0.1.0的<code>release</code>分支。现在这个版本可以进行测试，但是不再新增任何功能，只做bug修复。当我们完成修复后，通过<code>finish</code>发布，插件会帮我们完成几个操作，合并回<code>master</code>和<code>develop</code>，同时打上<code>tag</code>。</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"> ~/project/test/gitflow/ [release/release-v0.1.0] git flow release finish release-v0.1.0</span><br><span class="line">Switched to branch 'master'</span><br><span class="line">Merge made by the 'recursive' strategy.</span><br><span class="line"> README.md | 1 +</span><br><span class="line"> index.js  | 1 +</span><br><span class="line"> 2 files changed, 2 insertions(+)</span><br><span class="line"> create mode 100644 README.md</span><br><span class="line"> create mode 100644 index.js</span><br><span class="line">Deleted branch release/release-v0.1.0 (was 3e9f1f0).</span><br><span class="line"></span><br><span class="line">Summary of actions:</span><br><span class="line">- Latest objects have been fetched from 'origin'</span><br><span class="line">- Release branch has been merged into 'master'</span><br><span class="line">- The release was tagged 'release-v0.1.0'</span><br><span class="line">- Release branch has been back-merged into 'develop'</span><br><span class="line">- Release branch 'release/release-v0.1.0' has been deleted</span><br></pre></td></tr></table></figure><h3 id="修复线上bug（Hotfix）"><a href="#修复线上bug（Hotfix）" class="headerlink" title="修复线上bug（Hotfix）"></a>修复线上bug（Hotfix）</h3><p>假设现在在线上出现了bug，有用户提出了issue#1，那么我们可以创建hotfix分支，操作依旧相似。我们创建一个名为<code>release-v0.1.1</code>的hotfix分支：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"> ~/project/test/gitflow/ [master] git flow hotfix start release-v0.1.1</span><br><span class="line">Switched to a new branch 'hotfix/release-v0.1.1'</span><br><span class="line"></span><br><span class="line">Summary of actions:</span><br><span class="line">- A new branch 'hotfix/release-v0.1.1' was created, based on 'master'</span><br><span class="line">- You are now on branch 'hotfix/release-v0.1.1'</span><br><span class="line"></span><br><span class="line">Follow-up actions:</span><br><span class="line">- Bump the version number now!</span><br><span class="line">- Start committing your hot fixes</span><br><span class="line">- When done, run:</span><br><span class="line"></span><br><span class="line">     git flow hotfix finish 'release-v0.1.1'</span><br></pre></td></tr></table></figure><p>我们进行修复后commit到仓库，在commit的信息中，我们可以在内容加上<code>fix #1</code>，那么issue在对应的远程平台比如<code>Github</code>会被close掉。</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"> ~/project/test/gitflow/ [hotfix/release-v0.1.1*] git add .</span><br><span class="line"> ~/project/test/gitflow/ [hotfix/release-v0.1.1+] git commit -m 'fix #1'</span><br><span class="line"> ~/project/test/gitflow/ [hotfix/release-v0.1.1] git flow hotfix finisrelease-v0.1.1-1</span><br><span class="line">Switched to branch 'master'</span><br><span class="line">Merge made by the 'recursive' strategy.</span><br><span class="line"> index.js | 1 +</span><br><span class="line"> 1 file changed, 1 insertion(+)</span><br><span class="line">Switched to branch 'develop'</span><br><span class="line">Merge made by the 'recursive' strategy.</span><br><span class="line"> index.js | 1 +</span><br><span class="line"> 1 file changed, 1 insertion(+)</span><br><span class="line">Deleted branch hotfix/release-v0.1.1 (was 6811c88).</span><br><span class="line"></span><br><span class="line">Summary of actions:</span><br><span class="line">- Latest objects have been fetched from 'origin'</span><br><span class="line">- Hotfix branch has been merged into 'master'</span><br><span class="line">- The hotfix was tagged 'release-v0.1.1'</span><br><span class="line">- Hotfix branch has been back-merged into 'develop'</span><br><span class="line">- Hotfix branch 'hotfix/release-v0.1.1' has been deleted</span><br></pre></td></tr></table></figure><p>完成hotfix，代码会合并回<code>master</code>和<code>develop</code>，同时我们起的hotfix名字<code>release-v0.1.1</code>会被打成新的标签。</p><h2 id="Sourcetree"><a href="#Sourcetree" class="headerlink" title="Sourcetree"></a>Sourcetree</h2><p>如果你喜欢使用GUI工具，知名的有<code>Sourcetree</code>，它也内置了<code>Gitflow</code>工作流程的功能。</p><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul><li><a href="https://nvie.com/posts/a-successful-git-branching-model/" target="_blank" rel="noopener">A successful Git branching model</a></li><li><a href="https://www.jianshu.com/p/9a76e9aa9534" target="_blank" rel="noopener">Git Flow工作流程</a></li><li>[极客时间 - 左耳听风 - 20 | Git协同工作流，你该怎么选？]</li><li><a href="http://www.ruanyifeng.com/blog/2015/12/git-workflow.html" target="_blank" rel="noopener">Git 工作流程</a></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 工具 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> git </tag>
+            
+            <tag> git-flow </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Istio：流量管理</title>
+      <link href="/istio/traffic-management/"/>
+      <url>/istio/traffic-management/</url>
+      
+        <content type="html"><![CDATA[<p><img src="/img/2019051302.jpg" alt="Photo by Lianhao Qu on Unsplash"></p><blockquote><p>文章内容基本来自Istio官网，这里属于学习的记录。</p></blockquote><p>之前提到过<code>Istio</code>的几大组件：<code>Enovy</code>、<code>Pilot</code>、<code>Mixer</code>、<code>Citadel</code>、<code>Galley</code>，它们各自负责不同的功能。而流量管理的功能，主要由<code>Envoy</code>和<code>Pilot</code>负责。</p><h2 id="Pilot-和-Envoy"><a href="#Pilot-和-Envoy" class="headerlink" title="Pilot 和 Envoy"></a>Pilot 和 Envoy</h2><p><code>Pilot</code>是<code>Istio</code>管理流量的核心组件，它管理和配置所有<code>Envoy</code>代理。<br>通过<code>Pilot</code>，我们可以路由流量、配置失败策略，比如：超时、重试、断路器。<code>Pilot</code>还对底层的平台实现进行了抽象，不局限于<code>Kubernetes</code>。</p><p><code>Envoy</code>通过<code>Pilot</code>获取信息，维护着一个负载均衡池，对池中的实例做周期性健康检查，然后根据路由的规则智能分配流量到这些实例去。</p><p><img src="/img/2019051301.svg" alt="Pilot 架构图（来自Istio官网）"></p><p><code>Pilot</code>维护着与底层平台无关的一套服务规范，然后对于每个平台，<code>Pilot</code>有着对应的适配器来填充对应的规则。</p><p><code>Pilot</code>支持服务发现，负载均衡池和路由表的动态更新。</p><p>所以我们只要管理好<code>Pilot</code>的规则，接下来<code>Pilot</code>会自动帮我们转换成低级别的配置，然后分发到<code>Envoy</code>实例去。</p><h2 id="请求路由"><a href="#请求路由" class="headerlink" title="请求路由"></a>请求路由</h2><p>像前面说的，在<code>Service Mesh</code>中，<code>Pilot</code>维护着服务的规范，<code>Istio</code>的服务模型与底层无关，适配器会从各平台获取信息然后进行填充。</p><p><code>Istio</code>引入了服务版本的概念，可以用版本号像 <em>v1</em>， <em>v2</em>，也可以用部署的环境 <em>staging</em>， <em>prod</em> 来标识。有了这个概念，<code>Istio</code>可以完成 <em>A/B 测试</em>， <em>金丝雀部署</em> 这样的场景，通过流量控制服务的迭代来控制。</p><h3 id="服务间通讯"><a href="#服务间通讯" class="headerlink" title="服务间通讯"></a>服务间通讯</h3><p><img src="/img/2019051303.svg" alt="服务版本"></p><p>对于用户端而言，它通过域名/ip去访问服务，而服务背后的版本，客户端并不知道。</p><p><code>Envoy</code>拦截转发服务与客户端之间通讯的流量。<code>Envoy</code>根据我们使用<code>Pilot</code>配置的路由规则，动态决定具体哪个服务接受请求。这个模型使得应用程序代码从所依赖服务的演进中解耦出来，同时还能提供其他好处（参见<a href="https://istio.io/docs/concepts/policies-and-telemetry/" target="_blank" rel="noopener">Mixer</a>）。路由规则让<code>Envoy</code>能够从头部、标签、源/目的地等等来获取版本信息，然后根据不同的权重分发到各自的版本。</p><h3 id="Ingress和Egress"><a href="#Ingress和Egress" class="headerlink" title="Ingress和Egress"></a>Ingress和Egress</h3><p>在<code>Istio</code>中，假定网格中所有的流量都会经过<code>Envoy</code>，对于进入的流量，我们可以进行A/B测试，金丝雀部署。而对于外部的服务，我们可以配置超时、重试、断路器的功能，而且还能从这些请求中获取详细的信息。</p><p><img src="/img/2019051304.svg" alt="请求流"></p><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://istio.io/docs/concepts/traffic-management/#service-entries" target="_blank" rel="noopener">Traffic Management</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Istio </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> istio </tag>
+            
+            <tag> service mesh </tag>
+            
+            <tag> kubernetes </tag>
+            
+            <tag> sidecar </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Kubernetes：管理Pod的计算资源</title>
+      <link href="/kubernetes/managing-compute-resources-for-containers/"/>
+      <url>/kubernetes/managing-compute-resources-for-containers/</url>
+      
+        <content type="html"><![CDATA[<p><img src="/img/2019050901.jpg" alt="Photo by chuttersnap on Unsplash"></p><p>在Kubernetes中，有两种资源类型，CPU和内存，它们也称为计算资源。CPU资源以核为单位计算，内存则以字节为单位计算。</p><p>在创建Pod时，默认是没有对资源进行限制的，所以好的实践方式是预估好资源的需求，提前为Pod进行资源分配，另外限制Pod能请求的资源的最大数。</p><h2 id="CPU和内存的分配标准"><a href="#CPU和内存的分配标准" class="headerlink" title="CPU和内存的分配标准"></a>CPU和内存的分配标准</h2><p>在cpu的分配上，我们可以使用 <em>1</em>、 <em>0.5</em>、 <em>0.1</em> 这样的表达来分配，它们分别代表1个核，0.5个核，0.1个核，它们也等同于： <em>1000m</em>、 <em>500m</em>、 <em>100m</em>， <em>m</em> 代表millicpu的意思。cpu都是绝对值，所以不管在多少核的机器上，它们的意义都是一样的。</p><p>内存的单位是字节，我们可以使用纯数字，也可以用数字带上单位来表示，像：E, P, T, G, M, K，甚至是更高的单位：Ei, Pi, Ti, Gi, Mi, Ki等，比如：</p><figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1048576</span>，<span class="number">128</span>M，<span class="number">256</span>Mi</span><br></pre></td></tr></table></figure><h2 id="如何指定资源"><a href="#如何指定资源" class="headerlink" title="如何指定资源"></a>如何指定资源</h2><p>要对Pod进行资源分配，可以下面所列出来的Pod的配置中指定：</p><ul><li>spec.containers[].resources.requests.cpu</li><li>spec.containers[].resources.requests.memory</li><li>spec.containers[].resources.limits.cpu</li><li>spec.containers[].resources.limits.memory</li></ul><p>每个Container需要的资源可能是不同的，所以资源的配置是针对Container。前两者是对资源的请求，它们知道了Container需要的资源，从而决定Pod分配到哪个节点上。后两者是对资源的限制，它们指明了Container能获取到的最大资源数。</p><blockquote><p>注意：资源的请求，并非代表着节点当前的实际运行负载，所以当一个结点具体负载并不高，而Pod却报出资源不足而失败的错误，两者并不冲突，因为request代表的是资源的预留，而非具体的使用。</p></blockquote><p>下面是一个使用的例子：</p><figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">apiVersion</span>: v1</span><br><span class="line"><span class="attribute">kind</span>: Pod</span><br><span class="line"><span class="attribute">metadata</span>:</span><br><span class="line">  <span class="attribute">name</span>: frontend</span><br><span class="line"><span class="attribute">spec</span>:</span><br><span class="line">  <span class="attribute">containers</span>:</span><br><span class="line">  - <span class="attribute">name</span>: db</span><br><span class="line">    <span class="attribute">image</span>: mysql</span><br><span class="line">    <span class="attribute">env</span>:</span><br><span class="line">    - <span class="attribute">name</span>: MYSQL_ROOT_PASSWORD</span><br><span class="line">      <span class="attribute">value</span>: <span class="string">"password"</span></span><br><span class="line">    <span class="attribute">resources</span>:</span><br><span class="line">      <span class="attribute">requests</span>:</span><br><span class="line">        <span class="attribute">memory</span>: <span class="string">"64Mi"</span></span><br><span class="line">        <span class="attribute">cpu</span>: <span class="string">"250m"</span></span><br><span class="line">      <span class="attribute">limits</span>:</span><br><span class="line">        <span class="attribute">memory</span>: <span class="string">"128Mi"</span></span><br><span class="line">        <span class="attribute">cpu</span>: <span class="string">"500m"</span></span><br><span class="line">  - <span class="attribute">name</span>: wp</span><br><span class="line">    <span class="attribute">image</span>: wordpress</span><br><span class="line">    <span class="attribute">resources</span>:</span><br><span class="line">      <span class="attribute">requests</span>:</span><br><span class="line">        <span class="attribute">memory</span>: <span class="string">"64Mi"</span></span><br><span class="line">        <span class="attribute">cpu</span>: <span class="string">"250m"</span></span><br><span class="line">      <span class="attribute">limits</span>:</span><br><span class="line">        <span class="attribute">memory</span>: <span class="string">"128Mi"</span></span><br><span class="line">        <span class="attribute">cpu</span>: <span class="string">"500m"</span></span><br></pre></td></tr></table></figure><p>Pod中有两个Container，他们都申请了0.25cpu和64MB内存，最大限制为0.5cpu和128MB内存。所以Pod总共需要的资源为：0.5cpu和128MB内存，最大限制为1cpu和256MB内存。</p><p>应用完上面的例子后，通过查看<code>kubectl describe nodes &lt;your-node&gt;</code>，可以看到资源的申请和限制：</p><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[ <span class="built_in">..</span>.其它信息<span class="built_in">..</span>. ]</span><br><span class="line">Non-terminated Pods:      (34 <span class="keyword">in</span> total)</span><br><span class="line">  Namespace    Name       CPU Requests  CPU Limits    Memory Requests   Memory Limits</span><br><span class="line">  ---------    ----       ------------  ----------    ---------------   -------------</span><br><span class="line">  [ <span class="built_in">..</span>.其它Pod<span class="built_in">..</span>. ]</span><br><span class="line"> <span class="built_in"> default </span>     frontend   500m (10%)    1 (20%)       128Mi (1%)        256Mi (3%)</span><br><span class="line">  [ <span class="built_in">..</span>.其它Pod<span class="built_in">..</span>. ]</span><br><span class="line">Allocated resources:</span><br><span class="line">  (Total limits may be over 100 percent, i.e., overcommitted.)</span><br><span class="line"> <span class="built_in"> Resource </span> Requests          Limits</span><br><span class="line">  --------  --------          ------</span><br><span class="line">  cpu       4580m (91%)       39800m (796%)</span><br><span class="line">  memory    5678746112 (68%)  6701770Ki (83%)</span><br></pre></td></tr></table></figure><p>在资源信息的最下面是总的资源请求和限制信息。</p><h2 id="当请求资源大于剩余资源时"><a href="#当请求资源大于剩余资源时" class="headerlink" title="当请求资源大于剩余资源时"></a>当请求资源大于剩余资源时</h2><p>由于k8s对Pod的调度依赖于资源请求，假如出现Pod申请的资源大于集群中任一Node节点的剩余资源时，Pod将无法被调度而一直处于Pending状态。假设是CPU资源不足了，我们对Pod进行describe可以得到：</p><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">Events:</span></span><br><span class="line">  <span class="string">Reason</span><span class="string">Message</span></span><br><span class="line"><span class="bullet">  -</span><span class="bullet">-----</span><span class="bullet">-------</span></span><br><span class="line">  <span class="string">FailedScheduling</span><span class="literal">No</span> <span class="string">nodes</span> <span class="string">are</span> <span class="string">available</span> <span class="string">that</span> <span class="string">match</span> <span class="string">all</span> <span class="string">of</span> <span class="string">the</span> <span class="string">following</span> <span class="attr">predicates::</span> <span class="string">Insufficient</span> <span class="string">cpu</span> <span class="string">(3).</span></span><br></pre></td></tr></table></figure><p>信息是很明确的：<code>Insufficient cpu</code>，cpu资源不足。<br>这个时候，我们需要考虑如何调整资源，让Pod能够成功被调度。</p><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/#planned-improvements" target="_blank" rel="noopener">Managing Compute Resources for Containers</a><br><a href="https://kubernetes.io/docs/tasks/configure-pod-container/assign-cpu-resource/" target="_blank" rel="noopener">Assign CPU Resources to Containers and Pods</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Kubernetes </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> kubernetes </tag>
+            
+            <tag> k8s </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Istio：对Pod和Service的要求</title>
+      <link href="/istio/pod-and-svc-requirement/"/>
+      <url>/istio/pod-and-svc-requirement/</url>
+      
+        <content type="html"><![CDATA[<p><img src="/img/2019050701.jpg" alt="Photo by Michael Liao on Unsplash"></p><blockquote><p>Istio对需要注入的Pod和Service是有要求的，要成为服务网格中的一部分，它们需要满足下面的要求：</p></blockquote><ul><li><em>Service端口命名</em>：Service的端口必须命名，匹配的格式为：<code>&lt;protocol&gt;[-&lt;suffix&gt;]</code>，<code>&lt;protocol&gt;</code>可以是下面的几种：<code>grpc</code>、<code>http</code>、<code>http2</code>、<code>https</code>、<code>mongo</code>、<code>redis</code>、<code>tcp</code>、<code>tls</code>、<code>udp</code>，如果没有进行命名或者命名的前缀识别不出来，那么流量都会被当成TCP流量对待，除非显示声明，比如<code>Protocol: UDP</code>声明端口是UDP端口。</li><li><em>Pod端口</em>：Pod需要被代理端口都需要使用<code>containerPort</code>指定出来，否则都会绕过Istio Proxy。</li><li><em>关联服务</em>：不管Pod有没有暴露端口，它需要关联至少一个Service。如果Pod关联了不止一个Service，那么在相同端口不能使用不同的协议。</li><li><em>Deployment需要打上标签<em>app</em>和<em>version</em></em>：app用于识别上下文信息，version可以标识Deployment的版本信息。</li><li><em>Application UID</em>：确保Pod运行的用户ID（UID）不是1337。</li><li><em>NET_ADMIN能力</em>：如果集群实施了Pod安全策略，除非使用了Istio CNI Plugin，否则Pod需要具备<code>NET_ADMIN</code>能力。</li></ul><h2 id="被Istio使用的端口"><a href="#被Istio使用的端口" class="headerlink" title="被Istio使用的端口"></a>被Istio使用的端口</h2><p>下面的端口和协议是Istio会使用到的，需要确保服务不会与Istio冲突。</p><table><thead><tr><th>端口</th><th>协议</th><th>使用者</th><th>描述</th></tr></thead><tbody><tr><td>8060</td><td>HTTP</td><td>Citadel</td><td>GRPC 服务</td></tr><tr><td>9090</td><td>HTTP</td><td>Prometheus</td><td>Prometheus</td></tr><tr><td>9091</td><td>HTTP</td><td>Mixer</td><td>决策/遥测</td></tr><tr><td>9093</td><td>HTTP</td><td>Citadel</td><td></td></tr><tr><td>15000</td><td>TCP</td><td>Envoy</td><td>Envoy管理端口(命令/诊断)</td></tr><tr><td>15001</td><td>TCP</td><td>Envoy</td><td>Envoy</td></tr><tr><td>15004</td><td>HTTP</td><td>Mixer, Pilot</td><td>决策/遥测 - mTLS</td></tr><tr><td>15010</td><td>HTTP</td><td>Pilot</td><td>Pilot服务 - XDS pilot - 发现</td></tr><tr><td>15011</td><td>TCP</td><td>Pilot</td><td>Pilot服务 - mTLS - 代理 - 发现</td></tr><tr><td>15014</td><td>HTTP</td><td>Citadel, Mixer, Pilot</td><td>控制面板监控</td></tr><tr><td>15030</td><td>TCP</td><td>Prometheus</td><td>Prometheus</td></tr><tr><td>15090</td><td>HTTP</td><td>Mixer</td><td>代理</td></tr><tr><td>42422</td><td>TCP</td><td>Mixer</td><td>遥测 - Prometheus</td></tr></tbody></table><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://istio.io/docs/setup/kubernetes/prepare/requirements/" target="_blank" rel="noopener">Pods and Services</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Istio </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> istio </tag>
+            
+            <tag> service mesh </tag>
+            
+            <tag> kubernetes </tag>
+            
+            <tag> sidecar </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Istio：五种流量管理配置资源</title>
+      <link href="/istio/five-traffic-type-in-istio/"/>
+      <url>/istio/five-traffic-type-in-istio/</url>
+      
+        <content type="html"><![CDATA[<p><img src="/img/2019050501.jpg" alt></p><blockquote><p>文章内容基本来自Istio官网，这里属于学习的记录。</p></blockquote><p>Istio通过一个简单的配置模型，来控制API调用和服务间的4层通信。</p><p>流量管理配置有五种，我们先对其作简单介绍，先有个概念之后，后续再深入理解它们的行为，以及它们如何满足我们服务级别的需求。</p><p>这五种资源分别为：</p><ul><li>VirtualService</li><li>DestinationRule</li><li>ServiceEntry</li><li>Gateway</li><li>Sidecar</li></ul><h2 id="VirtualService"><a href="#VirtualService" class="headerlink" title="VirtualService"></a>VirtualService</h2><p><code>VirtualService</code>定义了在Istio服务网格中，服务请求是如何被路由的。它可以将请求路由到服务的不同版本，甚至是不同的服务。</p><p>路由的选择规则可以有许多，比如：</p><ul><li>请求的源和目的地</li><li>请求的HTTP路径和头部信息</li><li>不同的服务版本有不同的权重</li></ul><h2 id="DestinationRule"><a href="#DestinationRule" class="headerlink" title="DestinationRule"></a>DestinationRule</h2><p><code>DestinationRule</code>定义了当<code>VirtualService</code>生效时，应用在请求上的一系列策略。比如可以指定负载均衡的策略、配置断路器来对服务进行保护、配置TLS等等。</p><h2 id="ServiceEntry"><a href="#ServiceEntry" class="headerlink" title="ServiceEntry"></a>ServiceEntry</h2><p><code>ServiceEntry</code>通常用于开启对Istio服务网格之外的服务的请求。为什么说开启对外请求呢？因为在网格内，Istio假定所有进出流量都会经过Envoy代理，如果没有经过配置，网格内服务的请求是无法到达外部服务的。</p><blockquote><p>简单来说，ServiceEntry就是一份白名单，服务网格外的服务只有在白名单内，网格内的请求才能到达。</p></blockquote><p>或许你会遇到说，我没有配置ServiceEntry呀，照样可以访问外部网络，那可能是因为你的istio的策略是<code>ALLOW_ANY</code>，而不是<code>REGISTERY_ONLY</code>，可以通过下面的指令查看：<br><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ kubectl <span class="built_in">get</span> configmap istio -n istio-<span class="built_in">system</span> -<span class="keyword">o</span> yaml | <span class="keyword">grep</span> -<span class="keyword">o</span> -E <span class="string">"mode: .+_[A-Z]+"</span></span><br><span class="line">$ <span class="keyword">mode</span>: ALLOW_ANY</span><br></pre></td></tr></table></figure></p><h2 id="Gateway"><a href="#Gateway" class="headerlink" title="Gateway"></a>Gateway</h2><p><code>Gateway</code>配置负载均衡器运作在网格边缘，通常用于为服务启用HTTP/TCP入口流量。<br>跟Kubernetes Ingress不同的是，它只有4到6层的功能。使用VirtualService绑定到Gateway之上，就可以使用Istio的规则来控制HTTP和TCP流量。</p><h2 id="Sidecar"><a href="#Sidecar" class="headerlink" title="Sidecar"></a>Sidecar</h2><p>Istio默认会为网格中所有的工作负载配置边车代理，来接受所有相关联端口的流量。<code>Sidecar</code>配置能够微调被接受的端口和协议，限制代理能够访问的服务。</p><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>这五种流量的配置资源是Istio的主要内容，各式各样的服务需求都可以通过它们的组合来完成，后续会介绍它们是如何配置，并且怎么作用于服务之上。</p><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://istio.io/docs/concepts/traffic-management/#service-entries" target="_blank" rel="noopener">Traffic Management</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Istio </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> istio </tag>
+            
+            <tag> service mesh </tag>
+            
+            <tag> kubernetes </tag>
+            
+            <tag> sidecar </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Istio：初识Istio</title>
+      <link href="/istio/know-about-istio/"/>
+      <url>/istio/know-about-istio/</url>
+      
+        <content type="html"><![CDATA[<p><img src="/img/2019042801.jpg" alt></p><blockquote><p>文章内容大部分来自Istio官网，这里属于学习的记录。</p></blockquote><p>随着技术发展，应用从单体服务架构向微服务转变，从单点部署拆分成了数量众多的微服务分布式部署，在给开发带来便利的同时，也带来了许多挑战。</p><p>我们需要对微服务平台做许多额外的事情：</p><ul><li>微服务之间的依赖关系</li><li>微服务之间的认证授权</li><li>微服务之间的流量管理</li><li>日志、追踪、监控</li></ul><p>而这些内容，可以说是与业务开发无关的，如果加在应用层，抵消掉的，是拆分微服务所得到的好处。</p><h2 id="Istio应运而生"><a href="#Istio应运而生" class="headerlink" title="Istio应运而生"></a>Istio应运而生</h2><p>Istio由Google、IBM 和 Lyft 团队协作开发，是完全开源的Service Mesh，可以安装在Kubernetes之上（也可以是其他），对应用程序透明，只需对应用代码进行一点改动甚至无需改动。</p><p>Istio通过部署sidecar代理，拦截微服务间的所有网络请求，可以做到：</p><ul><li>HTTP、gRPC、WebSocket 和 TCP 流量的自动负载均衡。</li><li>通过丰富的路由规则、重试、故障转移和故障注入，可以对流量行为进行细粒度控制。</li><li>可插入的策略层和配置 API，支持访问控制、速率限制和配额。</li><li>对出入集群入口和出口中所有流量的自动度量指标、日志记录和追踪。</li><li>通过强大的基于身份的验证和授权，在集群中实现安全的服务间通信。</li></ul><h2 id="理念"><a href="#理念" class="headerlink" title="理念"></a>理念</h2><p>Istio生于云计算时代，需要满足混合和多云部署，它有几个关键的设计目标：</p><ul><li>最大化透明度：使用Istio，运维和开发人员只需要付出很少的代价。通过代理流量，无需对应用程序进行修改。与此同时，Istio提供的功能增加的资源开销很小。</li><li>可扩展性：被运维和开发人员依赖后，势必会有许多其他的策略或控制来源，Istio策略运行时支持标准扩展机制以便插入到其他服务中。</li><li>可移植性：Istio不单单可以运行在Kubernetes之上，它应该以最少的代价运行在任何云火预置环境中。</li><li>策略一致性：有些资源并非在API级别，策略作为独特的服务来维护，拥有自己的API，不是放入代理/sidecar中，可以允许服务根据需要与其集成。</li></ul><h2 id="核心功能"><a href="#核心功能" class="headerlink" title="核心功能"></a>核心功能</h2><ul><li>流量管理：在控制流量上，Istio让我们可以轻松的配置各种部署场景，比如A/B测试、金丝雀部署、流量分割，也拥有服务熔断、超时、重试等服务级别的功能。</li><li>安全：Istio可以管理服务通讯的认证、授权和加密，不需要应用程序做改动。</li><li>可观察性：通过Istio，我们拥有了强大的监控功能，包括：服务追踪、监控、日志记录。让我们对所有服务一目了然，能知道服务间是如何影响的。</li></ul><h2 id="架构"><a href="#架构" class="headerlink" title="架构"></a>架构</h2><p>在逻辑上，Istio由两部分组成： <em>data plane</em> 和 <em>control plane</em>。</p><ul><li>data plane：由 <em>Envoy</em> 作为sidecar部署而成的一组智能代理，协调控制所有微服务和 <em>Mixer</em> 间的网络通信，是一个通用的策略和遥测中心。</li><li>control plane：管理配置着代理来路由流量，配置 <em>Mixer</em> 实施策略和遥测数据。</li></ul><p>下面是来自Istio官网的一张架构图：</p><p><img src="/img/2019042901.svg" alt="Istio 架构"></p><p>Istio的架构中，有几个重要的模块，分别是 <em>Envoy</em>， <em>Mixer</em>， <em>Pilot</em>， <em>Citadel</em>， <em>Galley</em>，下面为它们做做介绍。</p><h3 id="Envoy"><a href="#Envoy" class="headerlink" title="Envoy"></a>Envoy</h3><p>Envoy在Istio架构中作为sidecar部署，代理所有服务的流量，它和业务服务部署在同一个Kubernetes Pod中。它可以完成下面这些功能：</p><ul><li>动态服务发现</li><li>负载均衡</li><li>TLS 终止</li><li>HTTP/2 &amp; gRPC 代理</li><li>熔断器</li><li>健康检查、基于百分比流量拆分的灰度发布</li><li>故障注入</li><li>丰富的度量指标</li></ul><h3 id="Mixer"><a href="#Mixer" class="headerlink" title="Mixer"></a>Mixer</h3><p>Mixer是一个独立于平台的组件。它在Service Mesh中执行访问控制和使用策略，同时收集Envoy和其他服务的遥测数据。<br>Mixer包含一个灵活组件模型，使得Istio能接入各种类型的主机环境和基础设施后端，从中抽象出Envoy代理和Istio管理的服务。</p><h3 id="Pilot"><a href="#Pilot" class="headerlink" title="Pilot"></a>Pilot</h3><p>控制流量行为的高级路由配置通过 <em>Pilot</em> 可以转换为Envoy特定的配置，并在运行时传播到sidecar中。<br>它可以为Envoy sidecar提供服务发现功能，为智能路由（例如 A/B 测试、金丝雀部署等）和弹性（超时、重试、熔断器等）提供流量管理功能。</p><h3 id="Citadel"><a href="#Citadel" class="headerlink" title="Citadel"></a>Citadel</h3><p>Citadel为Istio提供服务之间和终端用户身份认证。在Service Mesh中可以升级未加密的流量。</p><h3 id="Galley"><a href="#Galley" class="headerlink" title="Galley"></a>Galley</h3><p>Galley是Istio进行配置验证、提取、加工和分发的组件。其它组件可以通过Galley，从底层平台（比如Kubernetes）获取用户配置，达到其它组件和平台的解耦。</p><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://istio.io/docs/concepts/what-is-istio" target="_blank" rel="noopener">What is Istio</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Istio </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> istio </tag>
+            
+            <tag> service mesh </tag>
+            
+            <tag> kubernetes </tag>
+            
+            <tag> sidecar </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Nginx开启gzip优化数据传输</title>
+      <link href="/nginx/gzip-module/"/>
+      <url>/nginx/gzip-module/</url>
+      
+        <content type="html"><![CDATA[<p><img src="/img/2019042501.jpg" alt></p><blockquote><p>前言：本文的Nginx使用版本为：1.14.2</p></blockquote><p>在Web应用中，用户打开一个页面或者加载一个请求耗时过长时，体验是非常差的。这个时间可能受到很多因素影响，比如：</p><ul><li>建立连接慢</li><li>服务器响应较慢（Waiting）</li><li>页面资源大，包括js/css等（Downloading）</li><li>接口内容大（Downloading）</li></ul><p>正常情况下，在响应和传输上花费的时间比例是最多的。</p><p>假设我们的请求连接一下子建立完成，同时服务器的响应足够快，那么剩下的就是传输问题。<br>或许可以选择在硬件上提高速度，比如用户手机从2g信号提升到4g，宽带速度从10M提到200M，服务器的带宽也跟着提高。<br>可是用户端对于我们来说不可控，服务端的带宽资源相对还是比较昂贵。这时候，可以对传输的数据做压缩处理。假设资源文件能从5兆压缩到1兆，那便是5倍的性能提升。</p><h2 id="为Nginx开启gzip压缩"><a href="#为Nginx开启gzip压缩" class="headerlink" title="为Nginx开启gzip压缩"></a>为Nginx开启gzip压缩</h2><p>Nginx是一个高性能的HTTP和反向代理服务器，默认提供了gzip的压缩模块：<a href="https://nginx.org/en/docs/http/ngx_http_gzip_module.html" target="_blank" rel="noopener">ngx_http_gzip_module</a>。<br>模块的最开头便介绍道：<code>能帮助我们减少一半甚至更多的传输数据大小</code>。</p><p>gzip模块默认是没有开启的，我们可以在<code>http</code>、<code>server</code>、<code>location</code>配置中开启它。</p><p>这是官方的配置例子：</p><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">server&#123;</span><br><span class="line"></span><br><span class="line">    gzip  <span class="keyword">on</span>;  <span class="comment"># 开启gzip</span></span><br><span class="line">    gzip_types      <span class="built_in">text</span>/plain <span class="built_in">application</span>/xml; <span class="comment"># 进行压缩的类型</span></span><br><span class="line">    gzip_proxied    no-cache no-store private expired auth; <span class="comment"># 根据某些头部决定是否压缩，在下文详细分析</span></span><br><span class="line">    gzip_min_length <span class="number">1000</span>; <span class="comment"># 最小的压缩长度</span></span><br><span class="line"></span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>通过配置开启了gzip压缩，体验传输速度的提升吧。</p><p>gzip_module有许多详细的配置参数。</p><table><thead><tr><th>配置名</th><th>参数内容</th><th>默认值</th><th>描述</th></tr></thead><tbody><tr><td>gzip</td><td>on &#124; off</td><td>off</td><td>是否开启gzip</td></tr><tr><td>gzip_buffers</td><td>number size</td><td>32 4k &#124; 16 8k</td><td>压缩的buffers的数量和大小，默认值取决于系统一个内存页的大小</td></tr><tr><td>gzip_comp_level</td><td>number</td><td>1</td><td>压缩的级别，值的范围是1到9</td></tr><tr><td>gzip_disable</td><td>正则表达式</td><td>无</td><td>假如User-Agent符合正则规则，则关闭压缩功能</td></tr><tr><td>gzip_http_version</td><td>1.0 &#124; 1.1</td><td>1.1</td><td>设置压缩时最低的http版本</td></tr><tr><td>gzip_min_length</td><td>length</td><td>20</td><td>启用压缩的response最低长度</td></tr><tr><td>gzip_proxied</td><td>off &#124; expired &#124; no-cache &#124; no-store &#124; private &#124; no_last_modified &#124; no_etag &#124; auth &#124; any</td><td>off</td><td>详见下文说明</td></tr><tr><td>gzip_types</td><td>mine-type …</td><td>text/html</td><td>要压缩MINE-TYPE类型，设置为*时会匹配所有的MIME (0.8.29)类型</td></tr><tr><td>gzip_vary</td><td>on &#124; off</td><td>off</td><td>开启时，会在返回头插入”Vary: Accept-Encoding”</td></tr></tbody></table><p>同时，启用了模块我们可以在配置中使用内置变量$gzip_ratio，它的值是压缩率。</p><h3 id="比较难理解的参数：gzip-proxied"><a href="#比较难理解的参数：gzip-proxied" class="headerlink" title="比较难理解的参数：gzip_proxied"></a>比较难理解的参数：gzip_proxied</h3><p>这个模块中有一个配置gzip_proxied，对这个配置疑惑的人比较多。在了解这个配置前，我们先看下http的头部<code>Via</code>。<br><code>Via</code>头在代理服务器中传播时会被加上（不管是正向代理还是反向代理）。通过这个头部，服务器就可以知道请求经过了哪些代理。</p><p>回到<code>gzip_proxied</code>，默认情况下，nginx不会对被代理的请求进行压缩，它通过Via头识别请求是不是被代理过。如果要对被代理的请求进行压缩，可以配置这个参数，比如前文的：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gzip_proxied no-<span class="keyword">cache</span> <span class="keyword">no</span>-<span class="keyword">store</span> <span class="keyword">private</span> expired auth;</span><br></pre></td></tr></table></figure></p><p>它可以配多个值，分别为：</p><table><thead><tr><th>参数名</th><th>描述</th></tr></thead><tbody><tr><td>off</td><td>不压缩所有被代理的请求</td></tr><tr><td>expired</td><td>如果返回头包含<code>Expires</code>，则开启压缩</td></tr><tr><td>no-cached</td><td>如果返回头包含<code>Cache-Control</code>，值为<code>no-cache</code>，则开启压缩</td></tr><tr><td>no-store</td><td>如果返回头包含<code>Cache-Control</code>，值为<code>no-store</code>，则开启压缩</td></tr><tr><td>private</td><td>如果返回头包含<code>Cache-Control</code>，值为<code>private</code>，则开启压缩</td></tr><tr><td>no_last_modified</td><td>如果返回头没有包含<code>Last-Modified</code>，则开启压缩</td></tr><tr><td>no_etag</td><td>如果返回头没有包含<code>ETag</code>，则开启压缩</td></tr><tr><td>auth</td><td>如果请求头包含<code>Authorization</code>，则开启压缩</td></tr><tr><td>any</td><td>压缩所有被代理请求</td></tr></tbody></table><h2 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h2><p>开启压缩，能让我们的用户体验大大提升，同时节省服务器的带宽资源。然而压缩功能的开启，会消耗服务器的计算资源，需要衡量资源是否需要进行压缩、以及压缩的级别。<br>在web应用中，很多资源文件可能在构建项目时已经经过处理，那么可以不对它们进行压缩，这时可以由gzip模块的<code>gzip_types</code>具体配置。</p><p>总的来讲，压缩是一个可以提升性能的功能，但同时也是需要我们去衡量后，做出最好的配置调整。</p><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://nginx.org/en/docs/http/ngx_http_gzip_module.html" target="_blank" rel="noopener">ngx_http_gzip_module</a><br><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Via" target="_blank" rel="noopener">Via - HTTP | MDN</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Nginx </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> nginx </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>在Mac OS X管理Java的版本</title>
+      <link href="/java/manage-jdk-on-mac/"/>
+      <url>/java/manage-jdk-on-mac/</url>
+      
+        <content type="html"><![CDATA[<p><img src="/img/2019042401.jpg" alt></p><p>开发Java的时候，第一步肯定是将JAVA_HOME在环境变量中设置好。<br>Mac提供了一个方便地切换jdk版本的工具：<code>/usr/libexec/java_home</code>，使用起来也非常简单。</p><p>按照传统的做法，我们可能是在我们的配置文件中，比如.bashrc、.zshrc里，<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="builtin-name">export</span> <span class="attribute">JAVA_HOME</span>=/path/to/your/java_home</span><br></pre></td></tr></table></figure></p><p>这里是我们安装好jdk后，知道了jdk所在的位置，然后将变量指过去。</p><p>而有了<em>java_home</em>这个工具后，比如我们想设置jdk版本为11，可以这样用：<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="builtin-name">export</span> <span class="attribute">JAVA_HOME</span>=`/usr/libexec/java_home -v 11.0`</span><br></pre></td></tr></table></figure></p><p>由工具帮我们管理版本以及JAVA_HOME的位置。<br>如果指定的版本不存在，会报出<br><figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ /usr/libexec/java_home -v <span class="number">10</span></span><br><span class="line">$ Unable <span class="built_in">to</span> find <span class="keyword">any</span> JVMs matching <span class="built_in">version</span> <span class="string">"10"</span>.</span><br></pre></td></tr></table></figure></p><p>这时我们需要去找到对应的版本进行安装。</p><p><em>（需要注意的是，这里的前提是JDK使用官方的dmg安装文件进行安装）</em></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Java </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> java </tag>
+            
+            <tag> jdk </tag>
+            
+            <tag> mac </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>使用npm link调试node.js模块</title>
+      <link href="/nodejs/npm-link/"/>
+      <url>/nodejs/npm-link/</url>
+      
+        <content type="html"><![CDATA[<p>有时候，在项目开发时，我们会为我们的项目开发一些独立模块。</p><p>按照模块依赖的引入，我们会使用<code>require</code>去做：</p><ul><li>如果模块已经发布在仓库中，我们可以直接require模块名</li><li>如果没有在仓库中，我们可以使用路径去进行引入</li></ul><p>对于前者而已，如果我们想要做调整或者测试，一定要发布到仓库上面，显然是不妥的。而后者的话，不管是使用相对路径还是绝对路径，写法上都不优雅。</p><blockquote><p>其实，npm的命令中还有一个可以优雅解决我们当前需求的功能。</p></blockquote><h2 id="Npm-link"><a href="#Npm-link" class="headerlink" title="Npm link"></a>Npm link</h2><p>npm提供了link的功能，可以让我们使用本地模块就像使用仓库模块一样。</p><p>假设我们现在有两个项目：</p><ul><li>my-utils，这个项目提供一些辅助工具，作为模块使用</li><li>my-project，这是业务的项目，提供服务。</li></ul><p>在<code>my-project</code>中，会使用到<code>my-utils</code>。那使用npm link的话，要怎么做呢？命令其实很简单：</p><figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 进入到模块目录，创建模块链接</span></span><br><span class="line"><span class="keyword">cd</span> ~<span class="string">/projects/my-utils</span></span><br><span class="line">npm link</span><br><span class="line"><span class="comment"># 进入项目目录，将要引入的模块使用link安装进来</span></span><br><span class="line"><span class="keyword">cd</span> ~<span class="string">/projects/my-project</span></span><br><span class="line">npm link my-utils</span><br></pre></td></tr></table></figure><p>执行上面的命令之后，任何我们在my-utils的改变，都会在<br><code>~/projects/my-project/node_modules/my-utils</code><br>中提现出来。那么我们只要修改my-utils，然后使用my-project查看效果便可以了。</p><p>我们也可以将上面的两步link合并成一步：</p><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd ~<span class="regexp">/projects/my</span>-<span class="keyword">project</span></span><br><span class="line">npm link ~<span class="regexp">/projects/my</span>-utils</span><br></pre></td></tr></table></figure><p>这与上面两条link命令的效果是一致的。</p><h2 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h2><p>需要注意的是，当我们执行：</p><figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 进入到模块目录，创建模块链接</span></span><br><span class="line"><span class="keyword">cd</span> ~<span class="string">/projects/my-utils</span></span><br><span class="line">npm link</span><br></pre></td></tr></table></figure><p>这里link得到的模块名称，是从<code>package.json</code>中得到，并不是目录名称。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Node.js </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> nodejs </tag>
+            
+            <tag> npm </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>使用Pod探针让服务更可靠</title>
+      <link href="/kubernetes/use-pod-probe/"/>
+      <url>/kubernetes/use-pod-probe/</url>
+      
+        <content type="html"><![CDATA[<p>在默认情况下，Kubernetes启动Pod成功后，便认为它是可用的，Service会将Pod加入服务，流量就会进入到启动的Pod中。</p><p>这其实会造成一些服务不可靠的情况，比如：</p><ol><li>当我们用Deployment滚动升级的过程中，会遇到服务短暂性不可用，然后又恢复了。一个web服务，可能会出现502 Bad Gateway的一瞬间。</li><li>当一个Pod运行了一段时间后，应用程序由于各种原因已经处于不可用状态，需要重启，然而Pod还存活着，Kubernetes依旧认为它是可用的。</li><li>应用程序并不能成功启动，导致Pod在启动后又挂掉，陷入一个不断循环的过程。</li></ol><p>可以看出，一个服务可不可用，并不能单纯地使用是否启动成功作为判断，对此，k8s有Pod专门的探针来检测。</p><h2 id="探针的类型"><a href="#探针的类型" class="headerlink" title="探针的类型"></a>探针的类型</h2><p>探针有两种，<code>Liveness</code>和<code>Readiness</code>，通过官网的介绍，我们明确得到：</p><ul><li>Liveness: 让kubelet知道什么时候重启容器。比如，可以解决当一个应用程序虽然处于运行状态，实际却无法提供服务的情况。</li><li>Readniess：让kubelet知道容器是否已经准备好接受流量。Service的负载均衡会使用这个状态来决定是否将Pod作为服务的后端，或者什么时候将其剔除。</li></ul><h2 id="如何配置探针"><a href="#如何配置探针" class="headerlink" title="如何配置探针"></a>如何配置探针</h2><p>首先我们要先理解好两种探针的区别，清楚我们的目的是什么，想要达到什么样的效果，然后配置对应的探针。<br>两种探针在配置上是一样的，只是配置的名字不同而已，我们这里只列出Liveness怎么配置。</p><p>因为Pod可以配置多个Container，所以探针的具体配置是在每个Container之中。<br>探针有三种试探方式：</p><ul><li>exec：执行命令</li><li>httpGet：使用HTTP请求</li><li>tcpSocket：使用TCP检测</li></ul><p>下面三个探针方式的配置例子来自k8s官网。</p><h3 id="用命令来检测"><a href="#用命令来检测" class="headerlink" title="用命令来检测"></a>用命令来检测</h3><p>exec是通过执行命令来检测，命令执行成功时返回0，则认为探测成功。<br>下面的配置是用exec作为探测的例子：<br><figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">apiVersion:</span> v1</span><br><span class="line"><span class="symbol">kind:</span> Pod</span><br><span class="line"><span class="symbol">metadata:</span></span><br><span class="line"><span class="symbol">  labels:</span></span><br><span class="line"><span class="symbol">    test:</span> liveness</span><br><span class="line"><span class="symbol">  name:</span> liveness-exec</span><br><span class="line"><span class="symbol">spec:</span></span><br><span class="line"><span class="symbol">  containers:</span></span><br><span class="line">  - name: liveness</span><br><span class="line"><span class="symbol">    image:</span> k8s.gcr.io/busybox</span><br><span class="line"><span class="symbol">    args:</span></span><br><span class="line">    - <span class="meta-keyword">/bin/</span>sh</span><br><span class="line">    - -c</span><br><span class="line">    - touch <span class="meta-keyword">/tmp/</span>healthy; sleep <span class="number">30</span>; rm -rf <span class="meta-keyword">/tmp/</span>healthy; sleep <span class="number">600</span></span><br><span class="line"><span class="symbol">    livenessProbe:</span></span><br><span class="line"><span class="symbol">      exec:</span></span><br><span class="line"><span class="symbol">        command:</span></span><br><span class="line">        - cat</span><br><span class="line">        - <span class="meta-keyword">/tmp/</span>healthy</span><br><span class="line"><span class="symbol">      initialDelaySeconds:</span> <span class="number">5</span></span><br><span class="line"><span class="symbol">      periodSeconds:</span> <span class="number">5</span></span><br></pre></td></tr></table></figure></p><p>容器启动时，会生成<code>/tmp/healthy</code>文件，然后在30秒后，将文件删除，并且先别退出，等待600秒。<br>liveness的配置中，initialDelaySeconds指定了启动容器后先等待5秒，然后再执行探针，periodSeconds代表执行探针的频率，这里是5秒一次。</p><p>具体的执行过程这里就不展示了，从结果上看：启动后的30秒内，探针的检测都是正常的，在第35秒后，会显示liveness探针失败，容器被删掉并重建。</p><h3 id="用HTTP请求检测"><a href="#用HTTP请求检测" class="headerlink" title="用HTTP请求检测"></a>用HTTP请求检测</h3><p>还可以用http get请求作为检测：<br><figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">apiVersion</span>: v1</span><br><span class="line"><span class="attribute">kind</span>: Pod</span><br><span class="line"><span class="attribute">metadata</span>:</span><br><span class="line">  <span class="attribute">labels</span>:</span><br><span class="line">    <span class="attribute">test</span>: liveness</span><br><span class="line">  <span class="attribute">name</span>: liveness-http</span><br><span class="line"><span class="attribute">spec</span>:</span><br><span class="line">  <span class="attribute">containers</span>:</span><br><span class="line">  - <span class="attribute">name</span>: liveness</span><br><span class="line">    <span class="attribute">image</span>: k8s.gcr.io/liveness</span><br><span class="line">    <span class="attribute">args</span>:</span><br><span class="line">    - /server</span><br><span class="line">    <span class="attribute">livenessProbe</span>:</span><br><span class="line">      <span class="attribute">httpGet</span>:</span><br><span class="line">        <span class="attribute">path</span>: /healthz</span><br><span class="line">        <span class="attribute">port</span>: <span class="number">8080</span></span><br><span class="line">        <span class="attribute">httpHeaders</span>:</span><br><span class="line">        - <span class="attribute">name</span>: Custom-Header</span><br><span class="line">          <span class="attribute">value</span>: Awesome</span><br><span class="line">      <span class="attribute">initialDelaySeconds</span>: <span class="number">3</span></span><br><span class="line">      <span class="attribute">periodSeconds</span>: <span class="number">3</span></span><br></pre></td></tr></table></figure></p><p>对于httpGet探针来说，返回状态码在200到400间，就会认为是成功的。<code>状态码没有更改选项</code>。<br>该程序的源码如下：<br><figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">http.HandleFunc(<span class="string">"/healthz"</span>, <span class="function"><span class="keyword">func</span><span class="params">(w http.ResponseWriter, r *http.Request)</span></span> &#123;</span><br><span class="line">    duration := time.Now().Sub(started)</span><br><span class="line">    <span class="keyword">if</span> duration.Seconds() &gt; <span class="number">10</span> &#123;</span><br><span class="line">        w.WriteHeader(<span class="number">500</span>)</span><br><span class="line">        w.Write([]<span class="keyword">byte</span>(fmt.Sprintf(<span class="string">"error: %v"</span>, duration.Seconds())))</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        w.WriteHeader(<span class="number">200</span>)</span><br><span class="line">        w.Write([]<span class="keyword">byte</span>(<span class="string">"ok"</span>))</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p><p>代码可以看出，在程序启动的10秒内都是正常的，10秒后，会返回500的状态码，这个时候，探针会失败，容器将被杀掉并重启。</p><h3 id="用TCP连接检测"><a href="#用TCP连接检测" class="headerlink" title="用TCP连接检测"></a>用TCP连接检测</h3><p>使用TCP进行检测的方式是，只要通过指定的端口，能成功建立socket，则认为是成功的，否则认为失败。<br><figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">apiVersion</span>: v1</span><br><span class="line"><span class="attribute">kind</span>: Pod</span><br><span class="line"><span class="attribute">metadata</span>:</span><br><span class="line">  <span class="attribute">name</span>: goproxy</span><br><span class="line">  <span class="attribute">labels</span>:</span><br><span class="line">    <span class="attribute">app</span>: goproxy</span><br><span class="line"><span class="attribute">spec</span>:</span><br><span class="line">  <span class="attribute">containers</span>:</span><br><span class="line">  - <span class="attribute">name</span>: goproxy</span><br><span class="line">    <span class="attribute">image</span>: k8s.gcr.io/<span class="attribute">goproxy</span>:<span class="number">0.1</span></span><br><span class="line">    <span class="attribute">ports</span>:</span><br><span class="line">    - <span class="attribute">containerPort</span>: <span class="number">8080</span></span><br><span class="line">    <span class="attribute">readinessProbe</span>:</span><br><span class="line">      <span class="attribute">tcpSocket</span>:</span><br><span class="line">        <span class="attribute">port</span>: <span class="number">8080</span></span><br><span class="line">      <span class="attribute">initialDelaySeconds</span>: <span class="number">5</span></span><br><span class="line">      <span class="attribute">periodSeconds</span>: <span class="number">10</span></span><br><span class="line">    <span class="attribute">livenessProbe</span>:</span><br><span class="line">      <span class="attribute">tcpSocket</span>:</span><br><span class="line">        <span class="attribute">port</span>: <span class="number">8080</span></span><br><span class="line">      <span class="attribute">initialDelaySeconds</span>: <span class="number">15</span></span><br><span class="line">      <span class="attribute">periodSeconds</span>: <span class="number">20</span></span><br></pre></td></tr></table></figure></p><p>在这个例子里，同时存在了readinessProbe和livenessProbe，它们都是一样的，只要端口8080能成功建立连接，探针便是成功的。</p><h3 id="使用命名端口"><a href="#使用命名端口" class="headerlink" title="使用命名端口"></a>使用命名端口</h3><p>这个配置是针对httpGet和tcpSocket探针的，对于上面的port配置，都是配置一个具体端口号，我们也可以通过ContainerPort来配置它。比如：<br><figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">ports</span>:</span><br><span class="line">- <span class="attribute">name</span>: liveness-port</span><br><span class="line">  <span class="attribute">containerPort</span>: <span class="number">8080</span></span><br><span class="line">  <span class="attribute">hostPort</span>: <span class="number">8080</span></span><br><span class="line"></span><br><span class="line"><span class="attribute">livenessProbe</span>:</span><br><span class="line">  <span class="attribute">httpGet</span>:</span><br><span class="line">    <span class="attribute">path</span>: /healthz</span><br><span class="line">    <span class="attribute">port</span>: liveness-port</span><br></pre></td></tr></table></figure></p><h3 id="其他配置参数"><a href="#其他配置参数" class="headerlink" title="其他配置参数"></a>其他配置参数</h3><p>从上面的例子我们看到了探针的一些其他配置参数，这里列出探针的所有具体配置项：</p><table><thead><tr><th>配置项</th><th>描述</th></tr></thead><tbody><tr><td>initialDelaySeconds</td><td>探针在容器启动后的多少秒才开始执行</td></tr><tr><td>periodSeconds</td><td>探针执行频率。默认是10秒，最小1秒。</td></tr><tr><td>timeoutSeconds</td><td>探测超时时间。默认1秒，最小1秒。</td></tr><tr><td>successThreshold</td><td>探测失败后，最少连续探测成功多少次才被认定为成功。默认是1。对于liveness必须是1。最小值是1。</td></tr><tr><td>failureThreshold</td><td>探测成功后，最少连续探测失败多少次才被认定为失败。默认是3。最小值是1。</td></tr></tbody></table><p>HTTP probe 中可以给 httpGet设置其他配置项：</p><table><thead><tr><th>配置项</th><th>描述</th></tr></thead><tbody><tr><td>host</td><td>连接的主机名，默认连接到pod的IP。你可能想在http header中设置”Host”而不是使用IP。</td></tr><tr><td>scheme</td><td>连接使用的schema，默认HTTP。</td></tr><tr><td>path</td><td>访问的HTTP server的path。</td></tr><tr><td>httpHeaders</td><td>自定义请求的header。HTTP运行重复的header。</td></tr><tr><td>port</td><td>访问的容器的端口名字或者端口号。端口号必须介于1和65535之间。</td></tr></tbody></table><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>到这里，探针的相关内容都已经列出来了。我们要明确两种探针对应着什么样的效果：</p><ul><li>Liveness: 让kubelet知道什么时候重启容器。比如，可以解决当一个应用程序虽然处于运行状态，实际却无法提供服务的情况。</li><li>Readniess：让kubelet知道容器是否已经准备好接受流量。Service的负载均衡会使用这个状态来决定是否将Pod作为服务的后端，或者什么时候将其剔除。</li></ul><p>让它们相互之间配合，让我们的服务更加可靠。</p><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/" target="_blank" rel="noopener">Configure Liveness and Readiness Probes</a><br><a href="https://jimmysong.io/kubernetes-handbook/guide/configure-liveness-readiness-probes.html" target="_blank" rel="noopener">配置Pod的liveness和readiness探针</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Kubernetes </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> kubernetes </tag>
+            
+            <tag> k8s </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Nginx出现no live upstream问题</title>
+      <link href="/nginx/no-live-upstream/"/>
+      <url>/nginx/no-live-upstream/</url>
+      
+        <content type="html"><![CDATA[<p>有时候我们查看Nginx的错误日志，会发现有这么一种错误：</p><p>2019/04/13 20:41:03 [error] 18904#0: *214818926 no live upstreams while connecting to upstream, client: 47.111.193.40, server: xxx.xxx.cn, request: “GET /api/xxx HTTP/1.1”, upstream: “<a href="http://service/api/xxx&quot;" target="_blank" rel="noopener">http://service/api/xxx&quot;</a>, host: “xxx.xxx.cn”</p><p>里面的信息都是请求相关的内容，我们抓住关键点：<br><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="literal">no</span> <span class="string">live</span> <span class="string">upstreams</span></span><br></pre></td></tr></table></figure></p><p>nginx的upstream，是用于将请求分配到上游（被代理）服务，我们可以指定请求分配的策略，重试机制等等。</p><p>假设我们的upstream是这样配置的：</p><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">upstream a-service &#123;</span><br><span class="line"> <span class="built_in"> server </span>172.16.x.1;</span><br><span class="line"> <span class="built_in"> server </span>172.16.x.2;</span><br><span class="line"> <span class="built_in"> server </span>172.16.x.3;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>服务<code>a-service</code>拥有3个上游服务，这里没做其他配置，那么默认nginx会将请求轮询到3个服务去。</p><p>现在由于种种原因，<code>172.16.x.1</code>出现了问题，nginx发现请求失败后，会尝试下一个upstream也就是<code>172.16.x.2</code>，并且把<code>172.16.x.1</code>暂时标记为不可用状态，这样的话可以让调用方的请求正确使用。</p><p>然而当<code>172.16.x.2</code>也不可用呢，nginx会尝试<code>172.16.x.3</code>，如果<code>172.16.x.3</code>也不可用，意味着upstream a-service整体是不可用的</p><blockquote><p><code>no live upstreams</code>便是这个时候报出来的错误。</p></blockquote><p>但你可能可以看到，错误报出来后，服务还是正常可用啊，是因为nginx报出错误后，会将upstream下的几个上游服务失败次数清0，然后重新开始服务，假设这个时候<code>172.16.x.1</code>已经恢复过来了，服务就是可用的。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Nginx </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> nginx </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>认识缓存系统</title>
+      <link href="/architecture/meeting-cache-system/"/>
+      <url>/architecture/meeting-cache-system/</url>
+      
+        <content type="html"><![CDATA[<p>缓存，是系统性能优化的一种有效手段，通过缓存系统，我们可以弥补某些性能难以提升的场景。 比如：</p><ul><li>数据库查询复杂的语句，尽管有索引帮忙，却还是相当耗性能；</li><li>业务计算复杂，每次请求都耗费比较大的算力，响应较慢；</li><li>读多写少，读取频率远远大于写入。</li></ul><p>这些都是典型的可以使用缓存系统来提升系统整体性能的场景。</p><h2 id="缓存是什么"><a href="#缓存是什么" class="headerlink" title="缓存是什么"></a>缓存是什么</h2><p>基于内存的读写速度远远大于磁盘的前提，缓存将可重复使用的数据放入内存中，避免每次都对存储系统进行访问，使用时从内存中读取。</p><p>下面是一个常用的架构模型。</p><p>当读取数据时：<br><img src="/img/2019041201.svg" alt></p><p>程序首先从缓存中获取数据，如果拿到数据，则直接返回给调用方。<br>如果缓存数据不存在，那么从数据库读出数据，写入到缓存中，同时返回给调用方。</p><hr><p>写入更新数据时：<br><img src="/img/2019041202.svg" alt></p><p>这里涉及到缓存跟数据库的写入时机问题，<br>图中展示的是应用服务器先将数据写入数据库，然后将缓存设置为失效。</p><h2 id="缓存带来的问题"><a href="#缓存带来的问题" class="headerlink" title="缓存带来的问题"></a>缓存带来的问题</h2><p>缓存虽好，却给系统引入了复杂性。</p><h3 id="缓存失效（雪崩）"><a href="#缓存失效（雪崩）" class="headerlink" title="缓存失效（雪崩）"></a>缓存失效（雪崩）</h3><p>什么是雪崩，简单来说，雪崩的瞬间就是当一个请求到来时，系统还没来得及响应回去，后面的请求紧接到来，当系统响应时，请求者已经认为失败而进行重试了，这是一个不断重复放大的过程，最终造成系统连锁反应而服务不可用。</p><p>缓存系统的雪崩，就是缓存失效的时候，业务需要重新生成缓存，假设同时要好几百个请求，他们相互之间并不知道对方正在生成缓存，而都去重新生成缓存，造成系统压力过载而形成连锁反应。</p><p>这个时候，我们要考虑好的事情就算怎么去维护缓存失效问题。</p><h4 id="请求时主动刷新"><a href="#请求时主动刷新" class="headerlink" title="请求时主动刷新"></a>请求时主动刷新</h4><p>比如我们正在为一些高频率的API请求做缓存，请求到来时访问缓存系统，如果没有命中缓存，那么自然要去重新生成数据，如果命中缓存，在返回给调用者后（或者之前），检验缓存剩余时间，假设已经到达我们设置的阈值，则主动刷新缓存，避免缓存被动失效。</p><h4 id="后台刷新"><a href="#后台刷新" class="headerlink" title="后台刷新"></a>后台刷新</h4><p>缓存不由业务进程(线程)维护，而由一个独立的后台服务来维护，定时刷新缓存。<br>维护时注意缓存空间，如果缓存满了，需要采取策略剔除一些缓存。</p><h4 id="锁机制"><a href="#锁机制" class="headerlink" title="锁机制"></a>锁机制</h4><p>更新缓存时，采取锁机制，保证同一时间只有一个进程在更新缓存，其他进程等待缓存更新结果，或者提前返回默认值/空值.</p><p>注意点在于，现在大多数系统都不是单机单进程系统，使用分布式集群需要引入分布式锁，以保证不同机器之间不会同时生成缓存。</p><h3 id="缓存穿透（未命中）"><a href="#缓存穿透（未命中）" class="headerlink" title="缓存穿透（未命中）"></a>缓存穿透（未命中）</h3><p>缓存穿透是指，查询的数据不存在，此时缓存也不会有对应的数据，从而造成请求每次都会对存储层进行查询，缓存起不到缓解存储层压力的效果。<br>另外一种情况也会造成缓存穿透，就是数据是存在的，然而计算耗费时间较久，当缓存失效时，所有流量都会直接进入到存储层查询，造成穿透效果。</p><p>当我们可以确定缓存对应的数据是不存在时，将该key对应的值设置为空，那么缓存可以防止查询对存储层造成压力。</p><h3 id="缓存热点"><a href="#缓存热点" class="headerlink" title="缓存热点"></a>缓存热点</h3><p>缓存的性能很高，但如果突然出现的大量的热点集中式访问，会导致热点数据所在的缓存资源压力大。<br>这种时候可以考虑将缓存数据做成多份，分散请求到不同的缓存服务器上。</p><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://juejin.im/entry/57e39e320e3dd90058021bff" target="_blank" rel="noopener">分布式缓存架构基础</a><br>极客时间专栏「左耳听风」「从0开始学架构」</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 系统架构 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 缓存 </tag>
+            
+            <tag> cache </tag>
+            
+            <tag> 性能优化 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Vim插件推荐</title>
+      <link href="/tools/my_vim_usage/"/>
+      <url>/tools/my_vim_usage/</url>
+      
+        <content type="html"><![CDATA[<blockquote><p>在使用插件之前，我们需要有一款插件管理器。<br>推荐使用<a href="https://github.com/VundleVim/Vundle.vim" target="_blank" rel="noopener">Vundle</a>或<a href="https://github.com/tpope/vim-pathogen" target="_blank" rel="noopener">Pathogen</a><br>这里只做介绍，如何安装请参考插件的具体说明。</p></blockquote><h2 id="文件目录-nerdtree"><a href="#文件目录-nerdtree" class="headerlink" title="文件目录 nerdtree"></a>文件目录 nerdtree</h2><p>在很多时候，我们希望看到当前编辑的文件处在一个什么样的目录，或者是上下文中有什么相关的文件。在vim里面，尽管我们可以通过<code>!ls</code>或者<code>!pwd</code>之类的命令进行查看，但还是麻烦了些。<br><a href="https://github.com/scrooloose/nerdtree" target="_blank" rel="noopener">nerdtree</a>可以展示出文件目录结构，如项目主页所展示：<br><img src="https://github.com/scrooloose/nerdtree/raw/master/screenshot.png" alt></p><p>推荐指数：★★★★★</p><h2 id="进行多选-vim-multiple-cursors"><a href="#进行多选-vim-multiple-cursors" class="headerlink" title="进行多选 vim-multiple-cursors"></a>进行多选 vim-multiple-cursors</h2><p>不知道你有没有用过Sublime Text的multiple_selection功能，在选中一个词、区域后，按Command+d(ctrl+d)，就可以同时选中多个相同内容，然后进行编辑修改。</p><p>这个功能可以方便的让我们代替Find&amp;Replace的操作，而且非常直观。</p><p><img src="https://github.com/terryma/vim-multiple-cursors/raw/master/assets/example1.gif" alt></p><p>推荐指数：★★★★★</p><h2 id="代码提示-YouCompleteMe"><a href="#代码提示-YouCompleteMe" class="headerlink" title="代码提示 YouCompleteMe"></a>代码提示 YouCompleteMe</h2><p><a href="https://github.com/Valloric/YouCompleteMe" target="_blank" rel="noopener">YouCompleteMe</a>在Vim代码提示里算大哥大了，主要支持C-Family，Go，Java，JavaScript/TypeScript，Rust等，具体支持依赖于语言对应的引擎，缺点在于安装比较麻烦，稍微重量级。</p><p>推荐指数：★★★★</p><h2 id="专心写作-禅模式-goyo"><a href="#专心写作-禅模式-goyo" class="headerlink" title="专心写作(禅模式) goyo"></a>专心写作(禅模式) goyo</h2><p>在写作的时候，我们希望打扰我们的元素尽可能少，专注的点在于笔下，<a href="https://github.com/junegunn/goyo.vim" target="_blank" rel="noopener">goyo</a>可以让编辑界面变得非常简洁，而且内容展示方式舒适。</p><p><img src="https://camo.githubusercontent.com/58569256e607d63a1c6c930d64d80b8d93e8e8c1/68747470733a2f2f7261772e6769746875622e636f6d2f6a756e6567756e6e2f692f6d61737465722f676f796f2e706e67" alt></p><p>推荐指数：★★★★</p><h2 id="搜索-Ack"><a href="#搜索-Ack" class="headerlink" title="搜索 Ack"></a>搜索 Ack</h2><p>打开了vim，你突然想查找某个关键字在其他文件里是否出现，或许你不喜欢grep而喜欢ack，那插件<a href="https://github.com/mileszs/ack.vim" target="_blank" rel="noopener">ack</a>可以帮我们快速找到。</p><p>推荐指数：★★★★</p><h2 id="快速查找-ctrlp"><a href="#快速查找-ctrlp" class="headerlink" title="快速查找 ctrlp"></a>快速查找 ctrlp</h2><p>使用了<a href="https://github.com/ctrlpvim/ctrlp.vim" target="_blank" rel="noopener">ctrlp</a>，我们可以在文件、buffer、Amru、tag里快速定位我们要编辑的文件，而不用一个目录一个目录去查找。</p><p><img src="https://camo.githubusercontent.com/e15ac916ab9a14dd07135cb2d985cc7333200a38/687474703a2f2f692e696d6775722e636f6d2f614f63774877742e706e67" alt></p><p>推荐指数：★★★★</p><h2 id="tagbar"><a href="#tagbar" class="headerlink" title="tagbar"></a>tagbar</h2><p><a href>tagbar</a>可以让我们看到当前编辑的代码文件里，有什么定义、什么类、方法，就像在IDE里一样，另外通过它可以快速进行跳转。</p><p><img src="https://camo.githubusercontent.com/fc85311154723793776aed28488befdfaab36c42/68747470733a2f2f692e696d6775722e636f6d2f5366394c7332722e706e67" alt></p><p>推荐指数：★★★</p><h2 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h2><p>其实我们用vim，并非是要将其改造成一个IDE，插件不在于多，而在于实用。很多插件，折腾装完，可能用都用不上。</p><p>所以最实用的，还是vim本身自带的功能。或许，无插件才是最好的插件。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 工具 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> vim </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Chrome快捷键</title>
+      <link href="/tools/chrome_shortcuts/"/>
+      <url>/tools/chrome_shortcuts/</url>
+      
+        <content type="html"><![CDATA[<p>简单记录下Mac下Chrome的快捷键。</p><blockquote><p>标签页和窗口快捷键</p></blockquote><table><thead><tr><th>操作</th><th>快捷键</th></tr></thead><tbody><tr><td>打开新窗口</td><td>⌘ + n</td></tr><tr><td>在无痕模式下打开新窗口</td><td>⌘ + Shift + n</td></tr><tr><td>打开新的标签页，并跳转到该标签页</td><td>⌘ + t</td></tr><tr><td>重新打开最后关闭的标签页，并跳转到该标签页</td><td>⌘ + Shift + t</td></tr><tr><td>跳转到下一个打开的标签页</td><td>⌘ + Option + 向右箭头键</td></tr><tr><td>跳转到上一个打开的标签页</td><td>⌘ + Option + 向左箭头键</td></tr><tr><td>跳转到特定标签页</td><td>⌘ + 1 到 ⌘ + 8</td></tr><tr><td>跳转到最后一个标签页</td><td>⌘ + 9</td></tr><tr><td>打开当前标签页浏览记录中记录的上一个页面</td><td>⌘ + [ 或 ⌘ + 向左箭头键</td></tr><tr><td>打开当前标签页浏览记录中记录的下一个页面</td><td>⌘ + ] 或 ⌘ + 向右箭头键</td></tr><tr><td>关闭当前标签页或弹出式窗口</td><td>⌘ + w</td></tr><tr><td>关闭当前窗口</td><td>⌘ + Shift + w</td></tr><tr><td>最小化窗口</td><td>⌘ + m</td></tr><tr><td>隐藏 Google Chrome</td><td>⌘ + h</td></tr><tr><td>退出 Google Chrome</td><td>⌘ + q</td></tr></tbody></table><blockquote><p>功能快捷键</p></blockquote><table><thead><tr><th>操作</th><th>快捷键</th></tr></thead><tbody><tr><td>显示或隐藏书签栏</td><td>⌘ + Shift + b</td></tr><tr><td>打开书签管理器</td><td>⌘ + Option + b</td></tr><tr><td>在新标签页中打开“设置”页</td><td>⌘ + ,</td></tr><tr><td>在新标签页中打开“历史记录”页</td><td>⌘ + y</td></tr><tr><td>在新标签页中打开“下载内容”页</td><td>⌘ + Shift + j</td></tr><tr><td>打开查找栏搜索当前网页</td><td>⌘ + f</td></tr><tr><td>跳转到与查找栏中搜索字词相匹配的下一条内容</td><td>⌘ + g</td></tr><tr><td>跳转到与查找栏中搜索字词相匹配的上一条内容</td><td>⌘ + Shift + g</td></tr><tr><td>打开查找栏后，搜索选定文本</td><td>⌘ + e</td></tr><tr><td>打开“开发者工具”</td><td>⌘ + Option + i</td></tr><tr><td>打开“清除浏览数据”选项</td><td>⌘ + Shift + Delete</td></tr><tr><td>使用其他帐号登录或以访客身份浏览</td><td>⌘ + Shift + m</td></tr></tbody></table><blockquote><p>地址快捷键</p></blockquote><table><thead><tr><th>操作</th><th>快捷键</th></tr></thead><tbody><tr><td>使用默认搜索引擎进行搜索</td><td>输入搜索字词并按 Enter 键</td></tr><tr><td>使用其他搜索引擎进行搜索</td><td>输入搜索引擎名称，然后按 Tab 键</td></tr><tr><td>为网站名称添加 www. 和 .com，并在当前标签页中打开该网站</td><td>输入网站名称并按 Control + Enter 键</td></tr><tr><td>为网站名称添加 www. 和 .com，并在新标签页中打开该网站</td><td>输入网站名称并按 Control + Shift + Enter 键</td></tr><tr><td>在新的后台标签页中打开网站</td><td>输入网址并按 ⌘ + Enter 键</td></tr><tr><td>跳转到地址栏</td><td>⌘ + l</td></tr><tr><td>从地址栏中移除联想查询内容</td><td>按向下箭头键以突出显示相应内容，然后按 Shift + fn + Delete 键</td></tr></tbody></table><blockquote><p>网页快捷键</p></blockquote><table><thead><tr><th>操作</th><th>快捷键</th></tr></thead><tbody><tr><td>打开选项以打印当前网页</td><td>⌘ + p</td></tr><tr><td>打开选项以保存当前网页</td><td>⌘ + s</td></tr><tr><td>打开“页面设置”对话框</td><td>⌘ + Option + p</td></tr><tr><td>重新加载当前网页（忽略缓存的内容）</td><td>⌘ + Shift + r</td></tr><tr><td>停止加载网页</td><td>Esc</td></tr><tr><td>浏览下一个可点击项</td><td>Tab</td></tr><tr><td>浏览上一个可点击项</td><td>Shift + Tab</td></tr><tr><td>使用 Google Chrome 打开计算机中的文件</td><td>按住 ⌘ + o 键并选择文件</td></tr><tr><td>显示当前网页的 HTML 源代码（不可修改）</td><td>⌘ + Option + u</td></tr><tr><td>打开 JavaScript 控制台</td><td>⌘ + Option + j</td></tr><tr><td>将当前网页保存为书签</td><td>⌘ + d</td></tr><tr><td>将所有打开的标签页以书签的形式保存在新文件夹中</td><td>⌘ + Shift + d</td></tr><tr><td>开启或关闭全屏模式</td><td>⌘ + Ctrl + f</td></tr><tr><td>放大网页上的所有内容</td><td>⌘ 和 +</td></tr><tr><td>缩小网页上的所有内容</td><td>⌘ 和 -</td></tr><tr><td>将网页上的所有内容恢复到默认大小</td><td>⌘ + 0</td></tr><tr><td>向下滚动网页，一次一个屏幕</td><td>空格键</td></tr><tr><td>向上滚动网页，一次一个屏幕</td><td>Shift + 空格键</td></tr><tr><td>搜索网络</td><td>⌘ + Option + f</td></tr><tr><td>将光标移到文本字段中的上一个字词前面</td><td>Option + 向左箭头键</td></tr><tr><td>将光标移到文本字段中的上一个字词后面</td><td>Option + 向右箭头键</td></tr><tr><td>删除文本字段中的上一个字词</td><td>Option + Delete</td></tr><tr><td>在当前标签页中打开主页</td><td>⌘ + Shift + h</td></tr></tbody></table><blockquote><p>鼠标快捷键</p></blockquote><table><thead><tr><th>操作</th><th>快捷键</th></tr></thead><tbody><tr><td>在当前标签页中打开链接（仅限鼠标）</td><td>将链接拖到标签页中</td></tr><tr><td>在新的后台标签页中打开链接</td><td>按住 ⌘ 键的同时点击链接</td></tr><tr><td>打开链接，并跳转到该链接</td><td>按住 ⌘ + Shift 键的同时点击链接</td></tr><tr><td>打开链接，并跳转到该链接（仅使用鼠标）</td><td>将链接拖到标签栏的空白区域</td></tr><tr><td>在新窗口中打开链接</td><td>按住 Shift 键的同时点击链接</td></tr><tr><td>在新窗口中打开标签页（仅使用鼠标）</td><td>将标签页拖出标签栏</td></tr><tr><td>将标签页移至当前窗口（仅限鼠标）</td><td>将标签页拖到现有窗口中</td></tr><tr><td>将标签页移回其原始位置</td><td>拖动标签页的同时按 Esc</td></tr><tr><td>将当前网页保存为书签</td><td>将相应网址拖动到书签栏中</td></tr><tr><td>下载链接目标</td><td>按住 Option 键的同时点击链接</td></tr><tr><td>显示浏览记录</td><td>右键点击“后退”箭头 返回 或“前进”箭头 下一步，或者点击（按住鼠标按键别松手）“后退”箭头 返回 或“前进”箭头下一步</td></tr><tr><td>将窗口高度最大化</td><td>双击标签栏的空白区域</td></tr></tbody></table>]]></content>
+      
+      
+      <categories>
+          
+          <category> 工具 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Linux性能工具top</title>
+      <link href="/linux/top_util/"/>
+      <url>/linux/top_util/</url>
+      
+        <content type="html"><![CDATA[<blockquote><p>在Linux中，top是非常常用的性能分析工具，可以实时查看系统的信息，进程情况，资源占用情况。</p></blockquote><h3 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 在终端下，我们输入top进入</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> top</span></span><br></pre></td></tr></table></figure><p>然后我们会得到这样一个信息界面：</p><figure class="highlight tap"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">top - 23:27:06 up<span class="number"> 487 </span>days, 11:26, <span class="number"> 1 </span>user,  load average: 0.00, 0.02, 0.06</span><br><span class="line">Tasks: <span class="number"> 85 </span>total,  <span class="number"> 2 </span>running, <span class="number"> 83 </span>sleeping,  <span class="number"> 0 </span>stopped,  <span class="number"> 0 </span>zombie</span><br><span class="line">%Cpu(s):  1.0 us,  0.7 sy,  0.0 ni, 98.3 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st</span><br><span class="line">KiB Mem : <span class="number"> 1884124 </span>total,   <span class="number"> 89304 </span>free, <span class="number"> 1032600 </span>used,  <span class="number"> 762220 </span>buff/cache</span><br><span class="line">KiB Swap:       <span class="number"> 0 </span>total,       <span class="number"> 0 </span>free,       <span class="number"> 0 </span>used.  <span class="number"> 652344 </span>avail Mem</span><br><span class="line"></span><br><span class="line">  PID USER      PR  NI    VIRT    RES    SHR S %CPU %MEM     TIME+ COMMAND</span><br><span class="line">24449 root     <span class="number"> 20 </span> <span class="number"> 0 </span><span class="number"> 274856 </span> <span class="number"> 6468 </span> <span class="number"> 1808 </span>S  0.3  0.3  39:19.95 docker-containe</span><br><span class="line">28111 linbing+ <span class="number"> 20 </span> <span class="number"> 0 </span>1261512 <span class="number"> 90252 </span><span class="number"> 12660 </span>S  0.3  4.8 169:26.24 node /working/n</span><br><span class="line">   <span class="number"> 1 </span>root     <span class="number"> 20 </span> <span class="number"> 0 </span><span class="number"> 125156 </span> <span class="number"> 2628 </span> <span class="number"> 1380 </span>S  0.0  0.1  47:24.70 systemd</span><br><span class="line">   <span class="number"> 2 </span>root     <span class="number"> 20 </span> <span class="number"> 0 </span>     <span class="number"> 0 </span>    <span class="number"> 0 </span>    <span class="number"> 0 </span>S  0.0  0.0   0:05.39 kthreadd</span><br><span class="line">   <span class="number"> 3 </span>root     <span class="number"> 20 </span> <span class="number"> 0 </span>     <span class="number"> 0 </span>    <span class="number"> 0 </span>    <span class="number"> 0 </span>S  0.0  0.0   0:44.43 ksoftirqd/0</span><br><span class="line">   <span class="number"> 5 </span>root      <span class="number"> 0 </span>-20      <span class="number"> 0 </span>    <span class="number"> 0 </span>    <span class="number"> 0 </span>S  0.0  0.0   0:00.00 kworker/0:0H</span><br><span class="line">   <span class="number"> 7 </span>root      rt  <span class="number"> 0 </span>     <span class="number"> 0 </span>    <span class="number"> 0 </span>    <span class="number"> 0 </span>S  0.0  0.0   0:00.00 migration/0</span><br></pre></td></tr></table></figure><p>前面五行是系统的整体信息：<br>第一行其实与<code>uptime</code>命令相同：当前时间、系统运行时间、登录用户数、系统平均负载（1分钟、5分钟、15分钟）</p><p>二、三行是进程信息与CPU情况，当机器不止有一个CPU时，输入<code>1</code>，可以将各个cpu展开。<br>进程信息相对简单容易理解，CPU行分别为：</p><figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">us:</span> 用户占用<span class="meta">cpu</span></span><br><span class="line">sy：系统占用<span class="meta">cpu</span></span><br><span class="line">ni：用户修改进程优先级占用<span class="meta">cpu</span></span><br><span class="line">id：空闲<span class="meta">cpu</span></span><br><span class="line">wa：<span class="meta">cpu</span>等待io时间</span><br><span class="line">hi：硬中断消耗<span class="meta">cpu</span>时间</span><br><span class="line"><span class="built_in">si</span>：软中断消耗<span class="meta">cpu</span>时间</span><br><span class="line"><span class="built_in">st</span>：虚拟机</span><br></pre></td></tr></table></figure><p>四、五行是内存和交换区信息</p><p>接下来是进程相关信息，默认有许多信息没有展示出来，输入按键<code>f</code>可以更改展示列：</p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">Fields Management for window 1:Def, whose current sort field is %CPU</span><br><span class="line">   Navigate <span class="keyword">with</span> Up/Dn, <span class="keyword">Right</span> selects <span class="keyword">for</span> <span class="keyword">move</span> <span class="keyword">then</span> &lt;Enter&gt; <span class="keyword">or</span> <span class="keyword">Left</span> commits,</span><br><span class="line">   <span class="string">'d'</span> <span class="keyword">or</span> &lt;<span class="keyword">Space</span>&gt; toggles display, <span class="string">'s'</span> <span class="keyword">sets</span> sort.  <span class="keyword">Use</span> <span class="string">'q'</span> <span class="keyword">or</span> &lt;Esc&gt; <span class="keyword">to</span> <span class="keyword">end</span>!</span><br><span class="line"></span><br><span class="line">* PID     = Process <span class="keyword">Id</span></span><br><span class="line">* <span class="keyword">USER</span>    = Effective <span class="keyword">User</span> <span class="keyword">Name</span></span><br><span class="line">* PR      = <span class="keyword">Priority</span></span><br><span class="line">* NI      = Nice <span class="keyword">Value</span></span><br><span class="line">* VIRT    = <span class="keyword">Virtual</span> Image (KiB)</span><br><span class="line">* RES     = Resident <span class="keyword">Size</span> (KiB)</span><br><span class="line">* SHR     = <span class="keyword">Shared</span> <span class="keyword">Memory</span> (KiB)</span><br><span class="line">* S       = Process <span class="keyword">Status</span></span><br><span class="line">* %CPU    = CPU <span class="keyword">Usage</span></span><br><span class="line">* %MEM    = <span class="keyword">Memory</span> <span class="keyword">Usage</span> (RES)</span><br><span class="line">* <span class="built_in">TIME</span>+   = CPU <span class="built_in">Time</span>, hundredths</span><br><span class="line">* COMMAND = Command <span class="keyword">Name</span>/Line</span><br><span class="line">* PPID    = <span class="keyword">Parent</span> Process pid</span><br><span class="line">* UID     = Effective <span class="keyword">User</span> <span class="keyword">Id</span></span><br><span class="line">* RUID    = <span class="built_in">Real</span> <span class="keyword">User</span> <span class="keyword">Id</span></span><br><span class="line">* RUSER   = <span class="built_in">Real</span> <span class="keyword">User</span> <span class="keyword">Name</span></span><br><span class="line">  SUID    = Saved <span class="keyword">User</span> <span class="keyword">Id</span></span><br><span class="line">  SUSER   = Saved <span class="keyword">User</span> <span class="keyword">Name</span></span><br><span class="line">  GID     = <span class="keyword">Group</span> <span class="keyword">Id</span></span><br><span class="line">  <span class="keyword">GROUP</span>   = <span class="keyword">Group</span> <span class="keyword">Name</span></span><br><span class="line">  PGRP    = Process <span class="keyword">Group</span> <span class="keyword">Id</span></span><br><span class="line">  TTY     = Controlling Tty</span><br><span class="line">  TPGID   = Tty Process Grp <span class="keyword">Id</span></span><br><span class="line">  <span class="keyword">SID</span>     = <span class="keyword">Session</span> <span class="keyword">Id</span></span><br><span class="line">  nTH     = <span class="built_in">Number</span> <span class="keyword">of</span> Threads</span><br><span class="line">  P       = <span class="keyword">Last</span> Used Cpu (SMP)</span><br><span class="line">  <span class="built_in">TIME</span>    = CPU <span class="built_in">Time</span></span><br><span class="line">  SWAP    = Swapped <span class="keyword">Size</span> (KiB)</span><br><span class="line">  CODE    = Code <span class="keyword">Size</span> (KiB)</span><br><span class="line">  <span class="keyword">DATA</span>    = <span class="keyword">Data</span>+Stack (KiB)</span><br><span class="line">  nMaj    = Major Page Faults</span><br><span class="line">  nMin    = Minor Page Faults</span><br><span class="line">  nDRT    = Dirty Pages <span class="keyword">Count</span></span><br><span class="line">  WCHAN   = Sleeping <span class="keyword">in</span> <span class="keyword">Function</span></span><br><span class="line">  Flags   = Task Flags &lt;sched.h&gt;</span><br><span class="line">  CGROUPS = Control <span class="keyword">Groups</span></span><br><span class="line">  SUPGIDS = Supp <span class="keyword">Groups</span> IDs</span><br><span class="line">  SUPGRPS = Supp <span class="keyword">Groups</span> <span class="keyword">Names</span></span><br><span class="line">  TGID    = <span class="keyword">Thread</span> <span class="keyword">Group</span> <span class="keyword">Id</span></span><br><span class="line">  ENVIRON = Environment vars</span><br><span class="line">  vMj     = Major Faults delta</span><br><span class="line">  vMn     = Minor Faults delta</span><br><span class="line">  USED    = Res+Swap <span class="keyword">Size</span> (KiB)</span><br><span class="line">  nsIPC   = IPC namespace Inode</span><br><span class="line">  nsMNT   = MNT namespace Inode</span><br><span class="line">  nsNET   = NET namespace Inode</span><br><span class="line">  nsPID   = PID namespace Inode</span><br><span class="line">  nsUSER  = <span class="keyword">USER</span> namespace Inode</span><br><span class="line">  nsUTS   = UTS namespace Inode</span><br></pre></td></tr></table></figure><p>具体我们就不一一翻译了。</p><blockquote><p>在进入top后，按q可以退出top界面</p></blockquote><h3 id="实用命令"><a href="#实用命令" class="headerlink" title="实用命令"></a>实用命令</h3><p>使用top时，我们可以加入一些参数，比如：</p><ul><li>-d seconds，可以指定刷新信息的频率</li><li>-c，显示进程的命令行参数</li><li>-p pid1,pid2…，指定进程号</li></ul><figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">假设输入`top -d <span class="number">5</span> -c -p <span class="number">10</span>,<span class="number">300</span>`</span><br><span class="line">则代表每个<span class="number">5</span>秒刷新信息，只显示进程号为<span class="number">10</span>和<span class="number">300</span>的进程，同时显示进程的命令行参数</span><br></pre></td></tr></table></figure><p>如果在启动时没有指定-d和c，在进入进程后也可以更改，直接按对应的按键即可。</p><p>另外在top中，直接输入下面的按键，有不同的效果：</p><figure class="highlight excel"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">M：按内存占用进行排序</span><br><span class="line"><span class="built_in">t</span>：切换进程展示信息</span><br></pre></td></tr></table></figure><p>还有许多其他功能，在top中按<code>?</code>可以进行查看。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Linux </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> linux </tag>
+            
+            <tag> 操作系统 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>MySQL索引</title>
+      <link href="/database/mysql/about-index/"/>
+      <url>/database/mysql/about-index/</url>
+      
+        <content type="html"><![CDATA[<p>对于数据库索引，我们的第一反应就是，让查询变得更快。<br>为什么会快，当你进行一条数据查询的时候，没有索引的帮助，你只能从头查起，一行一行遍历，直到符合条件为止。索引就像书的目录，你可以通过它，快速定位到你要的章节，从而快速许多。</p><p>数据库索引常见数据结构有：</p><ul><li>哈希表</li><li>有序数组</li><li>搜索树</li></ul><p>哈希表查询数据时，key根据哈希函数换算得到位置，位置就是value存放的地方。但由于哈希存放数据并不是有序的，所以根据区间查询数据时会很慢。</p><p>有序数组查询区间数据时比较高效，然而在插入数据时，需要挪动插入位置后的所有元素，所以更新成本高。</p><p>搜索树可以有二叉和多叉，如果使用的是二叉搜索树，时间复杂度是O(log(N))，效率最高，然而二叉树的树高会很高，对于索引写在硬盘上的场景来讲，树的高度决定了访问磁盘的次数，磁盘效率相对内存极其低下，所以为了减少磁盘读写次数，可以使用N叉树（N取决于数据块大小）。</p><h2 id="InnoDB的索引"><a href="#InnoDB的索引" class="headerlink" title="InnoDB的索引"></a>InnoDB的索引</h2><p>在InnoDB引擎中，索引使用的结构是<code>B+</code>树。<br>关于B+树是什么一种结构，可以参考这里另外一篇文章：<a href="https://keepmoving.ren/learning/ds_and_alogorithm/data_structure/tree/btree/">B树(B+树)</a></p><p>对于每一个索引，InnoDB中都会创建一棵B+树。</p><p>主键与非主键对应的树是不同的：</p><ul><li>主键建立的<code>主键索引</code>：叶子节点存放的是整行的数据；</li><li>非主键建立的<code>非主键索引</code>：叶子节点存放着主键的值。</li></ul><blockquote><p>两种索引查询的区别就在于，非主键索引查询完之后，需要回到主键索引再搜索一次（回表），也就意味着对非主键索引的查询，会多查找一棵树。</p></blockquote><p>由于索引要保持B+树的结构，那么当新增删除节点时，就会产生树的维护成本。</p><p>比如数据页满了，那么需要进行页分裂，而删除时，可能需要页合并。对于分裂和合并，都会使空间利用率发生变化，分裂使得利用率降低，合并提高了利用率。</p><h2 id="覆盖索引"><a href="#覆盖索引" class="headerlink" title="覆盖索引"></a>覆盖索引</h2><p>我们前面提到过，对于非主键索引，索引叶子结点存放的是主键的值，查询了非主键索引树后，还需要进行一次回表，而回表则代表了多一次索引树的搜索。</p><p>有没有情况是不需要回表的？<br>那就是我们要查的值已经在索引树上，比如</p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">id</span> <span class="keyword">FROM</span> t <span class="keyword">WHERE</span> index_key <span class="keyword">BETWEEN</span> <span class="number">10</span> <span class="keyword">AND</span> <span class="number">20</span></span><br></pre></td></tr></table></figure><p>索引index_key查询完，已经能拿到id的数据，不需要回表。</p><p>联合索引也可以避免回表，比如建立联合索引(key1, key2)，当我们根据key1去查询key2的值时，也可以避免回表。</p><h2 id="最左前缀原则"><a href="#最左前缀原则" class="headerlink" title="最左前缀原则"></a>最左前缀原则</h2><h3 id="联合查询"><a href="#联合查询" class="headerlink" title="联合查询"></a>联合查询</h3><p>在MySQL里，对联合索引的查询会优先从左边的关键字查起。</p><p>假如我们现在的表里有几个字段，其中有字段: key1: int, key2: int。</p><p>我们经常需要对(key1, key2)进行查询，也会根据key1单独进行查询。那我们可以建立联合索引(key1, key2)，这个索引可以同时满足两个查询要求。</p><p>另外，当我们的查询条件顺序不同时，比如：</p><figure class="highlight n1ql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> key1, key2 <span class="keyword">FROM</span> t <span class="keyword">WHERE</span> key1 = <span class="number">10</span> <span class="keyword">AND</span> key2 = <span class="number">12</span>;</span><br><span class="line"><span class="keyword">SELECT</span> key1, key2 <span class="keyword">FROM</span> t <span class="keyword">WHERE</span> key2 = <span class="number">12</span> <span class="keyword">AND</span> key1 = <span class="number">10</span>;</span><br></pre></td></tr></table></figure><p>两条语句其实都可以用到联合索引(key1, key2)，这是MySQL进行优化，使得查询满足最左前缀原则，匹配到索引进行查询。</p><blockquote><p>注意：当我们单独对key2进行查询时，该联合索引是无效的，因为它不满足索引的顺序条件。</p></blockquote><h3 id="字符串索引"><a href="#字符串索引" class="headerlink" title="字符串索引"></a>字符串索引</h3><p>最左前缀原则，满足的不只是联合索引的最左字段，对于字符串索引来说，它也是满足的。<br>比如现在有name字段类型为varchar，同时我们为它建立了一个索引。</p><table><thead><tr><th>id</th><th>name</th></tr></thead><tbody><tr><td>1</td><td>张三3</td></tr><tr><td>2</td><td>张三1</td></tr><tr><td>3</td><td>李四1</td></tr><tr><td>4</td><td>张三2</td></tr></tbody></table><p>下面的查询语句是可以命中索引的<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">id</span>, <span class="keyword">name</span> <span class="keyword">FROM</span> t <span class="keyword">WHERE</span> <span class="keyword">name</span> <span class="keyword">LIKE</span> <span class="string">'张%'</span>;</span><br></pre></td></tr></table></figure></p><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul><li>尽量使用主键查询，因为非主键索引会产生回表过程</li><li>尽可能使用自增主键，能保证索引都是追加操作，不会产生分裂过程</li><li>主键越小，非主键索引占用空间越小，维护成本更低（因为分裂合并的次数相对变少了）</li><li><code>覆盖索引</code>是优化查询的一种手段，因为它可以避免回表，显著提升性能</li><li>根据<code>最左前缀原则</code>，可以减少需要维护的索引数量</li></ul><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>「极客时间」-「MySQL实战45讲」</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 数据库 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> mysql </tag>
+            
+            <tag> database </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>关于proxy_set_header的注意点</title>
+      <link href="/nginx/about-proxy-set-header/"/>
+      <url>/nginx/about-proxy-set-header/</url>
+      
+        <content type="html"><![CDATA[<h2 id="proxy-set-header的使用"><a href="#proxy-set-header的使用" class="headerlink" title="proxy_set_header的使用"></a>proxy_set_header的使用</h2><p>在Nginx中，<code>proxy_set_header</code>可以让我们对请求中的头部进行重定义、或者是增加请求头，再一并发送给被代理的服务器。</p><p>比如：<br><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">  <span class="attribute">listen</span> <span class="number">80</span>;</span><br><span class="line">  <span class="attribute">server_name</span> localhost;</span><br><span class="line"></span><br><span class="line">  <span class="attribute">location</span> / &#123;</span><br><span class="line">    <span class="attribute">proxy_set_header</span> Host <span class="variable">$host</span>;</span><br><span class="line">    <span class="attribute">proxy_pass</span> http://your_service;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><p>我们通过<code>proxy_set_header Host $host</code>，将真正请求的Host设置到头部，给到被代理的服务。</p><h2 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h2><p>proxy_set_header可以被使用在<code>http,server,location</code>这几个上下文中。</p><p>这里其实有一个可能会被忽略的注意点，对于nginx的文档描述是这样的：</p><blockquote><p>These directives are inherited from the previous level if and only if there are no proxy_set_header directives defined on the current level</p></blockquote><p>说的是：当且仅当当前level没有proxy_set_header的配置，才继承上层的配置。</p><p>单独提到这个注意事项是因为，有时候我们可能会将几个location的通用配置提到server中，然后在某一个location里面，我们为这个location单独做了一些配置。</p><p>这个时候，很容易忽略了我们在server中配置的通用header，导致header传给被代理服务器的时候少了。</p><p>比如：<br><figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">map <span class="variable">$http_upgrade</span> <span class="variable">$connection_upgrade</span> &#123;</span><br><span class="line">  default upgrade;</span><br><span class="line">  '' <span class="keyword">close</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">server &#123;</span><br><span class="line">  listen 80;</span><br><span class="line">  server_name localhost;</span><br><span class="line"></span><br><span class="line">  proxy_set_header Host <span class="variable">$host</span>;</span><br><span class="line">  proxy_set_header X-Forwarded-<span class="keyword">For</span> <span class="variable">$proxy_add_x_forwarded_for</span>;</span><br><span class="line">  proxy_set_header Upgrade <span class="variable">$http_upgrade</span>;</span><br><span class="line">  proxy_set_header Connection <span class="variable">$connection_upgrade</span>;</span><br><span class="line"></span><br><span class="line">  location / &#123;</span><br><span class="line">    proxy_pass http:<span class="comment">//your_service;</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  location /other &#123;</span><br><span class="line">    rewrite /other/(.*) /<span class="variable">$1</span> <span class="keyword">break</span>;</span><br><span class="line">    proxy_set_header <span class="keyword">Test</span> <span class="keyword">test</span>;</span><br><span class="line">    proxy_pass http:<span class="comment">//your_service/test;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><p>当我们这么配置的时候，问题就来了，因为我们在<code>location /other</code>里面，使用了<code>proxy_set_header</code>，<br>这个时候在server层配置的Host、X-Forwarded-For等等，都不会传给被代理服务器，<br>原因就是上面提到的那点：<em>当且仅当当前level没有proxy_set_header的配置，才继承上层的配置</em>。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Nginx </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> nginx </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Socket.io部署在k8s时，出现ws建立失败的问题</title>
+      <link href="/nodejs/socketio-with-k8s/"/>
+      <url>/nodejs/socketio-with-k8s/</url>
+      
+        <content type="html"><![CDATA[<h2 id="症状"><a href="#症状" class="headerlink" title="症状"></a>症状</h2><p>当我们将基于Socket.io的程序放到生产环境运行时，往往不止部署一个节点，或者是一个节点不止部署一份副本，这个时候，本来正常运行的程序，却在与客户端建立链接时出现了问题：<br><figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Http状态码为<span class="number">400</span>，<span class="keyword">body</span>为：</span><br><span class="line">&#123;<span class="string">"code"</span>:<span class="number">1</span>,<span class="string">"message"</span>:<span class="string">"Session ID unknown"</span>&#125;</span><br></pre></td></tr></table></figure></p><h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><p>建立链接时，报出了<code>Session ID unknown</code>，联想下socket.io的工作方式，它并不是无状态的Http接口，websocket间的会话是通过session id来标识，当一个请求过来后，原来是与Pod A打交道，这次被路由到了Pod B去，Pod B并没有该id的记录（因为在Pod A中），所以就出现了这样的报错。</p><h2 id="解决方案（Traefik）"><a href="#解决方案（Traefik）" class="headerlink" title="解决方案（Traefik）"></a>解决方案（Traefik）</h2><p>原因我们已经知道了，就是session会话请求去到了不该去的地方，我们可以让相同的请求去到同样的节点上。<br>对应traefik，我们可以在service配置annotation：<br><figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"annotations"</span>: &#123;</span><br><span class="line">  <span class="string">"traefik.backend.loadbalancer.stickiness"</span>: <span class="string">"true"</span>,</span><br><span class="line">  <span class="string">"traefik.backend.loadbalancer.stickiness.cookieName"</span>: <span class="string">"socket"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><p>第一个配置<code>traefik.backend.loadbalancer.stickiness</code>是指开启sticky session。<br>第二个配置<code>traefik.backend.loadbalancer.stickiness.cookieName</code>，可以自定义cookie的字段名。<br>配置完之后，再查看客户端，问题已经解决了。</p><h2 id="Traefik的实现方式"><a href="#Traefik的实现方式" class="headerlink" title="Traefik的实现方式"></a>Traefik的实现方式</h2><p>当我们配置好sticky session后，traefik会在连接里面保存一个cookie值，值的内容实际上指向了具体服务的Pod的k8s ip，也就是说，当请求过来后，traefik会直接将请求发送给该ip的Pod，从而实现粘性会话。</p><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://socket.io/docs/using-multiple-nodes/" target="_blank" rel="noopener">using-multiple-nodes</a><br><a href="https://docs.traefik.io/basics/#sticky-sessions" target="_blank" rel="noopener">sticky-sessions</a><br><a href="https://www.qikqiak.com/post/socketio-multiple-nodes-in-kubernetes/" target="_blank" rel="noopener">socketio-multiple-nodes-in-kubernetes</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Node.js </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> k8s </tag>
+            
+            <tag> nodejs </tag>
+            
+            <tag> socket.io </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>解决Nginx不支持if块嵌套proxy_set_header</title>
+      <link href="/nginx/proxy-set-header-with-if/"/>
+      <url>/nginx/proxy-set-header-with-if/</url>
+      
+        <content type="html"><![CDATA[<p>有时候我们想在Nginx的配置上加上一些判断，假如条件为真，那么就怎么样。比如：<br><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">location</span> / &#123;</span><br><span class="line">  <span class="attribute">if</span> (<span class="variable">$http_referer</span> <span class="regexp">~ "http[s]?\:\/\/\w*\.?keepmoving.*")</span> &#123;</span><br><span class="line">    <span class="comment"># do something</span></span><br><span class="line">    <span class="comment"># proxy_set_header Host "test.host";</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="attribute">proxy_pass</span> http://your.service;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><p>假如referer来自<code>keepmoving.ren</code>的域名，那么就加一个头部Host值为test.host给到上游服务器。</p><p>但你会发现解开上面的注释后，执行<code>nginx -t</code>会报错：<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">nginx:</span> [emerg] <span class="string">"proxy_set_header"</span> directive is not allowed here <span class="keyword">in</span> <span class="regexp">/usr/</span>local<span class="regexp">/etc/</span>nginx/test.<span class="string">conf:</span><span class="number">10</span></span><br></pre></td></tr></table></figure></p><p>原因是Nginx不支持在if块里面设置proxy_set_header。<br>那我们可以换一种做法，采用变量的方式赋值：<br><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">location</span> / &#123;</span><br><span class="line">  <span class="attribute">set</span> <span class="variable">$xhost</span> <span class="variable">$host</span>;</span><br><span class="line">  <span class="attribute">if</span> (<span class="variable">$http_referer</span> <span class="regexp">~ "http[s]?\:\/\/\w*\.?keepmoving.*")</span> &#123;</span><br><span class="line">    <span class="attribute">set</span> <span class="variable">$xhost</span> <span class="string">"test.host"</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="attribute">proxy_set_header</span> Host <span class="variable">$xhost</span>;</span><br><span class="line">  <span class="attribute">proxy_pass</span> http://your.service;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><p>另外我们也可以采用map的方式来配置，等待后续补充。</p><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://serverfault.com/questions/506972/nginx-why-i-cant-put-proxy-set-header-inside-an-if-clause/507018" target="_blank" rel="noopener">proxy - nginx: Why I can’t put proxy_set_header inside an if clause? - Server Fault</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Nginx </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> nginx </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>使用X-Accel-Redirect让Nginx做内部重定向</title>
+      <link href="/nginx/x-accel-redirect-with-nginx/"/>
+      <url>/nginx/x-accel-redirect-with-nginx/</url>
+      
+        <content type="html"><![CDATA[<p>有时候我们有对请求拦截的需求，比如做log、做权限校验等等，那X-Accel-Redirect可以让Nginx帮我们做到。<br>比如我们可以有一个项目专门负责权限处理，请求过来后，只有符合权限的，才会被转发到真实地址。</p><p>或者是我们想配置Nginx作为下载服务器，但是真实地址不想被外部知道，也可以使用X-Accel。</p><h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><p>下面有两份示例代码</p><ul><li>一份是Nginx的配置，来达到内部重定向的效果；</li><li>一份是简单的Server代码，接受http请求。</li></ul><h3 id="Nginx配置"><a href="#Nginx配置" class="headerlink" title="Nginx配置"></a>Nginx配置</h3><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">  listen  <span class="number">80</span>;</span><br><span class="line">  server_name your.host;</span><br><span class="line"></span><br><span class="line">  access_log off;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">location</span> <span class="title">/api</span> &#123;</span><br><span class="line">    proxy_pass http://localhost:<span class="number">3000</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">location</span> <span class="title">/internal</span> &#123;</span><br><span class="line">    internal;</span><br><span class="line">    proxy_pass http://localhost:<span class="number">3000</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h3 id="Server端"><a href="#Server端" class="headerlink" title="Server端"></a>Server端</h3><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Koa = <span class="built_in">require</span>(<span class="string">'koa'</span>);</span><br><span class="line"><span class="keyword">const</span> Router = <span class="built_in">require</span>(<span class="string">'koa-router'</span>);</span><br><span class="line"><span class="keyword">const</span> app = <span class="keyword">new</span> Koa();</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> router = <span class="keyword">new</span> Router();</span><br><span class="line">router.get(<span class="string">'/api/'</span>, <span class="function"><span class="params">ctx</span> =&gt;</span> &#123;</span><br><span class="line">  ctx.body = &#123; <span class="string">'hello'</span>: <span class="string">'world'</span> &#125;;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// api接口</span></span><br><span class="line">router.get(<span class="string">'/api/request'</span>, <span class="function"><span class="params">ctx</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// 这里告诉Nginx需要做内部重定向</span></span><br><span class="line">  ctx.set(&#123;<span class="string">'X-Accel-Redirect'</span>: <span class="string">'/internal/request'</span>&#125;);</span><br><span class="line">  ctx.status = <span class="number">200</span>;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 经过Nginx转发的内部请求</span></span><br><span class="line">router.get(<span class="string">'/internal/request'</span>, <span class="function"><span class="params">ctx</span> =&gt;</span> &#123;</span><br><span class="line">  ctx.body = &#123; <span class="string">'hello'</span>: <span class="string">'im here'</span> &#125;;</span><br><span class="line">  ctx.status = <span class="number">200</span>;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">app.use(router.routes());</span><br><span class="line">app.use(router.allowedMethods());</span><br><span class="line"></span><br><span class="line">app.listen(<span class="number">3000</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'server listen at 3000'</span>);</span><br></pre></td></tr></table></figure><h3 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h3><p>在Nginx的配置中，我们对/internal开头的请求，做了<code>internal</code>标识，外部是没办法直接访问到的。<br>对于<code>GET /internal/request</code>的这个请求，只能通过<code>/api/request</code>请求到达后，Nginx做内部重定向。<br>直接访问<code>/internal/request</code>，会得到Nginx的404结果。</p><p>相关代码与配置放在github上<a href="https://github.com/iceyang/x-accel-redirect-with-nginx" target="_blank" rel="noopener">here</a>。</p><h2 id="其他相关头部"><a href="#其他相关头部" class="headerlink" title="其他相关头部"></a>其他相关头部</h2><p>上面我们是用了<code>X-Accel-Redirect</code>，关于X-Accel还有几个其他头部参数可以设置，比如编码类型charset，过期时间等，具体可以参考<a href="https://www.nginx.com/resources/wiki/start/topics/examples/x-accel/" target="_blank" rel="noopener">X-Accel</a>。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Nginx </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> nginx </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>k8s每节点相同服务只部署一个进程</title>
+      <link href="/kubernetes/only-one-pod-each-node/"/>
+      <url>/kubernetes/only-one-pod-each-node/</url>
+      
+        <content type="html"><![CDATA[<blockquote><p>利用Pod反亲和性，可以做到相同服务在每个节点只部署一份进程。</p></blockquote><h2 id="Pod间的亲和性和反亲和性（affinity-and-anti-affinity）"><a href="#Pod间的亲和性和反亲和性（affinity-and-anti-affinity）" class="headerlink" title="Pod间的亲和性和反亲和性（affinity and anti-affinity）"></a>Pod间的亲和性和反亲和性（affinity and anti-affinity）</h2><ul><li>亲和性：Node上已经部署了指定条件的Pod，Pod才会在这个节点上部署</li><li>反亲和性：Node上已经部署了指定条件的Pod，Pod就不会再这个节点上部署</li></ul><p>亲和性和反亲和性有两种选择类型：</p><ul><li>requiredDuringSchedulingIgnoredDuringExecution</li><li>preferredDuringSchedulingIgnoredDuringExecution</li></ul><p>前者是必须符合条件，后者是优先考虑符合条件的Node。</p><p>更多配置细节查看<a href="https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity" target="_blank" rel="noopener">Assigning Pods to Nodes</a></p><h2 id="配置每节点只部署一份进程"><a href="#配置每节点只部署一份进程" class="headerlink" title="配置每节点只部署一份进程"></a>配置每节点只部署一份进程</h2><p><code>每节点</code>：我们可以使用Node内建标签<code>kubernetes.io/hostname</code>来标识。<br><code>只部署一份</code>：我们可以使用反亲和性的<code>requiredDuringSchedulingIgnoredDuringExecution</code>来规定。</p><p>假设我们要部署的<code>image</code>为<code>nginx</code>，节点数为3，那么我们可以这样配置：<br><figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">kind</span>: Deployment</span><br><span class="line"><span class="attribute">apiVersion</span>: extensions/v1beta1</span><br><span class="line"><span class="attribute">metadata</span>:</span><br><span class="line">  <span class="attribute">name</span>: nginx</span><br><span class="line">  <span class="attribute">labels</span>:</span><br><span class="line">    <span class="attribute">app</span>: nginx</span><br><span class="line"><span class="attribute">spec</span>:</span><br><span class="line">  <span class="attribute">replicas</span>: <span class="number">3</span></span><br><span class="line">  <span class="attribute">selector</span>:</span><br><span class="line">    <span class="attribute">matchLabels</span>:</span><br><span class="line">      <span class="attribute">app</span>: nginx</span><br><span class="line">  <span class="attribute">template</span>:</span><br><span class="line">    <span class="attribute">metadata</span>:</span><br><span class="line">      <span class="attribute">labels</span>:</span><br><span class="line">        <span class="attribute">app</span>: nginx</span><br><span class="line">    <span class="attribute">spec</span>:</span><br><span class="line">      <span class="attribute">containers</span>:</span><br><span class="line">      - <span class="attribute">name</span>: nginx</span><br><span class="line">        <span class="attribute">image</span>: nginx</span><br><span class="line">        <span class="attribute">ports</span>:</span><br><span class="line">        - <span class="attribute">containerPort</span>: <span class="number">80</span></span><br><span class="line">      <span class="attribute">affinity</span>:</span><br><span class="line">        <span class="attribute">podAntiAffinity</span>:</span><br><span class="line">          <span class="attribute">requiredDuringSchedulingIgnoredDuringExecution</span>:</span><br><span class="line">          - <span class="attribute">labelSelector</span>:</span><br><span class="line">              <span class="attribute">matchExpressions</span>:</span><br><span class="line">              - <span class="attribute">key</span>: app</span><br><span class="line">                <span class="attribute">operator</span>: In</span><br><span class="line">                <span class="attribute">values</span>:</span><br><span class="line">                - nginx</span><br><span class="line">            <span class="attribute">topologyKey</span>: kubernetes.io/hostname</span><br></pre></td></tr></table></figure></p><p>部署完成后，当我们把replicas数升至4时，会出现错误信息：<br><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">0</span>/<span class="number">4</span> nodes are available: <span class="number">1</span> <span class="keyword">node</span><span class="title">(s</span>) had taints that the pod didn't tolerate, <span class="number">3</span> <span class="keyword">node</span><span class="title">(s</span>) didn't match pod affinity/anti-affinity, <span class="number">3</span> <span class="keyword">node</span><span class="title">(s</span>) didn't satisfy existing pods anti-affinity rules.</span><br></pre></td></tr></table></figure></p><p><img src="/img/20190305-1" alt><br>此时第四个Pod是启动不起来的，达到了我们想要的目的。</p><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity" target="_blank" rel="noopener">Assigning Pods to Nodes</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Kubernetes </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> kubernetes </tag>
+            
+            <tag> k8s </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>MySQL的事务隔离</title>
+      <link href="/database/mysql/transation-isolation/"/>
+      <url>/database/mysql/transation-isolation/</url>
+      
+        <content type="html"><![CDATA[<p>有时候我们要确保几个操作是原子操作，就需要使用到事务，比如转账行为。<br>在MySQL中，事务是在引擎层支持的。但不是所有的引擎都支持事务，原生的MyISAM就不支持事务，所以也是被InnoDB所取代的一个原因。</p><h2 id="隔离性与隔离级别"><a href="#隔离性与隔离级别" class="headerlink" title="隔离性与隔离级别"></a>隔离性与隔离级别</h2><p>事务的ACID特性中的I（Isolation），是指隔离性，当数据库有多个事务同事执行时，可能会出现下面几个问题：</p><ol><li>脏读，dirty read：脏读就是指当一个事务正在访问数据，并且对数据进行了修改，而这种修改还没有提交到数据库中，这时，另外一个事务也访问这个数据，然后使用了这个数据。因为这个数据是还没有提交的数据，那么另外一个事务读到的这个数据是 脏数据，依据脏数据所做的操作可能是不正确的。</li><li>不可重复读，non-repeatable read：在数据库访问中，一个事务范围内两个相同的查询却返回了不同数据。</li><li>幻读，phantom read</li></ol><p>为了解决这些问题，有了「隔离级别」的概念，SQL标准的隔离级别有：</p><ol><li>读未提交：一个事务还没提交时，它做的变更就能被别的事务看到；</li><li>读提交：一个事务提交后，它做的变更才能被其他事务看到；</li><li>可重复读：一个事务执行过程中，它看到的数据总是一致的。未提交的变更对其他事务不可见；</li><li>串行读：「读」会加「读锁」，「写」会加「写锁」，当出现读写锁冲突时，后面事务需要等待前面的事务完成，才能继续执行。</li></ol><h2 id="事务隔离的实现"><a href="#事务隔离的实现" class="headerlink" title="事务隔离的实现"></a>事务隔离的实现</h2><p>MySQL中的「可重复读」，在每条记录更新时，都会记录一条回滚操作。记录上最新的值都可以通过回滚得到以前状态的值。<br>每个事务启动的时候，都会有不同的read-view，它们看到的值都是可以不同的。</p><p>回滚日志什么时候会被清除？<br>不需要的时候才会被删除，就是当系统里没有比这个回滚日志更早的read-view的时候。</p><p>长事务意味着系统会存在很老的事务视图，在事务被提交前，它可能用到的回滚记录都必须保留，导致占用大量存储空间。</p><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>「极客时间」-「MySQL实战45讲」</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 数据库 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> mysql </tag>
+            
+            <tag> database </tag>
+            
+            <tag> 事务 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>MySQL的SQL更新语句是怎么执行的</title>
+      <link href="/database/mysql/how-to-execute-update-sql/"/>
+      <url>/database/mysql/how-to-execute-update-sql/</url>
+      
+        <content type="html"><![CDATA[<h2 id="执行流程"><a href="#执行流程" class="headerlink" title="执行流程"></a>执行流程</h2><p>SQL的更新跟查询一样，会走同一套流程，即：<br><figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">「连接器」-&gt;「分析器」-&gt;「优化器」-&gt;「执行器」</span><br></pre></td></tr></table></figure></p><p>分析器知道SQL要做什么事情，优化器决定使用什么索引，执行器调用存储引擎进行具体执行。 [[SQL查询语句是怎么执行的]]<br><em>与查询流程不同的是，更新流程涉及到日志模块：redo log和binlog</em></p><p>注：在一个表进行更新的时候，表相关的缓存会失效。</p><h2 id="redo-log"><a href="#redo-log" class="headerlink" title="redo log"></a>redo log</h2><p>MySQL在数据进行更新的时候，采用了<em>WAL</em>技术（Write-Ahead Logging），先写日志，再写硬盘。</p><p>也就是说，有记录需要更新时，<em>InnoDB</em>引擎会先把记录写入<em>redo log</em>，然后更新内存，此时更新已算完成，等到系统空闲时，再讲操作记录更新到磁盘中。</p><p>redo log在InnoDB的大小是固定的（大小可以进行配置），可以看成是一个循环队列，这里面涉及到两个位置：</p><ul><li>write pos，当前记录位置</li><li>check point，当前要擦除的位置</li></ul><p>write pos一边写一边后移，check point在擦除记录时，要先把记录更新到数据文件中。<br>当redo log满了，也就是wrte pos追上check point，那么需要先停下来，擦除掉一些数据，把check point往前推进。</p><p>有了redo log，MySQL也就有了<em>crash-safe</em>的能力，即便数据库发生异常重启，数据也不会丢失。</p><h2 id="binlog"><a href="#binlog" class="headerlink" title="binlog"></a>binlog</h2><p>redo log是InnoDB引擎特有的日志，Server层也有自己的日志：binlog（归档日志）。<br>最开始MySQL没有InnoDB引擎，而自带的引擎MyISAM没有crash-safe的能力，binlog日志只能用于归档。</p><p>redo log与binlog的区别：</p><ol><li>redo log是InnoDB引擎特有的；binlog是MySQL的Server层实现，所有引擎都可以使用；</li><li>redo log是物理日志，记录：在某个数据页上做了什么修改；binlog是逻辑日志：记录语句的原始逻辑（比如为ID=2这行的c字段加1）；</li><li>redo log是循环写的，空间固定；binlog是追加写入的，不会覆盖以前的日志。</li></ol><h2 id="两阶段提交"><a href="#两阶段提交" class="headerlink" title="两阶段提交"></a>两阶段提交</h2><p>要保证redo log和binlog的一致性，MySQL采用了「两阶段提交」：</p><ol><li>当数据更新到内存时，先写入redo log，redo log处于prepare状态；</li><li>将binlog写入磁盘；</li><li>将redo log改为commit状态。</li></ol><p>假如一份日志完成，另外一份日志未完成便crash时，采用两阶段提交，可以保证两份数据的一致性。</p><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>「极客时间」-「MySQL实战45讲」</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 数据库 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> mysql </tag>
+            
+            <tag> database </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>MySQL的SQL查询语句是怎么执行的</title>
+      <link href="/database/mysql/how-to-execute-select-sql/"/>
+      <url>/database/mysql/how-to-execute-select-sql/</url>
+      
+        <content type="html"><![CDATA[<p>在MySQL里，一条查询语句，会经过：<br><figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">「连接器」-&gt;「分析器」-&gt;「优化器」-&gt;「执行器」</span><br></pre></td></tr></table></figure></p><p>它们分别负责：</p><ul><li>连接器：管理连接，权限验证</li><li>分析器：词法分析，语法分析</li><li>优化器：执行计划生成，索引选择</li><li>执行器：操作引擎，返回结果</li></ul><p>上面四个构成了MySQL的Server层，Server层包括了大多数核心服务功能，以及所有内置函数，还有其他跨存储引擎的功能：比如存储过程、触发器、视图等，而执行器操作的，是Mysql的存储引擎层，它负责数据的存储和提取。</p><h2 id="连接器"><a href="#连接器" class="headerlink" title="连接器"></a>连接器</h2><p>首先我们需要连接到数据库上，与数据库建立的是长连接，在连接断开之前，执行过程中产生的临时数据，都是保存在连接对象里的，所以会发现有些时候Mysql内存占用涨的比较快。可以考虑：</p><ol><li>定期断开长连接</li><li>如果是使用Mysql 5.7或更高版本，可以在执行了比较大的操作之后，执行mysql_reset_connection来重新初始化连接资源</li></ol><h2 id="查询缓存"><a href="#查询缓存" class="headerlink" title="查询缓存"></a>查询缓存</h2><p>连接建立完成后，发送查询语句，执行洛溪首先会查询缓存，看是否命中缓存，如果命中，则直接返回缓存结果。<br>缓存在表进行更新的时候，会被清空，所以在大多数情况下，缓存的失效是很频繁的。<br>MySQL 8.0 版本已经将缓存模块移除。</p><h2 id="分析器"><a href="#分析器" class="headerlink" title="分析器"></a>分析器</h2><p>如果没命中缓存，则开始执行语句。首先需要对SQL语句进行解析。<br>先做「词法分析」，识别出来字符串分别代表什么。<br>然后做「语法分析」，判断是否符合MySQL语法。</p><h2 id="优化器"><a href="#优化器" class="headerlink" title="优化器"></a>优化器</h2><p>经过分析器后，MySQL知道语句想要做什么了，在具体执行前，会先经过优化器进行处理。</p><p>优化器可以在表有多个索引时，决定使用哪个索引；或有多个表join时，决定join的顺序。</p><h2 id="执行器"><a href="#执行器" class="headerlink" title="执行器"></a>执行器</h2><p>执行时，会先查看是否有查询权限，如果有，则打开表继续执行。执行器调用引擎提供的接口：</p><ol><li>调用引擎接口取第一行，判断是否符合条件，如果不是则跳过，如果是则将这行放入结果集；</li><li>调用引擎接口去下一行，重复相同判断逻辑，直到最后一行；</li><li>将结果集返回给客户端。</li></ol><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>「极客时间」-「MySQL实战45讲」</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 数据库 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> mysql </tag>
+            
+            <tag> database </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>关于Kubernetes的一点简单记录</title>
+      <link href="/kubernetes/something-record/"/>
+      <url>/kubernetes/something-record/</url>
+      
+        <content type="html"><![CDATA[<h2 id="可用性问题"><a href="#可用性问题" class="headerlink" title="可用性问题"></a>可用性问题</h2><h3 id="Pod如何做健康检测（liveness探针）"><a href="#Pod如何做健康检测（liveness探针）" class="headerlink" title="Pod如何做健康检测（liveness探针）"></a>Pod如何做健康检测（liveness探针）</h3><p>k8s提供了liveness probe功能，用于检测pod情况。</p><ul><li>通过命令检测</li><li>通过HTTP请求检测（200 &lt; code &lt; 400即是成功）</li><li>通过TCP检测（端口建立连接成功，即被认为健康）</li></ul><h3 id="如何知道Pod已就绪（readiness探针）"><a href="#如何知道Pod已就绪（readiness探针）" class="headerlink" title="如何知道Pod已就绪（readiness探针）"></a>如何知道Pod已就绪（readiness探针）</h3><p>readiness探针与liveness探针一样，只是配置名字不同而已。<br>两者可以搭配一起使用，确保Pod容器是正常可以访问的。</p><h3 id="Pod一直重启不起来会如何"><a href="#Pod一直重启不起来会如何" class="headerlink" title="Pod一直重启不起来会如何"></a>Pod一直重启不起来会如何</h3><p>需要分几种情况讨论：</p><ul><li><p>Pod挂掉重启<br>新Pod启动不起来，此时Deployment有可能处于Unavailable状态，但只要旧Pod还在，就可以继续服务。</p></li><li><p>滚动部署（更改image版本）<br>新的Pod无法启动成功，Deployment会使用旧的版本，可以回滚到原先正常的版本，或者部署新的正常版本</p></li><li><p>新的Deployment<br>deployment会一直处在不可用状态，因为Pod并没有启动起来   </p></li></ul><h3 id="Pod挂掉会怎么样"><a href="#Pod挂掉会怎么样" class="headerlink" title="Pod挂掉会怎么样"></a>Pod挂掉会怎么样</h3><p>首先说明，这种情况是Pod挂掉，而不是Pod里面的进程无法正常服务（比如服务并不正常，但是进程没有异常退出）。</p><p>k8s会启动新的Pod进行服务，移除旧的Pod。</p><h3 id="集群Node挂掉，服务受到什么影响"><a href="#集群Node挂掉，服务受到什么影响" class="headerlink" title="集群Node挂掉，服务受到什么影响"></a>集群Node挂掉，服务受到什么影响</h3><p>目前来看，node挂掉，k8s检测到之后，需要持续一段时间不可用，才会把pod杀掉（此时请求并不能实际在node上生效，因为它已经挂掉），在其他node启动一个新的pod进行服务。</p><p>Traefik采用daemonset的形式部署，此时外部流量从nginx进来，nginx直接指向群集的traefik几个daemonset，会存在不可用的情况，这时候需要nginx的upsteam配置好对应策略，比如proxy_connect_timeout，默认为60s，那么在60s超时后才会尝试下一个upstream，此时会存在比较长时间不可用。</p><p>Node重启后，k8s控制器要求删除的pod会生效被删除，已经启动在其他node的pod照样运行，不会迁移回来。</p><p><a href="https://k8smeetup.github.io/docs/concepts/architecture/nodes/" target="_blank" rel="noopener">Nodes | Kubernetes</a></p><h3 id="Master挂掉，整个服务会怎么样"><a href="#Master挂掉，整个服务会怎么样" class="headerlink" title="Master挂掉，整个服务会怎么样"></a>Master挂掉，整个服务会怎么样</h3><p>（Master单点情况下挂掉）现有服务不受影响，新调度无法进行。</p><h3 id="Pod频繁挂掉，要怎么处理比较合适"><a href="#Pod频繁挂掉，要怎么处理比较合适" class="headerlink" title="Pod频繁挂掉，要怎么处理比较合适"></a>Pod频繁挂掉，要怎么处理比较合适</h3><h2 id="服务k8s化"><a href="#服务k8s化" class="headerlink" title="服务k8s化"></a>服务k8s化</h2><p>Pod挂掉，怎么查阅程序异常日志</p><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://jimmysong.io/kubernetes-handbook/guide/configure-liveness-readiness-probes.html" target="_blank" rel="noopener">配置Pod的liveness和readiness探针</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Kubernetes </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> kubernetes </tag>
+            
+            <tag> k8s </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>线程安全性</title>
+      <link href="/programming/thread-safty/"/>
+      <url>/programming/thread-safty/</url>
+      
+        <content type="html"><![CDATA[<p>要编写线程安全的代码，核心在于要对状态访问操作进行管理，特别是对共享的（Shared）和可变的（Mutable）状态的访问。<br>「共享」意味着变量可以由多个线程同时访问，「可变」意味着变量的值在其生命周期可以发生变化。</p><p>一个对象可以被多个线程访问，那么要让它是线程安全的，需要采用同步机制。Java的主要同步机制：</p><ul><li>关键字<em>synchronized</em></li><li><em>volatile</em>类型的变量</li><li>显式锁Explicit Lock</li><li>原子变量</li></ul><p>多个线程使用可变的状态变量可能会出现问题，解决办法有：</p><ul><li>不在线程间共享该变量</li><li>将变量改为不可变变量</li><li>在访问变量时使用同步</li></ul><h2 id="什么是线程安全性"><a href="#什么是线程安全性" class="headerlink" title="什么是线程安全性"></a>什么是线程安全性</h2><p>当多个线程访问某个类时，不管运行时环境采用何种调度方式或者这些线程将如何交替执行，并且在主调代码中不需要任何额外的同步或协调，这个类始终都能变现出正确的行为，那么就称这个类是线程安全的。</p><p>无状态对象一定是线程安全的。</p><h2 id="原子性"><a href="#原子性" class="headerlink" title="原子性"></a>原子性</h2><h3 id="竞态条件"><a href="#竞态条件" class="headerlink" title="竞态条件"></a>竞态条件</h3><p>并发编程中，由于不恰当的执行时序而出现不正确的结果，称为竞态条件。</p><p>最常见的竞态条件为Check-Then-Act操作，即通过一个可能失效的观测结果来决定下一步的动作。<br>「延迟初始化」是常见的Check-Then-Act操作，判断一个对象是否已经初始化，如果没有，则初始化一个新的实例。</p><h3 id="复合操作"><a href="#复合操作" class="headerlink" title="复合操作"></a>复合操作</h3><p>包含了一组必须以原子方式执行的操作以确保线程安全性，称为复合操作。</p><p>当只有一个状态变量时，可以使用线程安全类来保证线程安全性。</p><h3 id="加锁机制"><a href="#加锁机制" class="headerlink" title="加锁机制"></a>加锁机制</h3><p>当出现不止一个状态变量时，将变量都改为线程安全类，也未必能保证线程安全性。<br>要保持状态的一致性，就需要在单个原子操作中更新所有相关的状态变量。</p><h4 id="内置锁"><a href="#内置锁" class="headerlink" title="内置锁"></a>内置锁</h4><p>Java提供了「同步代码块」（Synchronized Block）的内置锁机制来支持原子性。通过关键字<em>synchronized</em>来修饰。<br><figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">synchronized</span> (lock) &#123;</span><br><span class="line">  <span class="comment">// 代码</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><p>每个Java对象都可以做一个实现同步的锁，这些锁被称为内置锁。锁在线程进入同步代码块之前获得，退出代码块后释放。<br>在同一时间只能有一个线程持有这种锁，意味着后面的线程会被阻塞，直到前面的线程释放锁。</p><p><em>synchronized</em>使用简单，却会造成比较低的性能。</p><h4 id="重入"><a href="#重入" class="headerlink" title="重入"></a>重入</h4><p>内置锁的粒度是「线程」，所以当一个线程试图获得一个已经由它自己持有的锁，是可以的。JVM会记录锁的使用者，并且为其计数，当计数值为0时，锁才会被释放。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Programming </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 多线程 </tag>
+            
+            <tag> 并发 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Nginx反向代理websocket</title>
+      <link href="/nginx/proxy-websocket/"/>
+      <url>/nginx/proxy-websocket/</url>
+      
+        <content type="html"><![CDATA[<h2 id="配置反向代理"><a href="#配置反向代理" class="headerlink" title="配置反向代理"></a>配置反向代理</h2><p>Nginx代理websoket，与普通配置基本相同，但是需要设置好头部信息：</p><ul><li>Host</li><li>Upgrade</li><li>Connection<br>这几个字段表示服务器请求升级为websocket协议。</li></ul><p>配置示例：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">map $http_upgrade $connection_upgrade &#123;</span><br><span class="line">    <span class="keyword">default</span> upgrade;</span><br><span class="line">    <span class="string">''</span> close;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">server &#123;</span><br><span class="line">     server_name localhost;</span><br><span class="line">     listen      <span class="number">80</span>;</span><br><span class="line"></span><br><span class="line">     location / &#123;</span><br><span class="line">         proxy_set_header X-Real-IP $remote_addr;</span><br><span class="line">         proxy_set_header X-Forwarded-<span class="keyword">For</span> $proxy_add_x_forwarded_for;</span><br><span class="line">         </span><br><span class="line">         proxy_set_header Host $host;</span><br><span class="line">         proxy_set_header Upgrade $http_upgrade;</span><br><span class="line">         proxy_set_header Connection $connection_upgrade;</span><br><span class="line"></span><br><span class="line">         proxy_pass http:<span class="comment">//your-service;</span></span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><p>重点在于：<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">proxy_set_header Host <span class="variable">$host</span>;</span><br><span class="line">proxy_set_header<span class="built_in"> Upgrade </span><span class="variable">$http_upgrade</span>;</span><br><span class="line">proxy_set_header<span class="built_in"> Connection </span><span class="variable">$connection_upgrade</span>;</span><br></pre></td></tr></table></figure></p><p>这三行就是为了达到前面提到的目的，设置头部，升级协议为websocket。</p><h2 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h2><p>有时候我们设置需要升级为websocket的头部是在location之外，在server之内，比如：<br><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">     <span class="attribute">server_name</span> localhost;</span><br><span class="line">     <span class="attribute">listen</span>      <span class="number">80</span>;</span><br><span class="line"></span><br><span class="line">     <span class="attribute">proxy_set_header</span> Host <span class="variable">$host</span>;</span><br><span class="line">     <span class="attribute">proxy_set_header</span> Upgrade <span class="variable">$http_upgrade</span>;</span><br><span class="line">     <span class="attribute">proxy_set_header</span> Connection <span class="variable">$connection_upgrade</span>;</span><br><span class="line"></span><br><span class="line">     <span class="attribute">location</span> / &#123;</span><br><span class="line">         <span class="attribute">proxy_set_header</span> X-Real-IP <span class="variable">$remote_addr</span>;</span><br><span class="line">         <span class="attribute">proxy_set_header</span> X-Forwarded-For <span class="variable">$proxy_add_x_forwarded_for</span>;</span><br><span class="line"></span><br><span class="line">         <span class="attribute">proxy_pass</span> http://your-service;</span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><p>这个时候，假如我们在location之内，重新设置了一次Host，则Upgrade与Connection会失效，导致websocket连接不成功。所以如果需要重新设置Host，要确保另外两个头部同时会重新设置。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Nginx </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> nginx </tag>
+            
+            <tag> websocket </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Gitblit配合Nginx搭建Git仓库（CentOS7）</title>
+      <link href="/devops/use-gitblit-with-nginx/"/>
+      <url>/devops/use-gitblit-with-nginx/</url>
+      
+        <content type="html"><![CDATA[<h3 id="关于Gitblit"><a href="#关于Gitblit" class="headerlink" title="关于Gitblit"></a>关于Gitblit</h3><p><a href="http://gitblit.com" target="_blank" rel="noopener">Gitblit</a>是一个以Git为基础的代码版本管理库。Gitblit简单易用，虽然界面不及Gitlab好看，但是Gitblit配置要求低，基本没什么依赖，而Gitlab依赖较多，搭建起来不是很方便（当然如果使用Docker那就很方便啦）。</p><h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><p>这里以 nginx 配合 gitblit 为例说一下 nginx 和 gitblit 配合使用搭建代码库。<br><code>注：文章默认已经掌握nginx安装和基本配置技能、linux基本操作</code></p><h4 id="下载安装Gitblit"><a href="#下载安装Gitblit" class="headerlink" title="下载安装Gitblit"></a>下载安装Gitblit</h4><p>首先从Gitblit官网下载Linux对应的压缩包，并解压到想要放的目录，比如<code>/data/gitblit</code>，解压完的结构如下：<br><img src="/img/20161221-0@2x.png" alt><br>修改data/gitblit.properties文件里面的http和https端口配置，找到server.httpPort、server.httpsPort并修改为自己想要的端口，或者使用默认端口。<br>修改service-centos.sh文件，有几个变量（属性）要修改：<br><figure class="highlight fortran"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">GITBLIT_HTTP_PORT、GITBLIT_HTTPS_PORT修改为刚刚我们设置的端口</span><br><span class="line"></span><br><span class="line">GITBLIT_LOG是<span class="built_in">log</span>要存放的位置</span><br><span class="line"></span><br><span class="line">GITBLIT_PATH是Gitblit的安装路径</span><br><span class="line"></span><br><span class="line">GITBLIT_BASE_FOLDER是数据存放的路径（默认应该是Gitblit安装路径中的<span class="keyword">data</span>目录）</span><br><span class="line"></span><br><span class="line">如果上面几项都没有，那么在脚本前面加入它们。</span><br></pre></td></tr></table></figure></p><p>上面都是准备工作，如果配置好了，那么用root权限执行service-centos.sh脚本，执行完之后以后可以通过<code>service gitblit {start|stop|restart|force-reload}</code>来启动停止gitblit。<br>现在运行<code>service gitblit start</code>，如果启动成功，那么访问 your_ip:port 应该能看到Gitblit的欢迎界面了。</p><h4 id="Nginx反向代理Gitblit"><a href="#Nginx反向代理Gitblit" class="headerlink" title="Nginx反向代理Gitblit"></a>Nginx反向代理Gitblit</h4><p>接下来我们为Git配置nginx的反向代理。<br>nginx的基本配置就不说了，现在给出简单代理Gitblit的配置<br><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">  <span class="attribute">listen</span>      <span class="number">80</span>;</span><br><span class="line">  <span class="attribute">server_name</span> git.abcabc.com;</span><br><span class="line">  </span><br><span class="line">  <span class="attribute">access_log</span>  logs/git.abcabc.com.access.log;</span><br><span class="line"> </span><br><span class="line">  <span class="comment"># 这一条配置主要是针对如果一次性提交量数据过大而设置</span></span><br><span class="line">  <span class="comment"># 假如有资源文件，那么使用默认的nginx配置容易超出</span></span><br><span class="line">  <span class="attribute">client_max_body_size</span> <span class="number">100m</span>;</span><br><span class="line">  </span><br><span class="line">  <span class="attribute">location</span> / &#123;</span><br><span class="line">    <span class="attribute">proxy_set_header</span> Host <span class="variable">$host</span>;</span><br><span class="line">    <span class="attribute">proxy_pass</span>       http://localhost:端口;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="comment"># https配置与http类似，这里不罗列了。</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><p>配置完之后reload nginx，那么我们现在可以通过git.abcabc.com访问gitblit啦。</p><blockquote><p>默认的Gitblit管理员账号密码为admin/admin，配置完之后应该马上修改掉。<br>从安全性角度考虑：强烈建议使用https而非http。</p></blockquote>]]></content>
+      
+      
+      <categories>
+          
+          <category> Devops </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> git </tag>
+            
+            <tag> gitblit </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>避免SSH连接因超时闲置断开</title>
+      <link href="/linux/ssh-timeout/"/>
+      <url>/linux/ssh-timeout/</url>
+      
+        <content type="html"><![CDATA[<p>平时我们通过终端连接服务器时，当鼠标和键盘长时间不操作，服务器就会自动断开连接，也就是SSH超时断开。<br>下面有几种方法可以避免超时断开连接：</p><h3 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h3><blockquote><p>配置服务器，修改<code>/etc/ssh/sshd_config</code>配置文件，找到<code>ClientAliveCountMax</code>（单位为分钟）修改你想要的值，执行<code>service sshd reload</code>。</p></blockquote><p><hr></p><h3 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h3><blockquote><p>配置服务器，在<code>/etc/profile</code>配置文件中添加<br><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">TMOUT</span>=<span class="number">1800</span></span><br></pre></td></tr></table></figure></p></blockquote><blockquote><p>这样30分钟没操作就自动LOGOUT（SSH超时断开）</p></blockquote><p><hr></p><h3 id="方法三"><a href="#方法三" class="headerlink" title="方法三"></a>方法三</h3><blockquote><p>配置客户端，编辑用户的.ssh目录下config文件（若没有，直接创建一个config），添加<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ServerAliveInterval <span class="number">60</span></span><br></pre></td></tr></table></figure></p></blockquote><blockquote><p>保存退出，重新开启用户的shell，则再ssh远程服务器的时候，不会因为长时间操作断开。加入这句之后，ssh客户端会每隔一段时间自动与ssh服务器通信一次，所以长时间操作不会断开。</p></blockquote><p><hr></p><h3 id="方法四"><a href="#方法四" class="headerlink" title="方法四"></a>方法四</h3><blockquote><p>利用expect 模拟键盘动作，在闲置时间之内模拟地给个键盘响应,将下列代码保存为xxx，然后用expect执行<br><figure class="highlight d"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/usr/bin/expect  </span></span><br><span class="line">set timeout <span class="number">60</span>  </span><br><span class="line">spawn ssh user<span class="keyword">@host</span>   </span><br><span class="line">      interact &#123;          </span><br><span class="line">            timeout <span class="number">300</span> &#123;send <span class="string">"\x20"</span>&#125;  </span><br><span class="line">      &#125; </span><br><span class="line">expect xxx</span><br></pre></td></tr></table></figure></p></blockquote><blockquote><p>接着按提示输入密码就可以了，这样每隔300秒就会自动打一个空格(\x20)，具体的时间间隔可以根据具体情况设置。</p></blockquote><p><hr></p><h3 id="方法五"><a href="#方法五" class="headerlink" title="方法五"></a>方法五</h3><blockquote><p>如果你在windows下通过工具连接，可以设置SSH超时断开选项为：</p><ul><li>putty：putty -&gt; Connection -&gt; Seconds between keepalives ( 0 to turn off ), 默认为0, 改为300。</li><li>secureCRT：选项—终端—反空闲 中设置每隔多少秒发送一个字符串，或者是NO-OP协议包。</li></ul></blockquote><p>文章转自：<a href="https://www.yurendu.com/read/avoid-ssh-connection-due-to-timeout-idle.html" target="_blank" rel="noopener">避免SSH连接因超时闲置断开</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Linux </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> linux </tag>
+            
+            <tag> ssh </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>(调侃)Node.js的版本变化一点也不像个&quot;后端&quot;的样子</title>
+      <link href="/nodejs/node-version-change/"/>
+      <url>/nodejs/node-version-change/</url>
+      
+        <content type="html"><![CDATA[<p>其实就是调侃Node的版本迭代的好快，哈哈</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Node.js </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> nodejs </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>可以消磨时间的桌游</title>
+      <link href="/life/2016-guoqing/"/>
+      <url>/life/2016-guoqing/</url>
+      
+        <content type="html"><![CDATA[<p>国庆假期就这么过去了，这个假期主要是在自我调节，9月份整个人的状态都偏差，各种各样的原因都有吧。假期回去和朋友玩了很多次桌游，「卡坦岛」和「卡卡颂」是最有意思，也是比较能消磨时间的。</p><p>卡坦岛：<br><img src="/img/20161008katandao.jpeg" alt><br>简单的可以看成一个复杂版本的大富翁，只是游戏不单纯地由掷骰子来决定，更多的是自己的发展决策，以及玩家间的互动。而且还有扩展版，可以在原游戏基础上增添元素。</p><p>卡卡颂：<br><img src="/img/20161008kakasong.png" alt><br>「卡卡颂」是在拼版图，过程中可以放入自己的“小人”，占领对应的资源已获取分数，也可以在拼版图的时候阻碍一下对方。同样也有扩展版，我感觉有扩展版真的是大大增加游戏可玩性的一种很有效的方式。</p><p>另外还有两款，「跑跑龟」和「德国心脏病」。<br>跑跑龟：<br><img src="/img/20161008paopaogui.png" alt><br>比较休闲，老少通杀，游戏时间较短，目的是让你的小乌龟冲向终点，特别是游戏规则，简单却可以让人意想不到，和朋友讲解的时候他（她）们都会“哇塞居然是这样”。</p><p>德国心脏病：<br><img src="/img/20161008deguoxinzangbing.png" alt><br>互动性最强，考的是快速反应能力，游戏过程中快速抢铃，接触比较多，玩这个游戏的时候，整个气氛都不一样了。</p><p>（注：图片取自网上，不是自己拍摄）</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 生活点滴 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>JS检查Function是否为Generator</title>
+      <link href="/nodejs/check-if-function-is-a-generator/"/>
+      <url>/nodejs/check-if-function-is-a-generator/</url>
+      
+        <content type="html"><![CDATA[<p>Nodejs中如何检查一个函数是否为GeneratorFunction（生成器，也就是function*）。<br>我一开始是想用typeof或者instanceof，发现达不到目的<br>其实可以这么做：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isGenerator</span>(<span class="params">fn</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> fn &amp;&amp; fn.constructor.name === <span class="string">'GeneratorFunction'</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> a = <span class="function"><span class="keyword">function</span> *(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line"><span class="keyword">var</span> b = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line"><span class="built_in">console</span>.log(isGenerator(a)); <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(isGenerator(b)); <span class="comment">// false</span></span><br></pre></td></tr></table></figure></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Node.js </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> nodejs </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>iOS10和macOS Sierra更新，印象比较深的功能</title>
+      <link href="/life/ios10-macOS-Sierra/"/>
+      <url>/life/ios10-macOS-Sierra/</url>
+      
+        <content type="html"><![CDATA[<p>上周更新了iOS10，昨天更新了macOS Sierra，最大的感受是整个苹果的生态又往前迈进了一步。</p><p>iOS10，比较喜欢的功能是「照片」的回忆，还有「时钟」的就寝。<br>「回忆」是将你照片里面，以往的某个时间点的照片提取出来，还可以制作成幻灯片类型的小视频（配上背景音乐），这样的效果跟单纯一张张的翻照片的感觉确实还是不同的，出来的结果也是挺喜欢，当然跟你当时拍的照片的质量也有关。<br>「就寝」也是挺不错的一个功能，我把以前设置的闹钟都关掉了，直接设置「就寝」，那我晚上几点要睡，早上几点起来，它会提醒你去睡觉，早上时间到了闹钟就响了，最近我刚好在调节自己的生物钟，发现挺好用的。</p><p>macOS的更新，觉得最有用的，是终于弥补了一直缺少的「存储空间管理」功能（在应用程序里面可以找到），特别是像我这种本身SSD就只有120G的电脑，总是要清理空间，特别烦恼。打开之后才发现，原来我硬盘里面17G竟是iPhone的备份，天呐，吓得我赶紧把它清掉。同时它还有删除应用的功能，还是挺不错的。顺带一提，储存空间的样子稍微变了一下，各种分类看得更清楚了：<br><img src="/img/20160923-0@2x.png" alt><br>现在空间能有35G，我之前可是只有10G可用啊！<br>mac更新之后Photos也跟着更新了，界面有点小变，也加上了「回忆」。</p><p>最近一直在使用「照片」的「共享」功能，这个功能以前也有，就是没怎么用，可以把某次出游（或者其他场合）的照片放一起，跟家人、朋友共享，这样自己拍的照片他们也有，他们拍的照片我们也能下载，多好。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 生活点滴 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> mac </tag>
+            
+            <tag> ios </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+  
+  
+</search>
