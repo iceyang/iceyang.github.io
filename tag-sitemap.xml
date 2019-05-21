@@ -45,7 +45,7 @@
     </url>
 
     <url>
-        <loc>https://keepmoving.ren/tags/git-flow/</loc>
+        <loc>https://keepmoving.ren/tags/gitflow/</loc>
         <lastmod>2019-05-19T05:30:00.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -66,6 +66,13 @@
     </url>
 
     <url>
+        <loc>https://keepmoving.ren/tags/mac/</loc>
+        <lastmod>2019-04-24T15:47:57.437Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>https://keepmoving.ren/tags/jdk/</loc>
         <lastmod>2019-04-24T15:47:57.437Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -74,13 +81,6 @@
 
     <url>
         <loc>https://keepmoving.ren/tags/java/</loc>
-        <lastmod>2019-04-24T15:47:57.437Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://keepmoving.ren/tags/mac/</loc>
         <lastmod>2019-04-24T15:47:57.437Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
