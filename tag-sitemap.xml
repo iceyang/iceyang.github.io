@@ -3,6 +3,27 @@
 
 
     <url>
+        <loc>https://keepmoving.ren/tags/%E5%B9%B6%E5%8F%91/</loc>
+        <lastmod>2019-05-22T02:42:23.406Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://keepmoving.ren/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/</loc>
+        <lastmod>2019-05-22T02:42:23.406Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://keepmoving.ren/tags/vim/</loc>
+        <lastmod>2019-05-22T02:40:08.280Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>https://keepmoving.ren/tags/%E5%96%B5%E6%98%9F%E4%BA%BA/</loc>
         <lastmod>2019-05-19T14:57:31.390Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -124,27 +145,6 @@
     <url>
         <loc>https://keepmoving.ren/tags/%E7%BC%93%E5%AD%98/</loc>
         <lastmod>2019-04-18T13:21:24.050Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://keepmoving.ren/tags/vim/</loc>
-        <lastmod>2019-04-18T13:20:09.167Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://keepmoving.ren/tags/%E5%B9%B6%E5%8F%91/</loc>
-        <lastmod>2019-04-18T13:19:51.702Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://keepmoving.ren/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/</loc>
-        <lastmod>2019-04-18T13:19:51.702Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>

@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://keepmoving.ren/programming/thread-safty/</loc>
+    <lastmod>2019-05-22</lastmod>
+  </url>  <url>
+    <loc>https://keepmoving.ren/tools/my_vim_usage/</loc>
+    <lastmod>2019-05-22</lastmod>
+  </url>  <url>
+    <loc>https://keepmoving.ren/tools/chrome_shortcuts/</loc>
+    <lastmod>2019-05-22</lastmod>
+  </url>  <url>
     <loc>https://keepmoving.ren/life/20190519-lulu/</loc>
     <lastmod>2019-05-19</lastmod>
   </url>  <url>
@@ -38,15 +47,6 @@
     <lastmod>2019-04-20</lastmod>
   </url>  <url>
     <loc>https://keepmoving.ren/architecture/meeting-cache-system/</loc>
-    <lastmod>2019-04-18</lastmod>
-  </url>  <url>
-    <loc>https://keepmoving.ren/tools/my_vim_usage/</loc>
-    <lastmod>2019-04-18</lastmod>
-  </url>  <url>
-    <loc>https://keepmoving.ren/tools/chrome_shortcuts/</loc>
-    <lastmod>2019-04-18</lastmod>
-  </url>  <url>
-    <loc>https://keepmoving.ren/programming/thread-safty/</loc>
     <lastmod>2019-04-18</lastmod>
   </url>  <url>
     <loc>https://keepmoving.ren/linux/ssh-timeout/</loc>

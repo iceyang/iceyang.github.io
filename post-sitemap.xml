@@ -8,6 +8,30 @@
     </url>
 
     <url>
+        <loc>https://keepmoving.ren/programming/thread-safty/</loc>
+        <lastmod>2019-05-22T02:42:23.406Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://keepmoving.ren/tools/my_vim_usage/</loc>
+        <lastmod>2019-05-22T02:40:08.280Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://keepmoving.ren/tools/chrome_shortcuts/</loc>
+        <lastmod>2019-05-22T02:37:37.248Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>https://keepmoving.ren/life/20190519-lulu/</loc>
         <lastmod>2019-05-19T14:57:31.390Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -106,30 +130,6 @@
     <url>
         <loc>https://keepmoving.ren/architecture/meeting-cache-system/</loc>
         <lastmod>2019-04-18T13:21:24.050Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://keepmoving.ren/tools/my_vim_usage/</loc>
-        <lastmod>2019-04-18T13:20:09.167Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://keepmoving.ren/tools/chrome_shortcuts/</loc>
-        <lastmod>2019-04-18T13:20:00.380Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://keepmoving.ren/programming/thread-safty/</loc>
-        <lastmod>2019-04-18T13:19:51.702Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
