@@ -1,25 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://keepmoving.ren/database/mysql/transation-isolation/</loc>
-    <lastmod>2019-05-24</lastmod>
-  </url>  <url>
     <loc>https://keepmoving.ren/database/mysql/how-to-execute-update-sql/</loc>
-    <lastmod>2019-05-24</lastmod>
+    <lastmod>2019-05-28</lastmod>
   </url>  <url>
     <loc>https://keepmoving.ren/database/mysql/how-to-execute-select-sql/</loc>
+    <lastmod>2019-05-28</lastmod>
+  </url>  <url>
+    <loc>https://keepmoving.ren/architecture/meeting-cache-system/</loc>
+    <lastmod>2019-05-28</lastmod>
+  </url>  <url>
+    <loc>https://keepmoving.ren/istio/traffic-management/</loc>
+    <lastmod>2019-05-28</lastmod>
+  </url>  <url>
+    <loc>https://keepmoving.ren/istio/know-about-istio/</loc>
+    <lastmod>2019-05-28</lastmod>
+  </url>  <url>
+    <loc>https://keepmoving.ren/java/manage-jdk-on-mac/</loc>
+    <lastmod>2019-05-28</lastmod>
+  </url>  <url>
+    <loc>https://keepmoving.ren/kubernetes/something-record/</loc>
+    <lastmod>2019-05-28</lastmod>
+  </url>  <url>
+    <loc>https://keepmoving.ren/nginx/x-accel-redirect-with-nginx/</loc>
+    <lastmod>2019-05-28</lastmod>
+  </url>  <url>
+    <loc>https://keepmoving.ren/nginx/no-live-upstream/</loc>
+    <lastmod>2019-05-28</lastmod>
+  </url>  <url>
+    <loc>https://keepmoving.ren/database/mysql/transation-isolation/</loc>
     <lastmod>2019-05-24</lastmod>
   </url>  <url>
     <loc>https://keepmoving.ren/database/mysql/about-index/</loc>
     <lastmod>2019-05-24</lastmod>
   </url>  <url>
-    <loc>https://keepmoving.ren/istio/traffic-management/</loc>
-    <lastmod>2019-05-24</lastmod>
-  </url>  <url>
     <loc>https://keepmoving.ren/istio/pod-and-svc-requirement/</loc>
-    <lastmod>2019-05-24</lastmod>
-  </url>  <url>
-    <loc>https://keepmoving.ren/istio/know-about-istio/</loc>
     <lastmod>2019-05-24</lastmod>
   </url>  <url>
     <loc>https://keepmoving.ren/istio/five-traffic-type-in-istio/</loc>
@@ -79,29 +94,14 @@
     <loc>https://keepmoving.ren/tools/git-flow/</loc>
     <lastmod>2019-05-19</lastmod>
   </url>  <url>
-    <loc>https://keepmoving.ren/java/manage-jdk-on-mac/</loc>
-    <lastmod>2019-04-24</lastmod>
-  </url>  <url>
     <loc>https://keepmoving.ren/life/ios10-macOS-Sierra/</loc>
     <lastmod>2019-04-22</lastmod>
-  </url>  <url>
-    <loc>https://keepmoving.ren/architecture/meeting-cache-system/</loc>
-    <lastmod>2019-04-18</lastmod>
   </url>  <url>
     <loc>https://keepmoving.ren/life/2016-guoqing/</loc>
     <lastmod>2019-04-18</lastmod>
   </url>  <url>
-    <loc>https://keepmoving.ren/kubernetes/something-record/</loc>
-    <lastmod>2019-04-18</lastmod>
-  </url>  <url>
     <loc>https://keepmoving.ren/devops/use-gitblit-with-nginx/</loc>
     <lastmod>2019-04-13</lastmod>
-  </url>  <url>
-    <loc>https://keepmoving.ren/nginx/no-live-upstream/</loc>
-    <lastmod>2019-04-13</lastmod>
-  </url>  <url>
-    <loc>https://keepmoving.ren/nginx/x-accel-redirect-with-nginx/</loc>
-    <lastmod>2019-03-10</lastmod>
   </url>  <url>
     <loc>https://keepmoving.ren/nodejs/node-version-change/</loc>
     <lastmod>2019-03-09</lastmod>
