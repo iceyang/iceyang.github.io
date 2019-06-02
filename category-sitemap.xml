@@ -8,6 +8,13 @@
     </url>
 
     <url>
+        <loc>https://keepmoving.ren/categories/%E5%B7%A5%E5%85%B7/</loc>
+        <lastmod>2019-06-02T14:15:29.233Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>https://keepmoving.ren/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/</loc>
         <lastmod>2019-05-28T04:01:18.448Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -73,13 +80,6 @@
     <url>
         <loc>https://keepmoving.ren/categories/Programming/</loc>
         <lastmod>2019-05-22T02:52:41.956Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://keepmoving.ren/categories/%E5%B7%A5%E5%85%B7/</loc>
-        <lastmod>2019-05-22T02:40:08.280Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>

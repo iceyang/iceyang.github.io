@@ -8,6 +8,22 @@
     </url>
 
     <url>
+        <loc>https://keepmoving.ren/tools/chrome_shortcuts/</loc>
+        <lastmod>2019-06-02T14:15:29.233Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://keepmoving.ren/tools/find-anki/</loc>
+        <lastmod>2019-06-02T14:14:46.582Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>https://keepmoving.ren/database/mysql/how-to-execute-update-sql/</loc>
         <lastmod>2019-05-28T04:01:18.448Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -226,14 +242,6 @@
     <url>
         <loc>https://keepmoving.ren/tools/my_vim_usage/</loc>
         <lastmod>2019-05-22T02:40:08.280Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://keepmoving.ren/tools/chrome_shortcuts/</loc>
-        <lastmod>2019-05-22T02:37:37.248Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 

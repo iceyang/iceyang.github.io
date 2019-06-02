@@ -3,6 +3,13 @@
 
 
     <url>
+        <loc>https://keepmoving.ren/tags/anki/</loc>
+        <lastmod>2019-06-02T14:14:46.582Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>https://keepmoving.ren/tags/database/</loc>
         <lastmod>2019-05-28T04:01:18.448Z</lastmod>
         <changefreq>weekly</changefreq>
