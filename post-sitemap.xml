@@ -8,6 +8,30 @@
     </url>
 
     <url>
+        <loc>https://keepmoving.ren/life/20190614-life-changed/</loc>
+        <lastmod>2019-06-14T14:43:28.065Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://keepmoving.ren/istio/five-traffic-type-in-istio/</loc>
+        <lastmod>2019-06-05T02:21:05.859Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://keepmoving.ren/linux/ssh-timeout/</loc>
+        <lastmod>2019-06-04T03:42:11.052Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>https://keepmoving.ren/tools/chrome_shortcuts/</loc>
         <lastmod>2019-06-02T14:15:29.233Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -120,14 +144,6 @@
     </url>
 
     <url>
-        <loc>https://keepmoving.ren/istio/five-traffic-type-in-istio/</loc>
-        <lastmod>2019-05-24T13:54:27.224Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
         <loc>https://keepmoving.ren/kubernetes/use-pod-probe/</loc>
         <lastmod>2019-05-24T13:53:50.310Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -154,14 +170,6 @@
     <url>
         <loc>https://keepmoving.ren/linux/top_util/</loc>
         <lastmod>2019-05-24T13:47:32.157Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://keepmoving.ren/linux/ssh-timeout/</loc>
-        <lastmod>2019-05-24T13:46:55.910Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 

@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://keepmoving.ren/life/20190614-life-changed/</loc>
+    <lastmod>2019-06-14</lastmod>
+  </url>  <url>
+    <loc>https://keepmoving.ren/istio/five-traffic-type-in-istio/</loc>
+    <lastmod>2019-06-05</lastmod>
+  </url>  <url>
+    <loc>https://keepmoving.ren/linux/ssh-timeout/</loc>
+    <lastmod>2019-06-04</lastmod>
+  </url>  <url>
     <loc>https://keepmoving.ren/tools/chrome_shortcuts/</loc>
     <lastmod>2019-06-02</lastmod>
   </url>  <url>
@@ -43,9 +52,6 @@
     <loc>https://keepmoving.ren/istio/pod-and-svc-requirement/</loc>
     <lastmod>2019-05-24</lastmod>
   </url>  <url>
-    <loc>https://keepmoving.ren/istio/five-traffic-type-in-istio/</loc>
-    <lastmod>2019-05-24</lastmod>
-  </url>  <url>
     <loc>https://keepmoving.ren/kubernetes/use-pod-probe/</loc>
     <lastmod>2019-05-24</lastmod>
   </url>  <url>
@@ -56,9 +62,6 @@
     <lastmod>2019-05-24</lastmod>
   </url>  <url>
     <loc>https://keepmoving.ren/linux/top_util/</loc>
-    <lastmod>2019-05-24</lastmod>
-  </url>  <url>
-    <loc>https://keepmoving.ren/linux/ssh-timeout/</loc>
     <lastmod>2019-05-24</lastmod>
   </url>  <url>
     <loc>https://keepmoving.ren/nginx/proxy-websocket/</loc>
