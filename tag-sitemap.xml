@@ -3,6 +3,20 @@
 
 
     <url>
+        <loc>https://keepmoving.ren/tags/jdk/</loc>
+        <lastmod>2019-06-21T02:15:38.294Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://keepmoving.ren/tags/java/</loc>
+        <lastmod>2019-06-21T02:15:38.294Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>https://keepmoving.ren/tags/%E8%87%AA%E5%BE%8B/</loc>
         <lastmod>2019-06-14T14:43:28.065Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -17,13 +31,6 @@
     </url>
 
     <url>
-        <loc>https://keepmoving.ren/tags/kubernetes/</loc>
-        <lastmod>2019-06-05T02:21:05.859Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>https://keepmoving.ren/tags/service-mesh/</loc>
         <lastmod>2019-06-05T02:21:05.859Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -32,6 +39,13 @@
 
     <url>
         <loc>https://keepmoving.ren/tags/istio/</loc>
+        <lastmod>2019-06-05T02:21:05.859Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://keepmoving.ren/tags/kubernetes/</loc>
         <lastmod>2019-06-05T02:21:05.859Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -89,27 +103,6 @@
     <url>
         <loc>https://keepmoving.ren/tags/%E7%BC%93%E5%AD%98/</loc>
         <lastmod>2019-05-28T03:58:52.797Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://keepmoving.ren/tags/mac/</loc>
-        <lastmod>2019-05-28T03:56:32.843Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://keepmoving.ren/tags/jdk/</loc>
-        <lastmod>2019-05-28T03:56:32.843Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://keepmoving.ren/tags/java/</loc>
-        <lastmod>2019-05-28T03:56:32.843Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
@@ -236,13 +229,6 @@
     <url>
         <loc>https://keepmoving.ren/tags/git/</loc>
         <lastmod>2019-05-19T05:30:00.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://keepmoving.ren/tags/ios/</loc>
-        <lastmod>2019-04-22T14:37:07.599Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>

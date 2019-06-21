@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://keepmoving.ren/life/ios10-macOS-Sierra/</loc>
+    <lastmod>2019-06-21</lastmod>
+  </url>  <url>
+    <loc>https://keepmoving.ren/java/manage-jdk-on-mac/</loc>
+    <lastmod>2019-06-21</lastmod>
+  </url>  <url>
     <loc>https://keepmoving.ren/life/20190614-life-changed/</loc>
     <lastmod>2019-06-14</lastmod>
   </url>  <url>
@@ -29,9 +35,6 @@
     <lastmod>2019-05-28</lastmod>
   </url>  <url>
     <loc>https://keepmoving.ren/istio/know-about-istio/</loc>
-    <lastmod>2019-05-28</lastmod>
-  </url>  <url>
-    <loc>https://keepmoving.ren/java/manage-jdk-on-mac/</loc>
     <lastmod>2019-05-28</lastmod>
   </url>  <url>
     <loc>https://keepmoving.ren/kubernetes/something-record/</loc>
@@ -99,9 +102,6 @@
   </url>  <url>
     <loc>https://keepmoving.ren/tools/git-flow/</loc>
     <lastmod>2019-05-19</lastmod>
-  </url>  <url>
-    <loc>https://keepmoving.ren/life/ios10-macOS-Sierra/</loc>
-    <lastmod>2019-04-22</lastmod>
   </url>  <url>
     <loc>https://keepmoving.ren/life/2016-guoqing/</loc>
     <lastmod>2019-04-18</lastmod>

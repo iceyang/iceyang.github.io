@@ -149,11 +149,11 @@
       
         <tags>
             
+            <tag> kubernetes </tag>
+            
             <tag> istio </tag>
             
             <tag> service mesh </tag>
-            
-            <tag> kubernetes </tag>
             
             <tag> sidecar </tag>
             
@@ -180,9 +180,9 @@
       
         <tags>
             
-            <tag> kubernetes </tag>
-            
             <tag> k8s </tag>
+            
+            <tag> kubernetes </tag>
             
         </tags>
       
@@ -207,11 +207,11 @@
       
         <tags>
             
+            <tag> kubernetes </tag>
+            
             <tag> istio </tag>
             
             <tag> service mesh </tag>
-            
-            <tag> kubernetes </tag>
             
             <tag> sidecar </tag>
             
@@ -238,11 +238,11 @@
       
         <tags>
             
+            <tag> kubernetes </tag>
+            
             <tag> istio </tag>
             
             <tag> service mesh </tag>
-            
-            <tag> kubernetes </tag>
             
             <tag> sidecar </tag>
             
@@ -269,11 +269,11 @@
       
         <tags>
             
+            <tag> kubernetes </tag>
+            
             <tag> istio </tag>
             
             <tag> service mesh </tag>
-            
-            <tag> kubernetes </tag>
             
             <tag> sidecar </tag>
             
@@ -329,8 +329,6 @@
             
             <tag> jdk </tag>
             
-            <tag> mac </tag>
-            
         </tags>
       
     </entry>
@@ -383,9 +381,9 @@
       
         <tags>
             
-            <tag> kubernetes </tag>
-            
             <tag> k8s </tag>
+            
+            <tag> kubernetes </tag>
             
         </tags>
       
@@ -666,9 +664,9 @@
       
         <tags>
             
-            <tag> kubernetes </tag>
-            
             <tag> k8s </tag>
+            
+            <tag> kubernetes </tag>
             
         </tags>
       
@@ -776,9 +774,9 @@
       
         <tags>
             
-            <tag> kubernetes </tag>
-            
             <tag> k8s </tag>
+            
+            <tag> kubernetes </tag>
             
             <tag> pod </tag>
             
@@ -979,14 +977,6 @@
           
       </categories>
       
-      
-        <tags>
-            
-            <tag> mac </tag>
-            
-            <tag> ios </tag>
-            
-        </tags>
       
     </entry>
     
