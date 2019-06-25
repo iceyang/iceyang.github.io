@@ -4,21 +4,21 @@
 
     <url>
         <loc>https://keepmoving.ren/tags/gin/</loc>
-        <lastmod>2019-06-24T02:56:52.699Z</lastmod>
+        <lastmod>2019-06-25T01:56:27.023Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>https://keepmoving.ren/tags/golang/</loc>
-        <lastmod>2019-06-24T02:56:52.699Z</lastmod>
+        <lastmod>2019-06-25T01:56:27.023Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>https://keepmoving.ren/tags/go/</loc>
-        <lastmod>2019-06-24T02:56:52.699Z</lastmod>
+        <lastmod>2019-06-25T01:56:27.023Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
@@ -52,13 +52,6 @@
     </url>
 
     <url>
-        <loc>https://keepmoving.ren/tags/kubernetes/</loc>
-        <lastmod>2019-06-05T02:21:05.859Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>https://keepmoving.ren/tags/service-mesh/</loc>
         <lastmod>2019-06-05T02:21:05.859Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -67,6 +60,13 @@
 
     <url>
         <loc>https://keepmoving.ren/tags/istio/</loc>
+        <lastmod>2019-06-05T02:21:05.859Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://keepmoving.ren/tags/kubernetes/</loc>
         <lastmod>2019-06-05T02:21:05.859Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
