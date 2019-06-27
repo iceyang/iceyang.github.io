@@ -8,8 +8,16 @@
     </url>
 
     <url>
+        <loc>https://keepmoving.ren/go/array-and-slice/</loc>
+        <lastmod>2019-06-27T14:32:27.792Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>https://keepmoving.ren/go/building-webservice-with-gin/</loc>
-        <lastmod>2019-06-25T14:11:38.172Z</lastmod>
+        <lastmod>2019-06-27T14:30:21.875Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
