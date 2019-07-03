@@ -3,6 +3,13 @@
 
 
     <url>
+        <loc>https://keepmoving.ren/tags/linux/</loc>
+        <lastmod>2019-07-03T00:26:51.410Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>https://keepmoving.ren/tags/slice/</loc>
         <lastmod>2019-06-27T14:46:33.245Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -88,13 +95,6 @@
 
     <url>
         <loc>https://keepmoving.ren/tags/ssh/</loc>
-        <lastmod>2019-06-04T03:42:11.052Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://keepmoving.ren/tags/linux/</loc>
         <lastmod>2019-06-04T03:42:11.052Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>

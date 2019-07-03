@@ -8,6 +8,13 @@
     </url>
 
     <url>
+        <loc>https://keepmoving.ren/categories/Linux/</loc>
+        <lastmod>2019-07-03T00:26:51.410Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>https://keepmoving.ren/categories/Golang/</loc>
         <lastmod>2019-06-27T14:46:33.245Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -31,13 +38,6 @@
     <url>
         <loc>https://keepmoving.ren/categories/Istio/</loc>
         <lastmod>2019-06-05T02:21:05.859Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://keepmoving.ren/categories/Linux/</loc>
-        <lastmod>2019-06-04T03:42:11.052Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>

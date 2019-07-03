@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>忍不住吐槽下ln和tar</title>
+      <link href="/linux/link-tar-params/"/>
+      <url>/linux/link-tar-params/</url>
+      
+        <content type="html"><![CDATA[<p>不知道是不是我一个人的问题，我就是记不住<code>ln -s sourcefile targetfile</code>的结果。</p><p>究竟是谁指向谁 :-( 。</p><p>同样的还有<code>tar</code>的打包参数，总是会搞反。</p><p>可能是这两个操作使用频率不高，还是说潜意识里面已经记住了反的方式。</p><p>今天又反了一次，忍不住来吐个槽。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Linux </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> linux </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Golang的数组与切片</title>
       <link href="/golang/array-and-slice/"/>
       <url>/golang/array-and-slice/</url>
