@@ -3,36 +3,36 @@
 
 
     <url>
-        <loc>https://keepmoving.ren/tags/linux/</loc>
-        <lastmod>2019-07-03T00:26:51.410Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>https://keepmoving.ren/tags/slice/</loc>
-        <lastmod>2019-06-27T14:46:33.245Z</lastmod>
+        <lastmod>2019-07-03T01:54:08.059Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>https://keepmoving.ren/tags/array/</loc>
-        <lastmod>2019-06-27T14:46:33.245Z</lastmod>
+        <lastmod>2019-07-03T01:54:08.059Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>https://keepmoving.ren/tags/golang/</loc>
-        <lastmod>2019-06-27T14:46:33.245Z</lastmod>
+        <lastmod>2019-07-03T01:54:08.059Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>https://keepmoving.ren/tags/go/</loc>
-        <lastmod>2019-06-27T14:46:33.245Z</lastmod>
+        <lastmod>2019-07-03T01:54:08.059Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://keepmoving.ren/tags/linux/</loc>
+        <lastmod>2019-07-03T01:51:47.090Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
