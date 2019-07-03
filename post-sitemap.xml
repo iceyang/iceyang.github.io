@@ -8,6 +8,14 @@
     </url>
 
     <url>
+        <loc>https://keepmoving.ren/architecture/meeting-cache-system/</loc>
+        <lastmod>2019-07-03T08:24:20.263Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>https://keepmoving.ren/golang/array-and-slice/</loc>
         <lastmod>2019-07-03T01:54:08.059Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -98,14 +106,6 @@
     <url>
         <loc>https://keepmoving.ren/database/mysql/how-to-execute-select-sql/</loc>
         <lastmod>2019-05-28T03:59:58.598Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://keepmoving.ren/architecture/meeting-cache-system/</loc>
-        <lastmod>2019-05-28T03:58:52.797Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 

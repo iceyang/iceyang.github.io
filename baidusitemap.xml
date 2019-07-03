@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://keepmoving.ren/architecture/meeting-cache-system/</loc>
+    <lastmod>2019-07-03</lastmod>
+  </url>  <url>
     <loc>https://keepmoving.ren/golang/array-and-slice/</loc>
     <lastmod>2019-07-03</lastmod>
   </url>  <url>
@@ -35,9 +38,6 @@
     <lastmod>2019-05-28</lastmod>
   </url>  <url>
     <loc>https://keepmoving.ren/database/mysql/how-to-execute-select-sql/</loc>
-    <lastmod>2019-05-28</lastmod>
-  </url>  <url>
-    <loc>https://keepmoving.ren/architecture/meeting-cache-system/</loc>
     <lastmod>2019-05-28</lastmod>
   </url>  <url>
     <loc>https://keepmoving.ren/istio/traffic-management/</loc>
