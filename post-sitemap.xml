@@ -8,8 +8,16 @@
     </url>
 
     <url>
+        <loc>https://keepmoving.ren/life/abundance_mentality_and_scarcity_mentality/</loc>
+        <lastmod>2019-07-16T13:43:54.856Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>https://keepmoving.ren/golang/map/</loc>
-        <lastmod>2019-07-15T05:14:16.311Z</lastmod>
+        <lastmod>2019-07-16T12:55:37.448Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
