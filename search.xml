@@ -64,7 +64,7 @@
       <link href="/linux/link-tar-params/"/>
       <url>/linux/link-tar-params/</url>
       
-        <content type="html"><![CDATA[<p><img src="/img/sylvain-guiheneuc-hIMdKs_0cSE-unsplash.jpg" alt="Photo by Sylvain Guiheneuc on Unsplash"></p><p>不知道是不是我一个人的问题，我就是记不住<code>ln -s sourcefile targetfile</code>的结果。</p><p>究竟是谁指向谁 :-( 。</p><p>同样的还有<code>tar</code>的打包参数，总是会搞反。</p><p>可能是这两个操作使用频率不高，还是说潜意识里面已经记住了反的方式。</p><p>今天又反了一次，忍不住来吐个槽。</p>]]></content>
+        <content type="html"><![CDATA[<p><img src="/img/sylvain-guiheneuc-hIMdKs_0cSE-unsplash.jpg" alt="Photo by Sylvain Guiheneuc on Unsplash"></p><p>不知道是不是我一个人的问题，我就是记不住<code>ln -s sourcefile targetfile</code>的结果。</p><p>究竟是谁指向谁 :-( 。</p><p>同样的还有<code>tar</code>的打包参数，总是会搞反。</p><p>可能是这两个操作使用频率不高，还是说潜意识里面已经记住了反的方式。</p><p>今天又反了一次，忍不住来吐个槽。</p><p>=============== 更新 (2019.07.18) ===============</p><p>请原谅笨拙的我找到解决方法了，哈哈：</p><p><img src="/img/2019071801.png" alt="🙃我用中文还不行吗"></p><p>可能还是思维习惯的问题。</p><p><code>target</code>给人一种歧义，究竟是生成的链接文件是target，还是目标文件是target呢。</p><p>庆幸的是，现在清楚了，终究是记住了。</p>]]></content>
       
       
       <categories>
@@ -290,11 +290,11 @@
       
         <tags>
             
+            <tag> kubernetes </tag>
+            
             <tag> istio </tag>
             
             <tag> service mesh </tag>
-            
-            <tag> kubernetes </tag>
             
             <tag> sidecar </tag>
             
@@ -321,9 +321,9 @@
       
         <tags>
             
-            <tag> kubernetes </tag>
-            
             <tag> k8s </tag>
+            
+            <tag> kubernetes </tag>
             
         </tags>
       
@@ -348,11 +348,11 @@
       
         <tags>
             
+            <tag> kubernetes </tag>
+            
             <tag> istio </tag>
             
             <tag> service mesh </tag>
-            
-            <tag> kubernetes </tag>
             
             <tag> sidecar </tag>
             
@@ -379,11 +379,11 @@
       
         <tags>
             
+            <tag> kubernetes </tag>
+            
             <tag> istio </tag>
             
             <tag> service mesh </tag>
-            
-            <tag> kubernetes </tag>
             
             <tag> sidecar </tag>
             
@@ -410,11 +410,11 @@
       
         <tags>
             
+            <tag> kubernetes </tag>
+            
             <tag> istio </tag>
             
             <tag> service mesh </tag>
-            
-            <tag> kubernetes </tag>
             
             <tag> sidecar </tag>
             
@@ -522,9 +522,9 @@
       
         <tags>
             
-            <tag> kubernetes </tag>
-            
             <tag> k8s </tag>
+            
+            <tag> kubernetes </tag>
             
         </tags>
       
@@ -805,9 +805,9 @@
       
         <tags>
             
-            <tag> kubernetes </tag>
-            
             <tag> k8s </tag>
+            
+            <tag> kubernetes </tag>
             
         </tags>
       
@@ -915,9 +915,9 @@
       
         <tags>
             
-            <tag> kubernetes </tag>
-            
             <tag> k8s </tag>
+            
+            <tag> kubernetes </tag>
             
             <tag> pod </tag>
             

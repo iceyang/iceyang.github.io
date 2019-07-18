@@ -3,6 +3,13 @@
 
 
     <url>
+        <loc>https://keepmoving.ren/tags/linux/</loc>
+        <lastmod>2019-07-18T01:49:27.429Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>https://keepmoving.ren/tags/%E6%80%9D%E8%80%83/</loc>
         <lastmod>2019-07-16T13:45:24.726Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -73,13 +80,6 @@
     </url>
 
     <url>
-        <loc>https://keepmoving.ren/tags/linux/</loc>
-        <lastmod>2019-07-03T01:51:47.090Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>https://keepmoving.ren/tags/gin/</loc>
         <lastmod>2019-06-27T14:37:52.769Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -115,13 +115,6 @@
     </url>
 
     <url>
-        <loc>https://keepmoving.ren/tags/kubernetes/</loc>
-        <lastmod>2019-06-05T02:21:05.859Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>https://keepmoving.ren/tags/service-mesh/</loc>
         <lastmod>2019-06-05T02:21:05.859Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -130,6 +123,13 @@
 
     <url>
         <loc>https://keepmoving.ren/tags/istio/</loc>
+        <lastmod>2019-06-05T02:21:05.859Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://keepmoving.ren/tags/kubernetes/</loc>
         <lastmod>2019-06-05T02:21:05.859Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
