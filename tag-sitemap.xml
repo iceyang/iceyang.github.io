@@ -3,6 +3,48 @@
 
 
     <url>
+        <loc>https://keepmoving.ren/tags/goroutine/</loc>
+        <lastmod>2019-07-23T13:56:24.621Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://keepmoving.ren/tags/channel/</loc>
+        <lastmod>2019-07-23T13:56:24.621Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://keepmoving.ren/tags/golang/</loc>
+        <lastmod>2019-07-23T13:56:24.621Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://keepmoving.ren/tags/go/</loc>
+        <lastmod>2019-07-23T13:56:24.621Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://keepmoving.ren/tags/directory/</loc>
+        <lastmod>2019-07-23T13:50:04.777Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://keepmoving.ren/tags/map/</loc>
+        <lastmod>2019-07-23T13:50:04.777Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>https://keepmoving.ren/tags/linux/</loc>
         <lastmod>2019-07-18T03:47:41.832Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -12,34 +54,6 @@
     <url>
         <loc>https://keepmoving.ren/tags/%E6%80%9D%E8%80%83/</loc>
         <lastmod>2019-07-16T13:45:24.726Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://keepmoving.ren/tags/directory/</loc>
-        <lastmod>2019-07-16T12:55:37.448Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://keepmoving.ren/tags/map/</loc>
-        <lastmod>2019-07-16T12:55:37.448Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://keepmoving.ren/tags/golang/</loc>
-        <lastmod>2019-07-16T12:55:37.448Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://keepmoving.ren/tags/go/</loc>
-        <lastmod>2019-07-16T12:55:37.448Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>

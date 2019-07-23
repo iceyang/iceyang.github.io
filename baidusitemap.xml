@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://keepmoving.ren/golang/channel/</loc>
+    <lastmod>2019-07-23</lastmod>
+  </url>  <url>
+    <loc>https://keepmoving.ren/golang/map/</loc>
+    <lastmod>2019-07-23</lastmod>
+  </url>  <url>
     <loc>https://keepmoving.ren/linux/link-tar-params/</loc>
     <lastmod>2019-07-18</lastmod>
   </url>  <url>
     <loc>https://keepmoving.ren/life/abundance_mentality_and_scarcity_mentality/</loc>
-    <lastmod>2019-07-16</lastmod>
-  </url>  <url>
-    <loc>https://keepmoving.ren/golang/map/</loc>
     <lastmod>2019-07-16</lastmod>
   </url>  <url>
     <loc>https://keepmoving.ren/architecture/meeting-cache-system/</loc>
