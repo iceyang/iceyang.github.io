@@ -2,25 +2,25 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://keepmoving.ren/golang/channel/</loc>
-    <lastmod>2019-07-23</lastmod>
+    <lastmod>2019-07-24</lastmod>
+  </url>  <url>
+    <loc>https://keepmoving.ren/golang/building-webservice-with-gin/</loc>
+    <lastmod>2019-07-24</lastmod>
+  </url>  <url>
+    <loc>https://keepmoving.ren/golang/array-and-slice/</loc>
+    <lastmod>2019-07-24</lastmod>
+  </url>  <url>
+    <loc>https://keepmoving.ren/life/abundance_mentality_and_scarcity_mentality/</loc>
+    <lastmod>2019-07-24</lastmod>
   </url>  <url>
     <loc>https://keepmoving.ren/golang/map/</loc>
-    <lastmod>2019-07-23</lastmod>
+    <lastmod>2019-07-24</lastmod>
   </url>  <url>
     <loc>https://keepmoving.ren/linux/link-tar-params/</loc>
     <lastmod>2019-07-18</lastmod>
   </url>  <url>
-    <loc>https://keepmoving.ren/life/abundance_mentality_and_scarcity_mentality/</loc>
-    <lastmod>2019-07-16</lastmod>
-  </url>  <url>
     <loc>https://keepmoving.ren/architecture/meeting-cache-system/</loc>
     <lastmod>2019-07-03</lastmod>
-  </url>  <url>
-    <loc>https://keepmoving.ren/golang/array-and-slice/</loc>
-    <lastmod>2019-07-03</lastmod>
-  </url>  <url>
-    <loc>https://keepmoving.ren/golang/building-webservice-with-gin/</loc>
-    <lastmod>2019-06-27</lastmod>
   </url>  <url>
     <loc>https://keepmoving.ren/life/ios10-macOS-Sierra/</loc>
     <lastmod>2019-06-21</lastmod>

@@ -9,7 +9,31 @@
 
     <url>
         <loc>https://keepmoving.ren/golang/channel/</loc>
-        <lastmod>2019-07-23T14:02:38.324Z</lastmod>
+        <lastmod>2019-07-24T09:52:51.462Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://keepmoving.ren/golang/building-webservice-with-gin/</loc>
+        <lastmod>2019-07-24T00:13:19.156Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://keepmoving.ren/golang/array-and-slice/</loc>
+        <lastmod>2019-07-24T00:12:20.501Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://keepmoving.ren/life/abundance_mentality_and_scarcity_mentality/</loc>
+        <lastmod>2019-07-24T00:10:24.310Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -17,7 +41,7 @@
 
     <url>
         <loc>https://keepmoving.ren/golang/map/</loc>
-        <lastmod>2019-07-23T13:50:04.777Z</lastmod>
+        <lastmod>2019-07-24T00:09:29.156Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -32,32 +56,8 @@
     </url>
 
     <url>
-        <loc>https://keepmoving.ren/life/abundance_mentality_and_scarcity_mentality/</loc>
-        <lastmod>2019-07-16T13:45:24.726Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
         <loc>https://keepmoving.ren/architecture/meeting-cache-system/</loc>
         <lastmod>2019-07-03T08:24:20.263Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://keepmoving.ren/golang/array-and-slice/</loc>
-        <lastmod>2019-07-03T01:54:08.059Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://keepmoving.ren/golang/building-webservice-with-gin/</loc>
-        <lastmod>2019-06-27T14:37:52.769Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
