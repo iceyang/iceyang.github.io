@@ -1,38 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://keepmoving.ren/golang/channel/</loc>
-    <lastmod>2019-07-24</lastmod>
+    <loc>https://keepmoving.ren/istio/traffic-management/</loc>
+    <lastmod>2019-07-25</lastmod>
+  </url>  <url>
+    <loc>https://keepmoving.ren/istio/pod-and-svc-requirement/</loc>
+    <lastmod>2019-07-25</lastmod>
+  </url>  <url>
+    <loc>https://keepmoving.ren/istio/know-about-istio/</loc>
+    <lastmod>2019-07-25</lastmod>
+  </url>  <url>
+    <loc>https://keepmoving.ren/istio/five-traffic-type-in-istio/</loc>
+    <lastmod>2019-07-25</lastmod>
   </url>  <url>
     <loc>https://keepmoving.ren/golang/building-webservice-with-gin/</loc>
+    <lastmod>2019-07-25</lastmod>
+  </url>  <url>
+    <loc>https://keepmoving.ren/programming/thread-safty/</loc>
+    <lastmod>2019-07-25</lastmod>
+  </url>  <url>
+    <loc>https://keepmoving.ren/nodejs/check-if-function-is-a-generator/</loc>
     <lastmod>2019-07-24</lastmod>
   </url>  <url>
-    <loc>https://keepmoving.ren/golang/array-and-slice/</loc>
+    <loc>https://keepmoving.ren/nginx/gzip-module/</loc>
+    <lastmod>2019-07-24</lastmod>
+  </url>  <url>
+    <loc>https://keepmoving.ren/linux/link-tar-params/</loc>
     <lastmod>2019-07-24</lastmod>
   </url>  <url>
     <loc>https://keepmoving.ren/life/abundance_mentality_and_scarcity_mentality/</loc>
     <lastmod>2019-07-24</lastmod>
   </url>  <url>
+    <loc>https://keepmoving.ren/life/20190614-life-changed/</loc>
+    <lastmod>2019-07-24</lastmod>
+  </url>  <url>
+    <loc>https://keepmoving.ren/kubernetes/something-record/</loc>
+    <lastmod>2019-07-24</lastmod>
+  </url>  <url>
+    <loc>https://keepmoving.ren/kubernetes/managing-compute-resources-for-containers/</loc>
+    <lastmod>2019-07-24</lastmod>
+  </url>  <url>
+    <loc>https://keepmoving.ren/java/manage-jdk-on-mac/</loc>
+    <lastmod>2019-07-24</lastmod>
+  </url>  <url>
     <loc>https://keepmoving.ren/golang/map/</loc>
     <lastmod>2019-07-24</lastmod>
   </url>  <url>
-    <loc>https://keepmoving.ren/linux/link-tar-params/</loc>
-    <lastmod>2019-07-18</lastmod>
+    <loc>https://keepmoving.ren/golang/array-and-slice/</loc>
+    <lastmod>2019-07-24</lastmod>
+  </url>  <url>
+    <loc>https://keepmoving.ren/golang/channel/</loc>
+    <lastmod>2019-07-24</lastmod>
   </url>  <url>
     <loc>https://keepmoving.ren/architecture/meeting-cache-system/</loc>
     <lastmod>2019-07-03</lastmod>
   </url>  <url>
     <loc>https://keepmoving.ren/life/ios10-macOS-Sierra/</loc>
     <lastmod>2019-06-21</lastmod>
-  </url>  <url>
-    <loc>https://keepmoving.ren/java/manage-jdk-on-mac/</loc>
-    <lastmod>2019-06-21</lastmod>
-  </url>  <url>
-    <loc>https://keepmoving.ren/life/20190614-life-changed/</loc>
-    <lastmod>2019-06-14</lastmod>
-  </url>  <url>
-    <loc>https://keepmoving.ren/istio/five-traffic-type-in-istio/</loc>
-    <lastmod>2019-06-05</lastmod>
   </url>  <url>
     <loc>https://keepmoving.ren/linux/ssh-timeout/</loc>
     <lastmod>2019-06-04</lastmod>
@@ -49,15 +73,6 @@
     <loc>https://keepmoving.ren/database/mysql/how-to-execute-select-sql/</loc>
     <lastmod>2019-05-28</lastmod>
   </url>  <url>
-    <loc>https://keepmoving.ren/istio/traffic-management/</loc>
-    <lastmod>2019-05-28</lastmod>
-  </url>  <url>
-    <loc>https://keepmoving.ren/istio/know-about-istio/</loc>
-    <lastmod>2019-05-28</lastmod>
-  </url>  <url>
-    <loc>https://keepmoving.ren/kubernetes/something-record/</loc>
-    <lastmod>2019-05-28</lastmod>
-  </url>  <url>
     <loc>https://keepmoving.ren/nginx/x-accel-redirect-with-nginx/</loc>
     <lastmod>2019-05-28</lastmod>
   </url>  <url>
@@ -70,16 +85,10 @@
     <loc>https://keepmoving.ren/database/mysql/about-index/</loc>
     <lastmod>2019-05-24</lastmod>
   </url>  <url>
-    <loc>https://keepmoving.ren/istio/pod-and-svc-requirement/</loc>
-    <lastmod>2019-05-24</lastmod>
-  </url>  <url>
     <loc>https://keepmoving.ren/kubernetes/use-pod-probe/</loc>
     <lastmod>2019-05-24</lastmod>
   </url>  <url>
     <loc>https://keepmoving.ren/kubernetes/only-one-pod-each-node/</loc>
-    <lastmod>2019-05-24</lastmod>
-  </url>  <url>
-    <loc>https://keepmoving.ren/kubernetes/managing-compute-resources-for-containers/</loc>
     <lastmod>2019-05-24</lastmod>
   </url>  <url>
     <loc>https://keepmoving.ren/linux/top_util/</loc>
@@ -91,16 +100,10 @@
     <loc>https://keepmoving.ren/nginx/proxy-set-header-with-if/</loc>
     <lastmod>2019-05-24</lastmod>
   </url>  <url>
-    <loc>https://keepmoving.ren/nginx/gzip-module/</loc>
-    <lastmod>2019-05-24</lastmod>
-  </url>  <url>
     <loc>https://keepmoving.ren/nginx/about-proxy-set-header/</loc>
     <lastmod>2019-05-24</lastmod>
   </url>  <url>
     <loc>https://keepmoving.ren/nodejs/socketio-with-k8s/</loc>
-    <lastmod>2019-05-24</lastmod>
-  </url>  <url>
-    <loc>https://keepmoving.ren/nodejs/check-if-function-is-a-generator/</loc>
     <lastmod>2019-05-24</lastmod>
   </url>  <url>
     <loc>https://keepmoving.ren/nodejs/npm-link/</loc>
@@ -108,9 +111,6 @@
   </url>  <url>
     <loc>https://keepmoving.ren/life/20190524-thinking/</loc>
     <lastmod>2019-05-24</lastmod>
-  </url>  <url>
-    <loc>https://keepmoving.ren/programming/thread-safty/</loc>
-    <lastmod>2019-05-22</lastmod>
   </url>  <url>
     <loc>https://keepmoving.ren/tools/my_vim_usage/</loc>
     <lastmod>2019-05-22</lastmod>

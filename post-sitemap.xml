@@ -8,8 +8,32 @@
     </url>
 
     <url>
-        <loc>https://keepmoving.ren/golang/channel/</loc>
-        <lastmod>2019-07-24T09:52:51.462Z</lastmod>
+        <loc>https://keepmoving.ren/istio/traffic-management/</loc>
+        <lastmod>2019-07-25T00:03:47.999Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://keepmoving.ren/istio/pod-and-svc-requirement/</loc>
+        <lastmod>2019-07-25T00:03:15.076Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://keepmoving.ren/istio/know-about-istio/</loc>
+        <lastmod>2019-07-25T00:02:44.215Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://keepmoving.ren/istio/five-traffic-type-in-istio/</loc>
+        <lastmod>2019-07-25T00:02:18.656Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -17,31 +41,31 @@
 
     <url>
         <loc>https://keepmoving.ren/golang/building-webservice-with-gin/</loc>
-        <lastmod>2019-07-24T00:13:19.156Z</lastmod>
+        <lastmod>2019-07-25T00:01:29.825Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
     </url>
 
     <url>
-        <loc>https://keepmoving.ren/golang/array-and-slice/</loc>
-        <lastmod>2019-07-24T00:12:20.501Z</lastmod>
+        <loc>https://keepmoving.ren/programming/thread-safty/</loc>
+        <lastmod>2019-07-25T00:00:17.566Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
     </url>
 
     <url>
-        <loc>https://keepmoving.ren/life/abundance_mentality_and_scarcity_mentality/</loc>
-        <lastmod>2019-07-24T00:10:24.310Z</lastmod>
+        <loc>https://keepmoving.ren/nodejs/check-if-function-is-a-generator/</loc>
+        <lastmod>2019-07-24T23:59:58.505Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
     </url>
 
     <url>
-        <loc>https://keepmoving.ren/golang/map/</loc>
-        <lastmod>2019-07-24T00:09:29.156Z</lastmod>
+        <loc>https://keepmoving.ren/nginx/gzip-module/</loc>
+        <lastmod>2019-07-24T23:59:35.594Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -49,7 +73,71 @@
 
     <url>
         <loc>https://keepmoving.ren/linux/link-tar-params/</loc>
-        <lastmod>2019-07-18T03:47:41.832Z</lastmod>
+        <lastmod>2019-07-24T23:59:06.064Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://keepmoving.ren/life/abundance_mentality_and_scarcity_mentality/</loc>
+        <lastmod>2019-07-24T23:58:31.019Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://keepmoving.ren/life/20190614-life-changed/</loc>
+        <lastmod>2019-07-24T23:57:53.804Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://keepmoving.ren/kubernetes/something-record/</loc>
+        <lastmod>2019-07-24T23:57:10.643Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://keepmoving.ren/kubernetes/managing-compute-resources-for-containers/</loc>
+        <lastmod>2019-07-24T23:56:50.972Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://keepmoving.ren/java/manage-jdk-on-mac/</loc>
+        <lastmod>2019-07-24T23:55:51.301Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://keepmoving.ren/golang/map/</loc>
+        <lastmod>2019-07-24T23:55:10.030Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://keepmoving.ren/golang/array-and-slice/</loc>
+        <lastmod>2019-07-24T23:53:40.061Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://keepmoving.ren/golang/channel/</loc>
+        <lastmod>2019-07-24T23:52:09.021Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -66,30 +154,6 @@
     <url>
         <loc>https://keepmoving.ren/life/ios10-macOS-Sierra/</loc>
         <lastmod>2019-06-21T02:15:55.190Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://keepmoving.ren/java/manage-jdk-on-mac/</loc>
-        <lastmod>2019-06-21T02:15:38.294Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://keepmoving.ren/life/20190614-life-changed/</loc>
-        <lastmod>2019-06-14T14:43:28.065Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://keepmoving.ren/istio/five-traffic-type-in-istio/</loc>
-        <lastmod>2019-06-05T02:21:05.859Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -136,30 +200,6 @@
     </url>
 
     <url>
-        <loc>https://keepmoving.ren/istio/traffic-management/</loc>
-        <lastmod>2019-05-28T03:57:36.710Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://keepmoving.ren/istio/know-about-istio/</loc>
-        <lastmod>2019-05-28T03:56:53.832Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://keepmoving.ren/kubernetes/something-record/</loc>
-        <lastmod>2019-05-28T03:55:57.303Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
         <loc>https://keepmoving.ren/nginx/x-accel-redirect-with-nginx/</loc>
         <lastmod>2019-05-28T03:54:25.039Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -192,14 +232,6 @@
     </url>
 
     <url>
-        <loc>https://keepmoving.ren/istio/pod-and-svc-requirement/</loc>
-        <lastmod>2019-05-24T13:54:54.645Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
         <loc>https://keepmoving.ren/kubernetes/use-pod-probe/</loc>
         <lastmod>2019-05-24T13:53:50.310Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -210,14 +242,6 @@
     <url>
         <loc>https://keepmoving.ren/kubernetes/only-one-pod-each-node/</loc>
         <lastmod>2019-05-24T13:52:49.750Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://keepmoving.ren/kubernetes/managing-compute-resources-for-containers/</loc>
-        <lastmod>2019-05-24T13:52:13.922Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -248,14 +272,6 @@
     </url>
 
     <url>
-        <loc>https://keepmoving.ren/nginx/gzip-module/</loc>
-        <lastmod>2019-05-24T13:43:08.017Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
         <loc>https://keepmoving.ren/nginx/about-proxy-set-header/</loc>
         <lastmod>2019-05-24T13:41:45.952Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -272,14 +288,6 @@
     </url>
 
     <url>
-        <loc>https://keepmoving.ren/nodejs/check-if-function-is-a-generator/</loc>
-        <lastmod>2019-05-24T13:40:16.703Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
         <loc>https://keepmoving.ren/nodejs/npm-link/</loc>
         <lastmod>2019-05-24T13:40:14.064Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -290,14 +298,6 @@
     <url>
         <loc>https://keepmoving.ren/life/20190524-thinking/</loc>
         <lastmod>2019-05-24T13:37:53.562Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://keepmoving.ren/programming/thread-safty/</loc>
-        <lastmod>2019-05-22T02:52:41.956Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
