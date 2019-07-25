@@ -321,11 +321,11 @@
       
         <tags>
             
-            <tag> kubernetes </tag>
-            
             <tag> istio </tag>
             
             <tag> service mesh </tag>
+            
+            <tag> kubernetes </tag>
             
             <tag> sidecar </tag>
             
@@ -352,9 +352,9 @@
       
         <tags>
             
-            <tag> k8s </tag>
-            
             <tag> kubernetes </tag>
+            
+            <tag> k8s </tag>
             
         </tags>
       
@@ -379,11 +379,11 @@
       
         <tags>
             
-            <tag> kubernetes </tag>
-            
             <tag> istio </tag>
             
             <tag> service mesh </tag>
+            
+            <tag> kubernetes </tag>
             
             <tag> sidecar </tag>
             
@@ -410,11 +410,11 @@
       
         <tags>
             
-            <tag> kubernetes </tag>
-            
             <tag> istio </tag>
             
             <tag> service mesh </tag>
+            
+            <tag> kubernetes </tag>
             
             <tag> sidecar </tag>
             
@@ -441,11 +441,11 @@
       
         <tags>
             
-            <tag> kubernetes </tag>
-            
             <tag> istio </tag>
             
             <tag> service mesh </tag>
+            
+            <tag> kubernetes </tag>
             
             <tag> sidecar </tag>
             
@@ -553,9 +553,9 @@
       
         <tags>
             
-            <tag> k8s </tag>
-            
             <tag> kubernetes </tag>
+            
+            <tag> k8s </tag>
             
         </tags>
       
@@ -836,9 +836,9 @@
       
         <tags>
             
-            <tag> k8s </tag>
-            
             <tag> kubernetes </tag>
+            
+            <tag> k8s </tag>
             
         </tags>
       
@@ -946,9 +946,9 @@
       
         <tags>
             
-            <tag> k8s </tag>
-            
             <tag> kubernetes </tag>
+            
+            <tag> k8s </tag>
             
             <tag> pod </tag>
             
