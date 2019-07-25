@@ -104,6 +104,14 @@
     </url>
 
     <url>
+        <loc>https://keepmoving.ren/kubernetes/only-one-pod-each-node/</loc>
+        <lastmod>2019-07-24T23:57:06.557Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>https://keepmoving.ren/kubernetes/managing-compute-resources-for-containers/</loc>
         <lastmod>2019-07-24T23:56:50.972Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -234,14 +242,6 @@
     <url>
         <loc>https://keepmoving.ren/kubernetes/use-pod-probe/</loc>
         <lastmod>2019-05-24T13:53:50.310Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://keepmoving.ren/kubernetes/only-one-pod-each-node/</loc>
-        <lastmod>2019-05-24T13:52:49.750Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
