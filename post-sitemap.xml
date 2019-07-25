@@ -8,6 +8,14 @@
     </url>
 
     <url>
+        <loc>https://keepmoving.ren/golang/channel/</loc>
+        <lastmod>2019-07-25T03:52:59.518Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>https://keepmoving.ren/istio/traffic-management/</loc>
         <lastmod>2019-07-25T00:03:47.999Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -138,14 +146,6 @@
     <url>
         <loc>https://keepmoving.ren/golang/array-and-slice/</loc>
         <lastmod>2019-07-24T23:53:40.061Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://keepmoving.ren/golang/channel/</loc>
-        <lastmod>2019-07-24T23:52:09.021Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
