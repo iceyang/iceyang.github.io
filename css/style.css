@@ -197,6 +197,11 @@ div {
       margin-top: 0.5em;
       position: relative;
       text-align: center; }
+    .post .post-banner img {
+      max-width: 100%;
+      padding: 0.5em 0;
+      margin: auto;
+      display: block; }
   .post .ds-thread-count {
     padding: 0;
     margin: 15px 0 0;

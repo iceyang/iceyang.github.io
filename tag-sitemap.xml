@@ -38,6 +38,13 @@
     </url>
 
     <url>
+        <loc>https://keepmoving.ren/tags/kubernetes/</loc>
+        <lastmod>2019-07-25T00:03:47.999Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>https://keepmoving.ren/tags/service-mesh/</loc>
         <lastmod>2019-07-25T00:03:47.999Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -46,13 +53,6 @@
 
     <url>
         <loc>https://keepmoving.ren/tags/istio/</loc>
-        <lastmod>2019-07-25T00:03:47.999Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://keepmoving.ren/tags/kubernetes/</loc>
         <lastmod>2019-07-25T00:03:47.999Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
