@@ -3,6 +3,13 @@
 
 
     <url>
+        <loc>https://keepmoving.ren/tags/%E6%80%9D%E8%80%83/</loc>
+        <lastmod>2019-08-06T01:45:37.302Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>https://keepmoving.ren/tags/goroutine/</loc>
         <lastmod>2019-07-25T03:52:59.518Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -96,13 +103,6 @@
     <url>
         <loc>https://keepmoving.ren/tags/linux/</loc>
         <lastmod>2019-07-24T23:59:06.064Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://keepmoving.ren/tags/%E6%80%9D%E8%80%83/</loc>
-        <lastmod>2019-07-24T23:58:31.019Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>

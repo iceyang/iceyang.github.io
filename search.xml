@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>早安八月</title>
+      <link href="/life/20190806-another-house/"/>
+      <url>/life/20190806-another-house/</url>
+      
+        <content type="html"><![CDATA[<p><img src="/img/2019080602.jpg" alt="头太大而很委屈的🐻"></p><p>最近暂时换了个住处，一直忙着搬家的事。晚上回到家的时间原本也不多，收拾来收拾去，也就到了睡觉的点了，东西实在太多。不过总算是告一段落了。</p><p>生活变化了一点，早上通勤时间长了三四十分钟，所幸早起的习惯帮我避开了上班高峰期，之前是起床后在家里吃早餐，看看书（甚至还泡个功夫茶），现在就提前到公司再看书，7点钟的体育西还是很空的。</p><p>鲁鲁（喵星人）去了新家，这两天处于侦察兵状态，很有意思。</p><p><img src="/img/2019080601.jpg" alt="跟着搬家的喵"></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 生活点滴 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 思考 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Go 语言的通道（channel）</title>
       <link href="/golang/channel/"/>
       <url>/golang/channel/</url>
