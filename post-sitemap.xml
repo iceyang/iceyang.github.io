@@ -8,8 +8,16 @@
     </url>
 
     <url>
+        <loc>https://keepmoving.ren/golang/map/</loc>
+        <lastmod>2019-08-19T02:03:40.805Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>https://keepmoving.ren/golang/goroutine/</loc>
-        <lastmod>2019-08-15T14:05:15.331Z</lastmod>
+        <lastmod>2019-08-19T02:03:33.291Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -17,7 +25,7 @@
 
     <url>
         <loc>https://keepmoving.ren/golang/channel/</loc>
-        <lastmod>2019-08-15T13:57:45.278Z</lastmod>
+        <lastmod>2019-08-19T02:03:30.639Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -25,7 +33,7 @@
 
     <url>
         <loc>https://keepmoving.ren/golang/array-and-slice/</loc>
-        <lastmod>2019-08-15T13:57:38.821Z</lastmod>
+        <lastmod>2019-08-19T02:03:20.395Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -154,14 +162,6 @@
     <url>
         <loc>https://keepmoving.ren/java/manage-jdk-on-mac/</loc>
         <lastmod>2019-07-24T23:55:51.301Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://keepmoving.ren/golang/map/</loc>
-        <lastmod>2019-07-24T23:55:10.030Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 

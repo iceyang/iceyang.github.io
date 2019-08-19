@@ -4,7 +4,7 @@
   
     
     <entry>
-      <title>Go 语言 - 协程（goroutine）</title>
+      <title>Go 语言基础 - 协程（goroutine）</title>
       <link href="/golang/goroutine/"/>
       <url>/golang/goroutine/</url>
       
@@ -62,7 +62,7 @@
     
     
     <entry>
-      <title>Go 语言 - 通道（channel）</title>
+      <title>Go 语言基础 - 通道（channel）</title>
       <link href="/golang/channel/"/>
       <url>/golang/channel/</url>
       
@@ -118,7 +118,7 @@
     
     
     <entry>
-      <title>Go 语言的字典（map）</title>
+      <title>Go 语言基础 - 字典（map）</title>
       <link href="/golang/map/"/>
       <url>/golang/map/</url>
       
@@ -174,7 +174,7 @@
     
     
     <entry>
-      <title>Go 语言 - 数组与切片</title>
+      <title>Go 语言基础 - 数组与切片</title>
       <link href="/golang/array-and-slice/"/>
       <url>/golang/array-and-slice/</url>
       

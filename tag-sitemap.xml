@@ -3,57 +3,71 @@
 
 
     <url>
-        <loc>https://keepmoving.ren/tags/csp/</loc>
-        <lastmod>2019-08-15T14:05:15.331Z</lastmod>
+        <loc>https://keepmoving.ren/tags/directory/</loc>
+        <lastmod>2019-08-19T02:03:40.805Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>https://keepmoving.ren/tags/%E5%B9%B6%E5%8F%91/</loc>
-        <lastmod>2019-08-15T14:05:15.331Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://keepmoving.ren/tags/goroutine/</loc>
-        <lastmod>2019-08-15T14:05:15.331Z</lastmod>
+        <loc>https://keepmoving.ren/tags/map/</loc>
+        <lastmod>2019-08-19T02:03:40.805Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>https://keepmoving.ren/tags/golang/</loc>
-        <lastmod>2019-08-15T14:05:15.331Z</lastmod>
+        <lastmod>2019-08-19T02:03:40.805Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>https://keepmoving.ren/tags/go/</loc>
-        <lastmod>2019-08-15T14:05:15.331Z</lastmod>
+        <lastmod>2019-08-19T02:03:40.805Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://keepmoving.ren/tags/csp/</loc>
+        <lastmod>2019-08-19T02:03:33.291Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://keepmoving.ren/tags/%E5%B9%B6%E5%8F%91/</loc>
+        <lastmod>2019-08-19T02:03:33.291Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://keepmoving.ren/tags/goroutine/</loc>
+        <lastmod>2019-08-19T02:03:33.291Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>https://keepmoving.ren/tags/channel/</loc>
-        <lastmod>2019-08-15T13:57:45.278Z</lastmod>
+        <lastmod>2019-08-19T02:03:30.639Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>https://keepmoving.ren/tags/slice/</loc>
-        <lastmod>2019-08-15T13:57:38.821Z</lastmod>
+        <lastmod>2019-08-19T02:03:20.395Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>https://keepmoving.ren/tags/array/</loc>
-        <lastmod>2019-08-15T13:57:38.821Z</lastmod>
+        <lastmod>2019-08-19T02:03:20.395Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
@@ -159,20 +173,6 @@
     <url>
         <loc>https://keepmoving.ren/tags/java/</loc>
         <lastmod>2019-07-24T23:55:51.301Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://keepmoving.ren/tags/directory/</loc>
-        <lastmod>2019-07-24T23:55:10.030Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://keepmoving.ren/tags/map/</loc>
-        <lastmod>2019-07-24T23:55:10.030Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
