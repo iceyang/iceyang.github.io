@@ -8,6 +8,14 @@
     </url>
 
     <url>
+        <loc>https://keepmoving.ren/golang/building-webservice-with-gin/</loc>
+        <lastmod>2019-08-19T13:54:33.262Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>https://keepmoving.ren/golang/map/</loc>
         <lastmod>2019-08-19T02:03:40.805Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -74,14 +82,6 @@
     <url>
         <loc>https://keepmoving.ren/istio/five-traffic-type-in-istio/</loc>
         <lastmod>2019-07-25T00:02:18.656Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://keepmoving.ren/golang/building-webservice-with-gin/</loc>
-        <lastmod>2019-07-25T00:01:29.825Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 

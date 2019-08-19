@@ -3,6 +3,27 @@
 
 
     <url>
+        <loc>https://keepmoving.ren/tags/gin/</loc>
+        <lastmod>2019-08-19T13:54:33.262Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://keepmoving.ren/tags/golang/</loc>
+        <lastmod>2019-08-19T13:54:33.262Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://keepmoving.ren/tags/go/</loc>
+        <lastmod>2019-08-19T13:54:33.262Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>https://keepmoving.ren/tags/directory/</loc>
         <lastmod>2019-08-19T02:03:40.805Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -11,20 +32,6 @@
 
     <url>
         <loc>https://keepmoving.ren/tags/map/</loc>
-        <lastmod>2019-08-19T02:03:40.805Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://keepmoving.ren/tags/golang/</loc>
-        <lastmod>2019-08-19T02:03:40.805Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://keepmoving.ren/tags/go/</loc>
         <lastmod>2019-08-19T02:03:40.805Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -103,13 +110,6 @@
     <url>
         <loc>https://keepmoving.ren/tags/istio/</loc>
         <lastmod>2019-07-25T00:03:47.999Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://keepmoving.ren/tags/gin/</loc>
-        <lastmod>2019-07-25T00:01:29.825Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>

@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://keepmoving.ren/golang/building-webservice-with-gin/</loc>
+    <lastmod>2019-08-19</lastmod>
+  </url>  <url>
     <loc>https://keepmoving.ren/golang/map/</loc>
     <lastmod>2019-08-19</lastmod>
   </url>  <url>
@@ -26,9 +29,6 @@
     <lastmod>2019-07-25</lastmod>
   </url>  <url>
     <loc>https://keepmoving.ren/istio/five-traffic-type-in-istio/</loc>
-    <lastmod>2019-07-25</lastmod>
-  </url>  <url>
-    <loc>https://keepmoving.ren/golang/building-webservice-with-gin/</loc>
     <lastmod>2019-07-25</lastmod>
   </url>  <url>
     <loc>https://keepmoving.ren/programming/thread-safty/</loc>
