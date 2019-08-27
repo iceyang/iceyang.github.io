@@ -3,21 +3,42 @@
 
 
     <url>
-        <loc>https://keepmoving.ren/tags/gin/</loc>
-        <lastmod>2019-08-19T13:54:33.262Z</lastmod>
+        <loc>https://keepmoving.ren/tags/csp/</loc>
+        <lastmod>2019-08-27T13:23:57.135Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://keepmoving.ren/tags/%E5%B9%B6%E5%8F%91/</loc>
+        <lastmod>2019-08-27T13:23:57.135Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://keepmoving.ren/tags/goroutine/</loc>
+        <lastmod>2019-08-27T13:23:57.135Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>https://keepmoving.ren/tags/golang/</loc>
-        <lastmod>2019-08-19T13:54:33.262Z</lastmod>
+        <lastmod>2019-08-27T13:23:57.135Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>https://keepmoving.ren/tags/go/</loc>
+        <lastmod>2019-08-27T13:23:57.135Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://keepmoving.ren/tags/gin/</loc>
         <lastmod>2019-08-19T13:54:33.262Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -33,27 +54,6 @@
     <url>
         <loc>https://keepmoving.ren/tags/map/</loc>
         <lastmod>2019-08-19T02:03:40.805Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://keepmoving.ren/tags/csp/</loc>
-        <lastmod>2019-08-19T02:03:33.291Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://keepmoving.ren/tags/%E5%B9%B6%E5%8F%91/</loc>
-        <lastmod>2019-08-19T02:03:33.291Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://keepmoving.ren/tags/goroutine/</loc>
-        <lastmod>2019-08-19T02:03:33.291Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>

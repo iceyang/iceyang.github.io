@@ -57,6 +57,9 @@
 <li>更少的内存消耗。</li>
 </ul>
 <p>以上的特点让我们的程序可以轻松的创建上万个协程，然而协程并不会比线程运行地更快，只是增加了更多的并发性和灵活性。</p>
+<p>我在内存占用上做个了简单测试，运行起下面的代码：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">waitForTenSeconds</span><span class="params">()</span></span> &#123;</span><br><span class="line">        time.Sleep(<span class="number">10</span> * time.Second)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="keyword">for</span> i := <span class="number">1</span>; i &lt; <span class="number">100000</span>; i++ &#123;</span><br><span class="line">                <span class="keyword">go</span> waitForTenSeconds()</span><br><span class="line">        &#125;</span><br><span class="line">        time.Sleep(<span class="number">60</span> * time.Second)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后进行内存占用查看，会发现，即使启用了10w个<code>goroutine</code>，内存也只不过占用了250MB左右，非常之底。</p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>我们介绍了<code>Go并发模型</code>的又一个基础：协程（goroutine），它是由<code>Go</code>运行时自动管理的，具有高并发性、低开销，比线程更灵活。</p>
 <p>首先介绍了如何使用<code>goroutine</code>，同时简单介绍了<code>Go</code>运行时如何调度协程。</p>
 <p>协程与通道的结合，才是<code>Go并发模型CSP</code>的核心，在后续的文章中将会进行介绍。</p>
