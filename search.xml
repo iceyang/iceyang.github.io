@@ -4,6 +4,41 @@
   
     
     <entry>
+      <title>Go 语言基础 - 协程与通道</title>
+      <link href="/golang/goroutine-with-channel/"/>
+      <url>/golang/goroutine-with-channel/</url>
+      
+        <content type="html"><![CDATA[<blockquote><p>Don’t communicate by sharing memory; share memory by communicating.</p></blockquote><p>这是<code>Go</code>语言的编程哲学，使用通信共享数据，而不要通过共享内存来通信。通过<code>Go</code>协程，我们可以简单写出高并发的程序，而协程搭配通道，使得协程间的通讯变得简单。</p><p>下面通过一个简单的<code>生产者与消费者</code>例子，我们来看看协程要如何方便的使用通道来通信。</p><h2 id="生产者与消费者"><a href="#生产者与消费者" class="headerlink" title="生产者与消费者"></a>生产者与消费者</h2><p>用两个简单的函数，分别代表<code>生产者</code>和<code>消费者</code>，他们接受<code>channel</code>作为参数，生产者负责往里面增加数据，而消费者负责取出处理。</p><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">producer</span><span class="params">(queue <span class="keyword">chan</span>&lt;- <span class="keyword">int</span>)</span></span> &#123;</span><br><span class="line">        <span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">10</span>; i++ &#123;</span><br><span class="line">                queue &lt;- i</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">close</span>(queue)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">consumer</span><span class="params">(queue &lt;-<span class="keyword">chan</span> <span class="keyword">int</span>, finish <span class="keyword">chan</span> <span class="keyword">int</span>)</span></span> &#123;</span><br><span class="line">        <span class="keyword">for</span> v := <span class="keyword">range</span> queue &#123;</span><br><span class="line">                fmt.Printf(<span class="string">"Get value: %d \n"</span>, v)</span><br><span class="line">                time.Sleep(time.Second)</span><br><span class="line">        &#125;</span><br><span class="line">        finish &lt;- <span class="number">1</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">        queue := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">int</span>)</span><br><span class="line">        finish := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">int</span>)</span><br><span class="line">        <span class="keyword">go</span> producer(queue)</span><br><span class="line">        <span class="keyword">go</span> consumer(queue, finish)</span><br><span class="line">        &lt;-finish</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>在上面的代码中，函数<code>producer(queue chan&lt;- int)</code>充当生产者，<code>consumer(queue &lt;-chan int, finish chan int)</code>充当消费者。</p><p>在<code>main</code>函数中，将两个函数作为<code>goroutine</code>启动。同时加入通道变量<code>finish</code>，用于阻塞程序，让生产者和消费者有运行的时间。</p><blockquote><p>在上面的例子，我们用了通道finishl来阻塞主进程，这是一种让程序等待子协程运行的办法。<br>如果没有它，程序会很快执行完毕，goroutine没有得到运行的机会。</p></blockquote><h3 id="一个生产者与多个消费者"><a href="#一个生产者与多个消费者" class="headerlink" title="一个生产者与多个消费者"></a>一个生产者与多个消费者</h3><p>还是上面的例子，我们启动多个<code>consumer</code>，可以达到多个消费者进行处理的效果。</p><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">consumer</span><span class="params">(queue &lt;-<span class="keyword">chan</span> <span class="keyword">int</span>, finish <span class="keyword">chan</span> <span class="keyword">int</span>)</span></span> &#123;</span><br><span class="line">        <span class="keyword">for</span> v := <span class="keyword">range</span> queue &#123;</span><br><span class="line">                fmt.Printf(<span class="string">"Get value: %d \n"</span>, v)</span><br><span class="line">                time.Sleep(time.Millisecond * <span class="number">200</span>)</span><br><span class="line">        &#125;</span><br><span class="line">        finish &lt;- <span class="number">1</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">        queue := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">int</span>)</span><br><span class="line">        finish := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">int</span>)</span><br><span class="line">        consumerCount := <span class="number">3</span></span><br><span class="line">        <span class="keyword">go</span> producer(queue)</span><br><span class="line">        <span class="keyword">for</span> i := <span class="number">0</span>; i &lt; consumerCount; i++ &#123;</span><br><span class="line">                <span class="keyword">go</span> consumer(queue, finish)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> i := <span class="number">0</span>; i &lt; consumerCount; i++ &#123;</span><br><span class="line">                &lt;-finish</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>多个<code>consume</code>的协程是并发执行的，相互之间互不干扰。<br>我们依旧使用<code>finish</code>通道来控制程序运行。</p><h2 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h2><p>通过上面的例子，我们认识到通道在协程中可以起到传递信息的作用。</p><p>虽然例子中的通道只是简单的<code>chan int</code>类型，然而通道类型也可以是复杂的结构体，可以传递更加多的信息，可以延伸出许多更加实用的应用场景。</p><p>比如数据库io操作、比如作为web应用，又或者是一些需要并行计算的任务，在<code>Go</code>协程和通道的配合下，都有着许多可能性。</p><p>虽然<code>Go</code>开发起并发程序非常简单，但是也隐藏了许多复杂性，这是并发程序带来的问题，需要保证数据的原子性、一致性，需要考虑对数据的加锁，需要控制好协程间的配合或者执行顺序。这些相较于本文是比较复杂的内容，在后面的章节详细说明。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Golang </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> go </tag>
+            
+            <tag> golang </tag>
+            
+            <tag> channel </tag>
+            
+            <tag> goroutine </tag>
+            
+            <tag> 并发 </tag>
+            
+            <tag> csp </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>oh-my-zsh 插件</title>
       <link href="/linux/oh-my-zsh-plugins/"/>
       <url>/linux/oh-my-zsh-plugins/</url>

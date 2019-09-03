@@ -8,6 +8,14 @@
     </url>
 
     <url>
+        <loc>https://keepmoving.ren/golang/goroutine-with-channel/</loc>
+        <lastmod>2019-09-03T05:59:08.610Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>https://keepmoving.ren/linux/oh-my-zsh-plugins/</loc>
         <lastmod>2019-09-01T14:50:48.456Z</lastmod>
         <changefreq>weekly</changefreq>
