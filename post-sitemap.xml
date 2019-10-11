@@ -8,6 +8,14 @@
     </url>
 
     <url>
+        <loc>https://keepmoving.ren/golang/error-handling-1/</loc>
+        <lastmod>2019-10-11T13:34:46.336Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>https://keepmoving.ren/golang/goroutine-with-channel/</loc>
         <lastmod>2019-09-03T05:59:08.610Z</lastmod>
         <changefreq>weekly</changefreq>
