@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>近況如何</title>
+      <link href="/life/20191016-resently-status/"/>
+      <url>/life/20191016-resently-status/</url>
+      
+        <content type="html"><![CDATA[<blockquote><p>這是嘮叨文一篇，主要是想回憶下最近的一些事。<br>它們可能沒有時間上的必然聯繫，只是印象比較較深，做個記錄。</p></blockquote><h2 id="通路"><a href="#通路" class="headerlink" title="通路"></a>通路</h2><p><img src="/img/2019101601.png" alt></p><p>「通路」，是最近發現的一款休閒桌遊，有實體版，不過我是在App Store下載的電子版。畫面精良，玩法有意思，看似簡單，卻隱藏深度。跟別人玩的時候，也有挺強的互動性。</p><p>說它有意思的原因是，你需要根據手牌，以及「對手」的走位，來判斷你應該如何放置道路。<br>它既是博弈，又需要大腦有一定的向前思考演進的思路。</p><p><img src="/img/2019101602.png" alt></p><p>其實說到它的另外的一個原因是，我蠻期望能將它做成一款養成遊戲，遊玩的過程不需要自己控制（這是因為這幾天玩下來發現，看電腦走來走去也挺有意思的），那養成就是說，我們不控制卡牌放置了，而是每個人擁有一個AI，AI自己對戰，升級，從對戰中學習到技巧（機器學習），然後與其他玩家進行對戰。（滑稽）</p><h2 id="Macbook-15’’屏幕壞了"><a href="#Macbook-15’’屏幕壞了" class="headerlink" title="Macbook 15’’屏幕壞了"></a>Macbook 15’’屏幕壞了</h2><p><img src="/img/2019101603.jpeg" alt></p><p>說到這個有點心疼。某個早上我出門蓋上Macbook蓋子時，發現蓋不上，被本子卡到了，我便將本子拿開蓋上，也沒留意。<br>晚上回家，想用的時候懵了，屏幕居然有裂痕，也有些花了，上網查閱了下維修費用，官方維修價：5k+ 人民幣，嚇懵了，本來想著去給第三方維修便宜點，不過想著這款是17年的頂配，還能撐挺久，猶豫之後還是決定去官方送修穩妥一點。</p><p>也算是長個教訓，現在打開蓋上屏幕我都是小心翼翼。</p><h2 id="關於魯魯（我家貓）"><a href="#關於魯魯（我家貓）" class="headerlink" title="關於魯魯（我家貓）"></a>關於魯魯（我家貓）</h2><p><img src="/img/2019101604.jpeg" alt></p><p>魯魯真是折磨死我了，像養了個小孩，每天晚上折騰人，凌晨特別活躍，就不能好好的睡個覺嗎。看在你其他時間都很乖的情況下，我就原諒你了。</p><blockquote><p>不如就勇敢打破，生命中的裂縫，陽光就逐漸灑滿了其中。</p></blockquote>]]></content>
+      
+      
+      <categories>
+          
+          <category> 生活点滴 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Go 语言基础 - 错误处理（一）</title>
       <link href="/golang/error-handling-1/"/>
       <url>/golang/error-handling-1/</url>

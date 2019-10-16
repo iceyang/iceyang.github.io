@@ -1,37 +1,29 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta name="generator" content="Hexo 3.8.0"><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="keywords" content="mysql,database,sql"><meta name="description" content=" SQL的更新跟查询一样，会走同一套流程，即： 「连接器」-&gt;「分析器」-&gt;「优化器」-&gt;「执行器」 分析器知道SQL要做什么事情，优化器决定使用什么索引，执行器调用存储引擎进行具体执行。 *与查询流程不同的是，更新流程涉及到日志模块：redo log和binlog* "><meta name="google-site-verification" content="9ddzsVO6nu32usnQZSDvt-S6l5wfzLtBB6Ks8XSRTTw"><meta name="msvalidate.01" content="49909021983FD0BF6B3BF354592AC015"><title>MySQL的SQL更新语句是怎么执行的 | Keep Moving</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/normalize/8.0.1/normalize.min.css"><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/pure/1.0.0/pure-min.css"><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/pure/1.0.0/grids-responsive-min.css"><link rel="stylesheet" href="//lib.baomitu.com/font-awesome/4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="//lib.baomitu.com/jquery/3.4.0/jquery.min.js"></script><link rel="icon" mask sizes="any" href="/favicon.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"><script>var _hmt = _hmt || [];
+<!DOCTYPE html><html lang="zh-CN"><head><meta name="generator" content="Hexo 3.8.0"><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="keywords" content="排序,正则表达式,程序员,算法,软件开发,AJAX,Algorithm,Android,Bash,book,C++,Code Review,Coding,CSS,Database,Debug,ebook,Erlang,Game,Go,Google,HTML,IE,Java,Javascript,jQuery,Linus Torvalds,Linux,Mac,MySQL,Oracle,OS,Perl,PHP,Programmer,programming,language,Python,Ruby,SQL,Ubuntu,UI,Unix,vim,Web,Windows"><meta name="description" content="&lt;blockquote&gt;
+&lt;p&gt;這是嘮叨文一篇，主要是想回憶下最近的一些事。&lt;br&gt;它們可能沒有時間上的必然聯繫，只是印象比較較深，做個記錄。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&quot;通路&quot;&gt;&lt;a href=&quot;#通路&quot; class=&quot;headerlink&quot; title=&quot;通路&quot;&gt;&lt;/a&gt;通路&lt;/h2&gt;&lt;p&gt;&lt;img src=&quot;/img/2019101601.png&quot; alt&gt;&lt;/p&gt;"><meta name="google-site-verification" content="9ddzsVO6nu32usnQZSDvt-S6l5wfzLtBB6Ks8XSRTTw"><meta name="msvalidate.01" content="49909021983FD0BF6B3BF354592AC015"><title>近況如何 | Keep Moving</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/normalize/8.0.1/normalize.min.css"><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/pure/1.0.0/pure-min.css"><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/pure/1.0.0/grids-responsive-min.css"><link rel="stylesheet" href="//lib.baomitu.com/font-awesome/4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="//lib.baomitu.com/jquery/3.4.0/jquery.min.js"></script><link rel="icon" mask sizes="any" href="/favicon.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"><script>var _hmt = _hmt || [];
 (function() {
   var hm = document.createElement("script");
   hm.src = 'https://hm.baidu.com/hm.js?' + '2865c3b77072dd5c6550fac9944d5313';
   var s = document.getElementsByTagName("script")[0];
   s.parentNode.insertBefore(hm, s);
-  })();</script></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">MySQL的SQL更新语句是怎么执行的</h1><a id="logo" href="/.">Keep Moving</a><p class="description">不如就勇敢打破，生命中的裂缝，阳光就逐渐洒满了其中</p></div><div id="nav-menu"><a class="current" href="/."><i class="fa fa-home"> 首页</i></a><a href="/archives/"><i class="fa fa-archive"> 归档</i></a><a href="/learning/ds_and_alogorithm/"><i class="fa fa-book"> 数据结构&amp;算法</i></a><a href="/about/"><i class="fa fa-user"> 关于</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">MySQL的SQL更新语句是怎么执行的</h1><div class="post-meta">Jan 23, 2019<span> | </span><span class="category"><a href="/categories/数据库/">数据库</a><span>  </span></span><script src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script><span id="busuanzi_container_page_pv"> | <span id="busuanzi_value_page_pv"></span><span> 阅读</span></span></div><div class="post-content"><h2 id="执行流程"><a href="#执行流程" class="headerlink" title="执行流程"></a>执行流程</h2><p>SQL的更新跟查询一样，会走同一套流程，即：<br><figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">「连接器」-&gt;「分析器」-&gt;「优化器」-&gt;「执行器」</span><br></pre></td></tr></table></figure></p>
-<p>分析器知道SQL要做什么事情，优化器决定使用什么索引，执行器调用存储引擎进行具体执行。<br><em>与查询流程不同的是，更新流程涉及到日志模块：redo log和binlog</em></p>
-<p>注：在一个表进行更新的时候，表相关的缓存会失效。</p>
-<h2 id="redo-log"><a href="#redo-log" class="headerlink" title="redo log"></a>redo log</h2><p>MySQL在数据进行更新的时候，采用了<em>WAL</em>技术（Write-Ahead Logging），先写日志，再写硬盘。</p>
-<p>也就是说，有记录需要更新时，<em>InnoDB</em>引擎会先把记录写入<em>redo log</em>，然后更新内存，此时更新已算完成，等到系统空闲时，再讲操作记录更新到磁盘中。</p>
-<p>redo log在InnoDB的大小是固定的（大小可以进行配置），可以看成是一个循环队列，这里面涉及到两个位置：</p>
-<ul>
-<li>write pos，当前记录位置</li>
-<li>check point，当前要擦除的位置</li>
-</ul>
-<p>write pos一边写一边后移，check point在擦除记录时，要先把记录更新到数据文件中。<br>当redo log满了，也就是wrte pos追上check point，那么需要先停下来，擦除掉一些数据，把check point往前推进。</p>
-<p>有了redo log，MySQL也就有了<em>crash-safe</em>的能力，即便数据库发生异常重启，数据也不会丢失。</p>
-<h2 id="binlog"><a href="#binlog" class="headerlink" title="binlog"></a>binlog</h2><p>redo log是InnoDB引擎特有的日志，Server层也有自己的日志：binlog（归档日志）。<br>最开始MySQL没有InnoDB引擎，而自带的引擎MyISAM没有crash-safe的能力，binlog日志只能用于归档。</p>
-<p>redo log与binlog的区别：</p>
-<ol>
-<li>redo log是InnoDB引擎特有的；binlog是MySQL的Server层实现，所有引擎都可以使用；</li>
-<li>redo log是物理日志，记录：在某个数据页上做了什么修改；binlog是逻辑日志：记录语句的原始逻辑（比如为ID=2这行的c字段加1）；</li>
-<li>redo log是循环写的，空间固定；binlog是追加写入的，不会覆盖以前的日志。</li>
-</ol>
-<h2 id="两阶段提交"><a href="#两阶段提交" class="headerlink" title="两阶段提交"></a>两阶段提交</h2><p>要保证redo log和binlog的一致性，MySQL采用了「两阶段提交」：</p>
-<ol>
-<li>当数据更新到内存时，先写入redo log，redo log处于prepare状态；</li>
-<li>将binlog写入磁盘；</li>
-<li>将redo log改为commit状态。</li>
-</ol>
-<p>假如一份日志完成，另外一份日志未完成便crash时，采用两阶段提交，可以保证两份数据的一致性。</p>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>「极客时间」-「MySQL实战45讲」</p>
-</div><div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>Justin</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="/database/mysql/how-to-execute-update-sql/">https://keepmoving.ren/database/mysql/how-to-execute-update-sql/</a></li><li class="post-copyright-license"><strong>版权声明：</strong>本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0 CN</a> 许可协议。转载请注明出处！</li></ul></div><br><div class="tags"><a href="/tags/mysql/">mysql</a><a href="/tags/database/">database</a></div><div class="post-nav"><a class="pre" href="/database/mysql/transation-isolation/">MySQL的事务隔离</a><a class="next" href="/database/mysql/how-to-execute-select-sql/">MySQL的SQL查询语句是怎么执行的</a></div><div id="container"></div><link rel="stylesheet" type="text/css" href="//unpkg.com/gitalk/dist/gitalk.css?v=0.0.0"><script type="text/javascript" src="//cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.js?v=0.0.0"></script><script type="text/javascript" src="//unpkg.com/gitalk/dist/gitalk.min.js?v=0.0.0"></script><script>var gitalk = new Gitalk({
+  })();</script></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">近況如何</h1><a id="logo" href="/.">Keep Moving</a><p class="description">不如就勇敢打破，生命中的裂缝，阳光就逐渐洒满了其中</p></div><div id="nav-menu"><a class="current" href="/."><i class="fa fa-home"> 首页</i></a><a href="/archives/"><i class="fa fa-archive"> 归档</i></a><a href="/learning/ds_and_alogorithm/"><i class="fa fa-book"> 数据结构&amp;算法</i></a><a href="/about/"><i class="fa fa-user"> 关于</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">近況如何</h1><div class="post-meta">2019年10月16日<span> | </span><span class="category"><a href="/categories/生活点滴/">生活点滴</a><span>  </span></span><script src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script><span id="busuanzi_container_page_pv"> | <span id="busuanzi_value_page_pv"></span><span> 阅读</span></span></div><div class="post-content"><blockquote>
+<p>這是嘮叨文一篇，主要是想回憶下最近的一些事。<br>它們可能沒有時間上的必然聯繫，只是印象比較較深，做個記錄。</p>
+</blockquote>
+<h2 id="通路"><a href="#通路" class="headerlink" title="通路"></a>通路</h2><p><img src="/img/2019101601.png" alt></p>
+<p>「通路」，是最近發現的一款休閒桌遊，有實體版，不過我是在App Store下載的電子版。畫面精良，玩法有意思，看似簡單，卻隱藏深度。跟別人玩的時候，也有挺強的互動性。</p>
+<p>說它有意思的原因是，你需要根據手牌，以及「對手」的走位，來判斷你應該如何放置道路。<br>它既是博弈，又需要大腦有一定的向前思考演進的思路。</p>
+<p><img src="/img/2019101602.png" alt></p>
+<p>其實說到它的另外的一個原因是，我蠻期望能將它做成一款養成遊戲，遊玩的過程不需要自己控制（這是因為這幾天玩下來發現，看電腦走來走去也挺有意思的），那養成就是說，我們不控制卡牌放置了，而是每個人擁有一個AI，AI自己對戰，升級，從對戰中學習到技巧（機器學習），然後與其他玩家進行對戰。（滑稽）</p>
+<h2 id="Macbook-15’’屏幕壞了"><a href="#Macbook-15’’屏幕壞了" class="headerlink" title="Macbook 15’’屏幕壞了"></a>Macbook 15’’屏幕壞了</h2><p><img src="/img/2019101603.jpeg" alt></p>
+<p>說到這個有點心疼。某個早上我出門蓋上Macbook蓋子時，發現蓋不上，被本子卡到了，我便將本子拿開蓋上，也沒留意。<br>晚上回家，想用的時候懵了，屏幕居然有裂痕，也有些花了，上網查閱了下維修費用，官方維修價：5k+ 人民幣，嚇懵了，本來想著去給第三方維修便宜點，不過想著這款是17年的頂配，還能撐挺久，猶豫之後還是決定去官方送修穩妥一點。</p>
+<p>也算是長個教訓，現在打開蓋上屏幕我都是小心翼翼。</p>
+<h2 id="關於魯魯（我家貓）"><a href="#關於魯魯（我家貓）" class="headerlink" title="關於魯魯（我家貓）"></a>關於魯魯（我家貓）</h2><p><img src="/img/2019101604.jpeg" alt></p>
+<p>魯魯真是折磨死我了，像養了個小孩，每天晚上折騰人，凌晨特別活躍，就不能好好的睡個覺嗎。看在你其他時間都很乖的情況下，我就原諒你了。</p>
+<blockquote>
+<p>不如就勇敢打破，生命中的裂縫，陽光就逐漸灑滿了其中。</p>
+</blockquote>
+</div><div class="tags"></div><div class="post-nav"><a class="next" href="/golang/error-handling-1/">Go 语言基础 - 错误处理（一）</a></div><div id="container"></div><link rel="stylesheet" type="text/css" href="//unpkg.com/gitalk/dist/gitalk.css?v=0.0.0"><script type="text/javascript" src="//cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.js?v=0.0.0"></script><script type="text/javascript" src="//unpkg.com/gitalk/dist/gitalk.min.js?v=0.0.0"></script><script>var gitalk = new Gitalk({
   clientID: '6ad6eee4b6354355459d',
   clientSecret: '8ad89404b8df514d08cb1af1be8b4242bb0a2533',
   repo: 'gitalk.keepmoving.ren',
