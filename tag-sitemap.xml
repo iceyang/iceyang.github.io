@@ -3,21 +3,28 @@
 
 
     <url>
-        <loc>https://keepmoving.ren/tags/error/</loc>
-        <lastmod>2019-10-11T13:34:46.336Z</lastmod>
+        <loc>https://keepmoving.ren/tags/struct/</loc>
+        <lastmod>2019-10-26T08:15:38.853Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>https://keepmoving.ren/tags/golang/</loc>
-        <lastmod>2019-10-11T13:34:46.336Z</lastmod>
+        <lastmod>2019-10-26T08:15:38.853Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>https://keepmoving.ren/tags/go/</loc>
+        <lastmod>2019-10-26T08:15:38.853Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://keepmoving.ren/tags/error/</loc>
         <lastmod>2019-10-11T13:34:46.336Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
