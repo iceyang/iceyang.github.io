@@ -8,6 +8,22 @@
     </url>
 
     <url>
+        <loc>https://keepmoving.ren/life/2020-01-05-starter/</loc>
+        <lastmod>2020-01-05T10:07:21.221Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://keepmoving.ren/life/abundance_mentality_and_scarcity_mentality/</loc>
+        <lastmod>2020-01-05T09:19:15.884Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>https://keepmoving.ren/life/20191209-so-so-busy/</loc>
         <lastmod>2019-12-13T02:28:40.339Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -170,14 +186,6 @@
     <url>
         <loc>https://keepmoving.ren/linux/link-tar-params/</loc>
         <lastmod>2019-07-24T23:59:06.064Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://keepmoving.ren/life/abundance_mentality_and_scarcity_mentality/</loc>
-        <lastmod>2019-07-24T23:58:31.019Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 

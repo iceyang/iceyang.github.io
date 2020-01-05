@@ -3,6 +3,13 @@
 
 
     <url>
+        <loc>https://keepmoving.ren/tags/%E6%80%9D%E8%80%83/</loc>
+        <lastmod>2020-01-05T09:19:15.884Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>https://keepmoving.ren/tags/struct/</loc>
         <lastmod>2019-10-26T08:15:38.853Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -31,14 +38,14 @@
     </url>
 
     <url>
-        <loc>https://keepmoving.ren/tags/csp/</loc>
+        <loc>https://keepmoving.ren/tags/%E5%B9%B6%E5%8F%91/</loc>
         <lastmod>2019-09-03T05:59:08.610Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>https://keepmoving.ren/tags/%E5%B9%B6%E5%8F%91/</loc>
+        <loc>https://keepmoving.ren/tags/csp/</loc>
         <lastmod>2019-09-03T05:59:08.610Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -101,21 +108,7 @@
     </url>
 
     <url>
-        <loc>https://keepmoving.ren/tags/%E6%80%9D%E8%80%83/</loc>
-        <lastmod>2019-08-06T01:45:37.302Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>https://keepmoving.ren/tags/sidecar/</loc>
-        <lastmod>2019-07-25T00:03:47.999Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://keepmoving.ren/tags/kubernetes/</loc>
         <lastmod>2019-07-25T00:03:47.999Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -130,6 +123,13 @@
 
     <url>
         <loc>https://keepmoving.ren/tags/istio/</loc>
+        <lastmod>2019-07-25T00:03:47.999Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://keepmoving.ren/tags/kubernetes/</loc>
         <lastmod>2019-07-25T00:03:47.999Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>

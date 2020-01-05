@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>新年伊始</title>
+      <link href="/life/2020-01-05-starter/"/>
+      <url>/life/2020-01-05-starter/</url>
+      
+        <content type="html"><![CDATA[<p>2020 年，一下就到了。</p><p>前年（2018）立下的两个 flag，完成了一个，另一个，争取还得看缘分。</p><p>在 2019 年，其实改变还是蛮大，特别是看了一些书，经历一些事。</p><p>眨眼间，你觉得时间过得很快，却在翻开满满的相片时，发现时间它又很充实。就像在某个晚上，回忆了下我懂事以来的每一年所经历的事，都有一些是挥之不去的。</p><p>2020 年，开年会有所变化，不管怎样，积极主动便是了。</p><p>================= 我是华丽的分割线 =================</p><p>今年的年会在省外开，三天时间，玩了几处地方。虽然时间较紧累了些，不过体验还不错（羡煞不少伙伴）。</p><p><img src="/img/20200105/IMG_7887.jpeg" alt="入睡前的记录"></p><p>回来后的隔天，家里领导生日，赶紧地定了 🎂 ，晚上及时奉上。</p><p><img src="/img/20200105/IMG_8136.jpeg" alt="Happy Birthday"></p><p>==================== 写在最后 =====================</p><p>新的一年，做好规划，虽说计划赶不上变化，但可以调整。旗子照插，完成度，拭目以待吧。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 生活点滴 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>最近琐事太多</title>
       <link href="/life/20191209-so-so-busy/"/>
       <url>/life/20191209-so-so-busy/</url>
@@ -143,9 +162,9 @@
             
             <tag> goroutine </tag>
             
-            <tag> 并发 </tag>
-            
             <tag> csp </tag>
+            
+            <tag> 并发 </tag>
             
         </tags>
       
@@ -201,9 +220,9 @@
             
             <tag> goroutine </tag>
             
-            <tag> 并发 </tag>
-            
             <tag> csp </tag>
+            
+            <tag> 并发 </tag>
             
         </tags>
       
@@ -272,7 +291,7 @@
       <link href="/life/abundance_mentality_and_scarcity_mentality/"/>
       <url>/life/abundance_mentality_and_scarcity_mentality/</url>
       
-        <content type="html"><![CDATA[<p>最近看到描述心态的两个词，在某种程度上还是比较认可的。</p><blockquote><p>富足心态 与 匮乏心态</p></blockquote><p>我们现在的成长生活环境，总是潜移默化地给我们灌输竞争的意识。</p><p>在学校里，学生成绩需要排名；在工作中，需要绩效考核，末尾淘汰；在生活中，经常要和比人比个高下，要胜过他人。</p><p>先不论对错，真的一定要这样吗？并不是。</p><blockquote><p>所谓匮乏心态，是认为世界的资源是有限的，需要争夺，别人获取的资源多了，自己的便少了。</p></blockquote><p>同个班里的学生争相排名，第一名只能有一个。工作中有人拿了A，就有人要拿D。</p><p>这种心态并不能为我们带来真正的快乐，当好友拿到了高薪offer，当好友在某方面取得了成功，来向你分享喜悦时，第一反应不是为好友祝福，而是考虑自己是怎样，甚至会眼红嫉妒。</p><p>其实，我们要多点包容心。对自己、对他人，不要那么苛刻，当别人向你分享喜悦时，移情聆听他人内心深处的喜悦，我们也会感到快乐满足。</p><blockquote><p>这便是富足心态。世界的资源是充足的，别人对资源的索取并不会造成我们的损失。</p></blockquote><p>我们树立的双赢思维会让双方都获得好处。好学生互相分享成功的学习经验，互相帮助。技能熟练的同事或领导，多帮助同事和下属提升技能，效率的提升带来的不只是公司业务的增长，也可以让自己轻松许多。</p><p>当今的房价居高不下，收入高，有房有车成了成功人士的代言词。总是会看到许多文章，字里行间说着每个人都需要时刻拼搏努力，冠以鸡汤，对普通人表现出浓厚的不懈。</p><p>但我不这么认为，我告诫自己要保持学习，但那些普通过日子的人也并不是<em>loser</em>，他们有他们自己的选择。</p><p>最后，我们要重新认识自己，想想自己的追求，想要的东西，初衷是什么。人的精力有限，不是什么都能得到，太过于贪心只会使得什么都做不成。</p><h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><p>今天写的有点乱，主要还是想表达富足与匮乏的心态，发现自己以前是偏匮乏心态的，现阶段对富足心态比较认可，有感而发。</p>]]></content>
+        <content type="html"><![CDATA[<p>最近看到描述心态的两个词，在某种程度上还是比较认可的。</p><blockquote><p>富足心态 与 匮乏心态</p></blockquote><p>我们现在的成长生活环境，总是潜移默化地给我们灌输竞争的意识。</p><p>在学校里，学生成绩需要排名；在工作中，需要绩效考核，末尾淘汰；在生活中，经常要和比人比个高下，要胜过他人。</p><p>先不论对错，真的一定要这样吗？并不是。</p><blockquote><p>所谓匮乏心态，是认为世界的资源是有限的，需要争夺，别人获取的资源多了，自己的便少了。</p></blockquote><p>同个班里的学生争相排名，第一名只能有一个。工作中有人拿了A，就有人要拿D。</p><p>这种心态并不能为我们带来真正的快乐，当好友拿到了高薪offer，当好友在某方面取得了成功，来向你分享喜悦时，第一反应不是为好友祝福，而是考虑自己是怎样，甚至会眼红嫉妒。</p><p>其实，我们要多点包容心。对自己、对他人，不要那么苛刻，当别人向你分享喜悦时，移情聆听他人内心深处的喜悦，我们也会感到快乐满足。</p><blockquote><p>这便是富足心态。世界的资源是充足的，别人对资源的索取并不会造成我们的损失。</p></blockquote><p>我们树立的双赢思维会让双方都获得好处。好学生互相分享成功的学习经验，互相帮助。技能熟练的同事或领导，多帮助同事和下属提升技能，效率的提升带来的不只是公司业务的增长，也可以让自己轻松许多。</p><p>当今的房价居高不下，收入高，有房有车成了成功人士的代言词。总是会看到许多文章，字里行间说着每个人都需要时刻拼搏努力，冠以鸡汤，对普通人表现出浓厚的不屑。</p><p>但我不这么认为，我告诫自己要保持学习，但那些普通过日子的人也并不是<em>loser</em>，他们有他们自己的选择。</p><p>最后，我们要重新认识自己，想想自己的追求，想要的东西，初衷是什么。人的精力有限，不是什么都能得到，太过于贪心只会使得什么都做不成。</p><h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><p>今天写的有点乱，主要还是想表达富足与匮乏的心态，发现自己以前是偏匮乏心态的，现阶段对富足心态比较认可，有感而发。</p>]]></content>
       
       
       <categories>
@@ -554,11 +573,11 @@
       
         <tags>
             
+            <tag> kubernetes </tag>
+            
             <tag> istio </tag>
             
             <tag> service mesh </tag>
-            
-            <tag> kubernetes </tag>
             
             <tag> sidecar </tag>
             
@@ -585,9 +604,9 @@
       
         <tags>
             
-            <tag> kubernetes </tag>
-            
             <tag> k8s </tag>
+            
+            <tag> kubernetes </tag>
             
         </tags>
       
@@ -612,11 +631,11 @@
       
         <tags>
             
+            <tag> kubernetes </tag>
+            
             <tag> istio </tag>
             
             <tag> service mesh </tag>
-            
-            <tag> kubernetes </tag>
             
             <tag> sidecar </tag>
             
@@ -643,11 +662,11 @@
       
         <tags>
             
+            <tag> kubernetes </tag>
+            
             <tag> istio </tag>
             
             <tag> service mesh </tag>
-            
-            <tag> kubernetes </tag>
             
             <tag> sidecar </tag>
             
@@ -674,11 +693,11 @@
       
         <tags>
             
+            <tag> kubernetes </tag>
+            
             <tag> istio </tag>
             
             <tag> service mesh </tag>
-            
-            <tag> kubernetes </tag>
             
             <tag> sidecar </tag>
             
@@ -786,9 +805,9 @@
       
         <tags>
             
-            <tag> kubernetes </tag>
-            
             <tag> k8s </tag>
+            
+            <tag> kubernetes </tag>
             
         </tags>
       
@@ -1069,9 +1088,9 @@
       
         <tags>
             
-            <tag> kubernetes </tag>
-            
             <tag> k8s </tag>
+            
+            <tag> kubernetes </tag>
             
         </tags>
       
@@ -1179,9 +1198,9 @@
       
         <tags>
             
-            <tag> kubernetes </tag>
-            
             <tag> k8s </tag>
+            
+            <tag> kubernetes </tag>
             
             <tag> pod </tag>
             
@@ -1208,9 +1227,9 @@
       
         <tags>
             
-            <tag> 多线程 </tag>
-            
             <tag> 并发 </tag>
+            
+            <tag> 多线程 </tag>
             
         </tags>
       
