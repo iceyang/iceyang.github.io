@@ -3,6 +3,20 @@
 
 
     <url>
+        <loc>https://keepmoving.ren/tags/golang/</loc>
+        <lastmod>2020-01-10T15:15:16.252Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://keepmoving.ren/tags/go/</loc>
+        <lastmod>2020-01-10T15:15:16.252Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>https://keepmoving.ren/tags/%E6%80%9D%E8%80%83/</loc>
         <lastmod>2020-01-05T09:19:15.884Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -17,22 +31,15 @@
     </url>
 
     <url>
-        <loc>https://keepmoving.ren/tags/golang/</loc>
-        <lastmod>2019-10-26T08:15:38.853Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://keepmoving.ren/tags/go/</loc>
-        <lastmod>2019-10-26T08:15:38.853Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>https://keepmoving.ren/tags/error/</loc>
         <lastmod>2019-10-11T13:34:46.336Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://keepmoving.ren/tags/channel/</loc>
+        <lastmod>2019-09-03T05:59:08.610Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
@@ -53,13 +60,6 @@
 
     <url>
         <loc>https://keepmoving.ren/tags/goroutine/</loc>
-        <lastmod>2019-09-03T05:59:08.610Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://keepmoving.ren/tags/channel/</loc>
         <lastmod>2019-09-03T05:59:08.610Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
