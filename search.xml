@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>Kubernetes 优雅地停止 Pod</title>
+      <link href="/kubernetes/gracefully-terminate/"/>
+      <url>/kubernetes/gracefully-terminate/</url>
+      
+        <content type="html"><![CDATA[<p><code>Pod</code>作为<code>k8s</code>的计算单元，当我们在部署新版本或者重启<code>Pod</code>时，<code>k8s</code>给我们提供了优雅退出<code>Pod</code>的机制，让我们有机会做一些事情，比如：</p><ul><li>获得更好的用户体验；</li><li>保存数据，保护数据的完整性；</li><li>完成其它善尾工作，保护相关状态。</li></ul><h2 id="k8s如何停止Pod"><a href="#k8s如何停止Pod" class="headerlink" title="k8s如何停止Pod"></a>k8s如何停止Pod</h2><p>我们要清楚<code>k8s</code>在停止<code>Pod</code>时的流程。</p><p>首先在<code>Pod</code>模板里，有一个属性<code>terminationGracePeriodSeconds</code>，默认值是30，它代表<code>Pod</code>有30秒的宽限期，过了这个时间<code>Pod</code>便被当做<code>死亡</code>。</p><h3 id="示例流程"><a href="#示例流程" class="headerlink" title="示例流程"></a>示例流程</h3><p>下面是一个示例流程：</p><ol><li>用户发送命令删除<code>Pod</code>，默认<code>terminationGracePeriodSeconds</code>（宽限期）为30s；</li><li><code>Pod</code>会根据宽限期进行更新，同时被标记为<code>Terminating</code>：<ul><li>通过命令行查询，可以看到<code>Pod</code>为<code>Terminating</code>状态；</li><li><code>Service</code>会将<code>Pod</code>从它的<code>Endpoints</code>中移除，同时<code>Replication Controller</code>也会认为<code>Pod</code>不是<em>运行状态</em>。负载均衡也不会再将流量分配到该<code>Pod</code>中；</li><li><code>Pod</code>处于<code>Terminating</code>状态时，<code>Kubelet</code>会执行<code>Pod</code>关闭流程：<ol><li>如果<code>Pod</code>定义了<code>preStop</code>的勾子，便在<code>Pod</code>中执行它。</li><li>当宽限期结束后<code>preStop</code>还在执行时，会给<code>Pod</code>内的进程发送<code>SIGTERM</code>信号（相当于kill pid），增加等待时间是2秒（扩展宽限期）。</li></ol></li></ul></li><li>当宽限期结束后，任何还在<code>Pod</code>中运行的进程都会被<code>SIGKILL</code>杀死。</li><li><code>Kubelet</code>将通过设置宽限期为0（立即删除）来完成删除 API 服务器上的 Pod。Pod 从 API 中消失，从客户端也不再可见。</li></ol><h3 id="停止流程的重点"><a href="#停止流程的重点" class="headerlink" title="停止流程的重点"></a>停止流程的重点</h3><p>在<code>Pod</code>的停止流程中，我们可以注意几个重点：</p><ol><li><code>terminationGracePeriodSeconds</code>（宽限期）：<br>这个在上面提到过了，它代表着整个<code>Pod</code>停止流程的宽限期。</li><li><code>preStop</code>勾子：<br>如果我们定义了<code>preStop</code>勾子，那在关闭<code>Pod</code>时，会先执行它。</li><li><code>SIGTERM</code>信号：<br>如果没有定义<code>preStop</code>勾子，那在关闭<code>Pod</code>时，会直接发送<code>SIGTERM</code>信号。或者是有定义<code>preStop</code>，然而在宽限期结束了，<code>preStop</code>依旧没执行完，那么也会发送<code>SIGTERM</code>信号，并扩展2秒钟的宽限期。</li><li><code>SIGKILL</code>信号：<br>当时间超过了宽限期，<code>Pod</code>中的所有进程都会被<code>SIGKILL</code>杀死。</li><li><p>如何强制删除<code>Pod</code>：<br>通过<code>kubectl delete</code>命令的<code>--grace-period</code>参数，可以覆盖掉宽限期，设置为「0」时会强制删除Pod。如果<code>kubectl</code>版本大于等于1.5，还需要增加一个<code>--force</code>参数。</p><p>默认情况下，所有删除在30秒内都是优雅的。kubectl delete 命令支持 –grace-period=<seconds> 选项，允许用户覆盖默认值并声明他们自己的宽限期。设置为 ‘0’ 会强制删除 Pod。在 kubectl 1.5以后的版本（含1.5版本）中，为了执行强制删除，您还必须为 –grace-period=0 声明一个额外的 –force 标志。</seconds></p></li></ol><h2 id="我们要如何优雅地停止Pod"><a href="#我们要如何优雅地停止Pod" class="headerlink" title="我们要如何优雅地停止Pod"></a>我们要如何优雅地停止Pod</h2><p>上面说了那么多，其实根据<code>k8s</code>提供的机制，我们只能做两件事情：</p><ol><li>定义<code>preStop</code>操作；</li><li>监听<code>SIGTERM</code>信号。</li></ol><p>对于<code>preStop</code>而言，我们可以提供两种 Hook： <em>Exec</em> 和 <em>HttpGet</em>，配置位于<code>Pod</code>的<code>.spec.containers[].lifecycle.preStop</code>中，可以为每一个<code>container</code>都做配置。<br>而监听<code>SIGTERM</code>信号，需要写在程序代码里面，当程序接收到信号后，做退出的操作。</p><h3 id="两个注意（坑）"><a href="#两个注意（坑）" class="headerlink" title="两个注意（坑）"></a>两个注意（坑）</h3><h4 id="preStop接口Path"><a href="#preStop接口Path" class="headerlink" title="preStop接口Path"></a>preStop接口Path</h4><p><code>preStop</code>如果使用的是<code>httpGet</code>的形式，要注意接口的路径问题，根据<code>k8s</code>目前<a href="https://github.com/kubernetes/kubernetes/blob/master/pkg/kubelet/lifecycle/handlers.go#L126" target="_blank" rel="noopener">代码</a>：</p><figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">url := fmt.Sprintf(<span class="string">"http://%s/%s"</span>, net.JoinHostPort(host, strconv.Itoa(port)), handler.HTTPGet.Path)</span><br><span class="line">resp, err := hr.httpGetter.Get(url)</span><br></pre></td></tr></table></figure><p>路径的拼接可能会出现问题，比如我们填写 <code>path</code>为<code>/shutdown</code>时，接收到的请求将会是：<code>{your.ip}//shutdown</code>，有两个<code>/</code>，所以你的应用很可能会没有做对相应的响应。</p><h4 id="SIGTERM信号的接收"><a href="#SIGTERM信号的接收" class="headerlink" title="SIGTERM信号的接收"></a>SIGTERM信号的接收</h4><p><code>SIGTERM</code>信号的接收需要注意，在<code>Pod</code>中只有<code>pid</code>为1的进程会接收到信号，其他进程是接收不到的。</p><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul><li><a href="https://kubernetes.io/docs/concepts/workloads/pods/pod/#termination-of-pods" target="_blank" rel="noopener">Termination of Pods</a></li><li><a href="https://github.com/kubernetes/kubernetes/issues/56770" target="_blank" rel="noopener">hardcode in Url format in httpGet handler of container lifecycle</a></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> Kubernetes </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> k8s </tag>
+            
+            <tag> kubernetes </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Go语言sync.WaitGroup用法上可能会出现的坑</title>
       <link href="/golang/waitgroup/"/>
       <url>/golang/waitgroup/</url>
@@ -35,7 +62,7 @@
       <link href="/life/2020-01-05-starter/"/>
       <url>/life/2020-01-05-starter/</url>
       
-        <content type="html"><![CDATA[<p>2020 年，一下就到了。</p><p>前年（2018）立下的两个 flag，完成了一个，另一个，争取还得看缘分。</p><p>在 2019 年，其实改变还是蛮大，特别是看了一些书，经历一些事。</p><p>眨眼间，你觉得时间过得很快，却在翻开满满的相片时，发现时间它又很充实。就像在某个晚上，回忆了下我懂事以来的每一年所经历的事，都有一些是挥之不去的。</p><p>2020 年，开年会有所变化，不管怎样，积极主动便是了。</p><p>================= 我是华丽的分割线 =================</p><p>今年的年会在省外开，三天时间，玩了几处地方。虽然时间较紧累了些，不过体验还不错（羡煞不少伙伴）。</p><p><img src="/img/20200105/IMG_7887.jpeg" alt="入睡前的记录"></p><p>回来后的隔天，家里领导生日，赶紧地定了 🎂 ，晚上及时奉上。</p><p><img src="/img/20200105/IMG_8136.jpeg" alt="Happy Birthday"></p><p>==================== 写在最后 =====================</p><p>新的一年，做好规划，虽说计划赶不上变化，但可以调整。旗子照插，完成度，拭目以待吧。</p>]]></content>
+        <content type="html"><![CDATA[<p>2020 年，一下就到了。</p><p>前年（2018）立下的两个 flag，完成了一个，另一个，争取还得看缘分。</p><p>在 2019 年，其实改变还是蛮大，特别是看了一些书，经历一些事。</p><p>眨眼间，你觉得时间过得很快，却在翻开满满的相片时，发现时间它又很充实。就像在某个晚上，回忆了下我懂事以来的每一年所经历的事，都有一些是挥之不去的。</p><p>2020 年，开年会有所变化，不管怎样，积极主动便是了。</p><p>=============== 我是华丽的分割线 ===============</p><p>今年的年会在省外开，三天时间，玩了几处地方。虽然时间较紧累了些，不过体验还不错（羡煞不少伙伴）。</p><p><img src="/img/20200105/IMG_7887.jpeg" alt="入睡前的记录"></p><p>回来后的隔天，家里领导生日，赶紧地定了 🎂 ，晚上及时奉上。</p><p><img src="/img/20200105/IMG_8136.jpeg" alt="Happy Birthday"></p><p>=================== 写在最后 ===================</p><p>新的一年，做好规划，虽说计划赶不上变化，但可以调整。旗子照插，完成度，拭目以待吧。</p>]]></content>
       
       
       <categories>

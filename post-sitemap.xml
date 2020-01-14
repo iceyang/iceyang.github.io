@@ -8,8 +8,8 @@
     </url>
 
     <url>
-        <loc>https://keepmoving.ren/golang/waitgroup/</loc>
-        <lastmod>2020-01-10T15:37:40.010Z</lastmod>
+        <loc>https://keepmoving.ren/kubernetes/gracefully-terminate/</loc>
+        <lastmod>2020-01-14T15:53:30.291Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -17,7 +17,15 @@
 
     <url>
         <loc>https://keepmoving.ren/life/2020-01-05-starter/</loc>
-        <lastmod>2020-01-05T10:07:21.221Z</lastmod>
+        <lastmod>2020-01-14T15:47:10.113Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://keepmoving.ren/golang/waitgroup/</loc>
+        <lastmod>2020-01-10T15:37:40.010Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 

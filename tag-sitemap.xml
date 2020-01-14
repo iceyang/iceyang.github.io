@@ -3,6 +3,20 @@
 
 
     <url>
+        <loc>https://keepmoving.ren/tags/kubernetes/</loc>
+        <lastmod>2020-01-14T15:53:30.291Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://keepmoving.ren/tags/k8s/</loc>
+        <lastmod>2020-01-14T15:53:30.291Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>https://keepmoving.ren/tags/golang/</loc>
         <lastmod>2020-01-10T15:37:40.010Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -129,13 +143,6 @@
     </url>
 
     <url>
-        <loc>https://keepmoving.ren/tags/kubernetes/</loc>
-        <lastmod>2019-07-25T00:03:47.999Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>https://keepmoving.ren/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/</loc>
         <lastmod>2019-07-25T00:00:17.566Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -165,13 +172,6 @@
 
     <url>
         <loc>https://keepmoving.ren/tags/pod/</loc>
-        <lastmod>2019-07-24T23:57:10.643Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://keepmoving.ren/tags/k8s/</loc>
         <lastmod>2019-07-24T23:57:10.643Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
