@@ -8,6 +8,14 @@
     </url>
 
     <url>
+        <loc>https://keepmoving.ren/life/2020-01-15-set-up-cabinet/</loc>
+        <lastmod>2020-01-16T14:49:09.453Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>https://keepmoving.ren/kubernetes/gracefully-terminate/</loc>
         <lastmod>2020-01-14T15:53:30.291Z</lastmod>
         <changefreq>weekly</changefreq>
