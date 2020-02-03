@@ -8,6 +8,14 @@
     </url>
 
     <url>
+        <loc>https://keepmoving.ren/golang/map/</loc>
+        <lastmod>2020-02-03T07:52:32.100Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>https://keepmoving.ren/life/2020-happy-new-year/</loc>
         <lastmod>2020-01-25T15:09:51.999Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -122,14 +130,6 @@
     <url>
         <loc>https://keepmoving.ren/golang/building-webservice-with-gin/</loc>
         <lastmod>2019-08-19T13:54:33.262Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://keepmoving.ren/golang/map/</loc>
-        <lastmod>2019-08-19T02:03:40.805Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 

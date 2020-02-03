@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://keepmoving.ren/golang/map/</loc>
+    <lastmod>2020-02-03</lastmod>
+  </url>  <url>
     <loc>https://keepmoving.ren/life/2020-happy-new-year/</loc>
     <lastmod>2020-01-25</lastmod>
   </url>  <url>
@@ -44,9 +47,6 @@
     <lastmod>2019-08-27</lastmod>
   </url>  <url>
     <loc>https://keepmoving.ren/golang/building-webservice-with-gin/</loc>
-    <lastmod>2019-08-19</lastmod>
-  </url>  <url>
-    <loc>https://keepmoving.ren/golang/map/</loc>
     <lastmod>2019-08-19</lastmod>
   </url>  <url>
     <loc>https://keepmoving.ren/golang/channel/</loc>
