@@ -1,17 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://keepmoving.ren/devops/docker-registry-harbor/</loc>
+    <lastmod>2020-03-13</lastmod>
+  </url>  <url>
+    <loc>https://keepmoving.ren/life/2020-happy-new-year/</loc>
+    <lastmod>2020-03-12</lastmod>
+  </url>  <url>
+    <loc>https://keepmoving.ren/kubernetes/gracefully-terminate/</loc>
+    <lastmod>2020-03-08</lastmod>
+  </url>  <url>
     <loc>https://keepmoving.ren/golang/map/</loc>
     <lastmod>2020-02-03</lastmod>
   </url>  <url>
-    <loc>https://keepmoving.ren/life/2020-happy-new-year/</loc>
-    <lastmod>2020-01-25</lastmod>
-  </url>  <url>
     <loc>https://keepmoving.ren/life/2020-01-15-set-up-cabinet/</loc>
     <lastmod>2020-01-16</lastmod>
-  </url>  <url>
-    <loc>https://keepmoving.ren/kubernetes/gracefully-terminate/</loc>
-    <lastmod>2020-01-14</lastmod>
   </url>  <url>
     <loc>https://keepmoving.ren/life/2020-01-05-starter/</loc>
     <lastmod>2020-01-14</lastmod>

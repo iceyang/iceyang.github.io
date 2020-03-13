@@ -8,6 +8,30 @@
     </url>
 
     <url>
+        <loc>https://keepmoving.ren/devops/docker-registry-harbor/</loc>
+        <lastmod>2020-03-13T13:46:05.440Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://keepmoving.ren/life/2020-happy-new-year/</loc>
+        <lastmod>2020-03-12T14:06:15.788Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://keepmoving.ren/kubernetes/gracefully-terminate/</loc>
+        <lastmod>2020-03-08T12:48:46.847Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>https://keepmoving.ren/golang/map/</loc>
         <lastmod>2020-02-03T07:52:32.100Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -16,24 +40,8 @@
     </url>
 
     <url>
-        <loc>https://keepmoving.ren/life/2020-happy-new-year/</loc>
-        <lastmod>2020-01-25T15:09:51.999Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
         <loc>https://keepmoving.ren/life/2020-01-15-set-up-cabinet/</loc>
         <lastmod>2020-01-16T14:49:09.453Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://keepmoving.ren/kubernetes/gracefully-terminate/</loc>
-        <lastmod>2020-01-14T15:53:30.291Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
