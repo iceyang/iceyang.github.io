@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>「非积极废人」随记</title>
+      <link href="/life/2020-03-30-new-challenge/"/>
+      <url>/life/2020-03-30-new-challenge/</url>
+      
+        <content type="html"><![CDATA[<p>距离去年中的心血来潮的早睡早起行动，不知不觉已快一年。</p><p>很荣幸，这次没有做积极废人，成功地养成了习惯，现在基本上早上6点几起身，洗漱吃个早餐，为自己和家人做一份中午餐，这个时候大概也才到了八点出。</p><p>因为公司离家近（不到半个钟时间），所以距离上班时间（九点半）还早的很，我经常也就直接出发，前往公司。前段时间没有做饭，我经常到公司还不到八点，着实把上早班的同事吓一跳。</p><p>最近「动森」发售，本来不想入坑的，但有朋友很感兴趣，那便一块玩呗（谁说的不肝？）。</p><p>还记得说好的二零二零年有两个 flag，第一个已经实现，第二个看来胜券在握。<br>总的来说，要把握好节奏，还是蛮难的，也差不多做了一整年的尝试，慢慢摸索出属于自己的效率计划，挺好的。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 生活点滴 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>搭建企业级镜像库Harbor（1.10）</title>
       <link href="/devops/docker-registry-harbor/"/>
       <url>/devops/docker-registry-harbor/</url>
