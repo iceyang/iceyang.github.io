@@ -8,6 +8,14 @@
     </url>
 
     <url>
+        <loc>https://keepmoving.ren/golang/interface/</loc>
+        <lastmod>2020-05-10T12:57:38.013Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>https://keepmoving.ren/life/2020-03-30-new-challenge/</loc>
         <lastmod>2020-03-30T15:17:55.652Z</lastmod>
         <changefreq>weekly</changefreq>
