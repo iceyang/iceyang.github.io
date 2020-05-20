@@ -4,6 +4,37 @@
   
     
     <entry>
+      <title>Go 语言的多态</title>
+      <link href="/golang/polymorphism/"/>
+      <url>/golang/polymorphism/</url>
+      
+        <content type="html"><![CDATA[<p>在之前的文章里，我们了解过 <a href="/golang/struct/">struct</a> 与 <a href="/golang/interface/">interface</a>。</p><p>通过结构体，我们可以将松散的数据字段组合成有意义的类型，同时它可以拥有自己的方法，让我们可以像面向对象的「类」一样去使用。</p><p>而通过接口，我们可以统一 <strong>类型与行为</strong>，非侵入性的实现允许在完全不需要改动旧代码的情况下，让 struct <strong>实现</strong> interface。</p><p>还记得面向对象中有另外一个特性：多态。</p><p>多态在 Go 语言中，是如何体现呢，我们先看一段简单的例子：</p><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Animal <span class="keyword">interface</span> &#123;</span><br><span class="line">        Eat()</span><br><span class="line">        Sleep()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Cat <span class="keyword">struct</span> &#123;</span><br><span class="line">        Name <span class="keyword">string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c Cat)</span> <span class="title">Eat</span><span class="params">()</span></span> &#123;</span><br><span class="line">        fmt.Printf(<span class="string">"Cat %s is eating.\n"</span>, c.Name)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c Cat)</span> <span class="title">Sleep</span><span class="params">()</span></span> &#123;</span><br><span class="line">        fmt.Printf(<span class="string">"Cat %s is sleeping.\n"</span>, c.Name)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Dog <span class="keyword">struct</span> &#123;</span><br><span class="line">        Name <span class="keyword">string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(d Dog)</span> <span class="title">Eat</span><span class="params">()</span></span> &#123;</span><br><span class="line">        fmt.Printf(<span class="string">"Dog %s is eating.\n"</span>, d.Name)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(d Dog)</span> <span class="title">Sleep</span><span class="params">()</span></span> &#123;</span><br><span class="line">        fmt.Printf(<span class="string">"Dog %s is sleep.\n"</span>, d.Name)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">AnimalEat</span><span class="params">(animal Animal)</span></span> &#123;</span><br><span class="line">        animal.Eat()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">TestPolymorphismOne</span><span class="params">(t *testing.T)</span></span> &#123;</span><br><span class="line">        kitty := &amp;Cat&#123;<span class="string">"kitty"</span>&#125;</span><br><span class="line">        <span class="comment">// kitty.Eat()</span></span><br><span class="line"></span><br><span class="line">        spike := &amp;Dog&#123;<span class="string">"spike"</span>&#125;</span><br><span class="line">        <span class="comment">// spike.Eat()</span></span><br><span class="line"></span><br><span class="line">        AnimalEat(kitty)</span><br><span class="line">        AnimalEat(spike)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>Go的多态是通过Interface实现的，我们定义了<code>Aniaml</code>的接口，然后<code>Cat</code>与<code>Dog</code>都实现了它的方法，另外提供了<code>func AnimalEat(animal Animal)</code>，在该函数中调用animal的Eat方法，它不需要知道具体的实现类是谁，它只知道animal实例是一个Animal，它肯定拥有Eat方法。</p><p>在测试<code>TestPolymorphism</code>中，实例化了Cat kitty与Dog spike，将他们传给函数AnimalEat，结果是：</p><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Cat kitty <span class="keyword">is</span> eating.</span><br><span class="line">Dog spike <span class="keyword">is</span> eating.</span><br></pre></td></tr></table></figure><p>这便是多态在Go中的体现。</p><p>有其他面向对象语言经验的童鞋可能会问，那struct组合struct有多态吗？比如在Java中，子类可以继承自父类，只要不同的子类他们都相同相同的父类，那么便可以将子类参数赋值给父类，在方法中达到多态的效果。</p><p>解答这个问题得回顾下struct的特性，struct的组合嵌套，其实并不是「继承」，它们的关系是 <strong>has-a</strong> 而非 <strong>is-a</strong>，并没有父类子类的概念，所以这在Go语言中是行不通的。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Golang </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> go </tag>
+            
+            <tag> golang </tag>
+            
+            <tag> interface </tag>
+            
+            <tag> polymorphism </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Go 语言基础 - 接口</title>
       <link href="/golang/interface/"/>
       <url>/golang/interface/</url>
