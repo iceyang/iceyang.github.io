@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://keepmoving.ren/life/2020-05-20-thinking/</loc>
+    <lastmod>2020-05-20</lastmod>
+  </url>  <url>
     <loc>https://keepmoving.ren/golang/polymorphism/</loc>
     <lastmod>2020-05-20</lastmod>
   </url>  <url>
