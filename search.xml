@@ -4,11 +4,11 @@
   
     
     <entry>
-      <title>Gitlab CI/CD</title>
+      <title>Gitlab CI/CD with K8S</title>
       <link href="/devops/gitlab-ci-cd/"/>
       <url>/devops/gitlab-ci-cd/</url>
       
-        <content type="html"><![CDATA[<p>五月的尾声，这个月有些许忙碌。这周主要是在尝试Gitlab的CI/CD，考虑替代Jenkins的可行性。<br>中途并没有那么顺利，也不是复杂度的问题，就是调试脚本这事情，总觉得不像debug程序那么顺畅，就类似搭建 Harbor和简单的K8S集群，想一次点亮还真不容易，但是一旦你通过了一次，你发现第二次便无比顺利。</p><p>这次是想记录用Gitlab CI/CD的过程，也算是把遇到的问题做一个记录，供自己、其他童鞋们查询。</p>]]></content>
+        <content type="html"><![CDATA[<p>五月的尾声，这个月有些许忙碌。这周主要是在尝试Gitlab的CI/CD，考虑替代Jenkins的可行性。<br>中途并没有那么顺利，也不是复杂度的问题，就是调试脚本这事情，总觉得不像debug程序那么顺畅，就类似搭建 Harbor和简单的K8S集群，想一次点亮还真不容易，但是一旦你通过了一次，你发现第二次便无比顺利。</p><p>这次是想记录用Gitlab CI/CD的过程，也算是把遇到的问题做一个记录，供自己、其他童鞋们查询。</p><p>这次会介绍使用 Gitlab CI/CD 搭配 K8S 部署项目的过程。</p><p>[TODO]</p>]]></content>
       
       
       <categories>
@@ -19,6 +19,8 @@
       
       
         <tags>
+            
+            <tag> kubernetes </tag>
             
             <tag> gitlab </tag>
             
