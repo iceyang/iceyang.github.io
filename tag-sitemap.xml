@@ -3,43 +3,57 @@
 
 
     <url>
-        <loc>https://keepmoving.ren/tags/ci-cd/</loc>
-        <lastmod>2020-07-09T23:21:05.903Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://keepmoving.ren/tags/devops/</loc>
-        <lastmod>2020-07-09T23:21:05.903Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://keepmoving.ren/tags/gitlab/</loc>
-        <lastmod>2020-07-09T23:21:05.903Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://keepmoving.ren/tags/kubernetes/</loc>
-        <lastmod>2020-07-09T23:21:05.903Z</lastmod>
+        <loc>https://keepmoving.ren/tags/error/</loc>
+        <lastmod>2020-08-26T01:11:49.437Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>https://keepmoving.ren/tags/golang/</loc>
-        <lastmod>2020-07-09T23:10:00.605Z</lastmod>
+        <lastmod>2020-08-26T01:11:49.437Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>https://keepmoving.ren/tags/go/</loc>
-        <lastmod>2020-07-09T23:10:00.605Z</lastmod>
+        <lastmod>2020-08-26T01:11:49.437Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://keepmoving.ren/tags/ci-cd/</loc>
+        <lastmod>2020-07-25T14:57:07.470Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://keepmoving.ren/tags/devops/</loc>
+        <lastmod>2020-07-25T14:57:07.470Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://keepmoving.ren/tags/gitlab/</loc>
+        <lastmod>2020-07-25T14:57:07.470Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://keepmoving.ren/tags/kubernetes/</loc>
+        <lastmod>2020-07-25T14:57:07.470Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://keepmoving.ren/tags/k8s/</loc>
+        <lastmod>2020-07-25T14:57:07.470Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
@@ -80,13 +94,6 @@
     </url>
 
     <url>
-        <loc>https://keepmoving.ren/tags/k8s/</loc>
-        <lastmod>2020-03-08T12:48:46.847Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>https://keepmoving.ren/tags/directory/</loc>
         <lastmod>2020-02-03T07:52:32.100Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -110,13 +117,6 @@
     <url>
         <loc>https://keepmoving.ren/tags/struct/</loc>
         <lastmod>2019-10-26T08:15:38.853Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://keepmoving.ren/tags/error/</loc>
-        <lastmod>2019-10-11T13:34:46.336Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
