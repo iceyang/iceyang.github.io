@@ -33,11 +33,38 @@
     
     
     <entry>
+      <title>Git commit规范</title>
+      <link href="/tools/git-commit-msg/"/>
+      <url>/tools/git-commit-msg/</url>
+      
+        <content type="html"><![CDATA[<p>Git commit规范</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 工具 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> git </tag>
+            
+            <tag> git-commit </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>用 Gitlab CI 持续集成 k8s</title>
       <link href="/devops/gitlab-ci-cd/"/>
       <url>/devops/gitlab-ci-cd/</url>
       
-        <content type="html"><![CDATA[<p>五月的尾声，这个月有些许忙碌。这周主要是在调Gitlab的CI/CD，考虑替代Jenkins的可行性。<br>中途并没有那么顺利，也不是复杂度的问题，就是调试脚本这事情，总觉得不像debug程序那么顺畅，就类似搭建 Harbor 和简单的 K8S 集群，想一次点亮还真不容易，但是一旦你通过了一次，你发现第二次便无比顺利。</p><p>这次是想记录用Gitlab CI/CD的过程，也算是把遇到的问题做一个记录，供自己、其他童鞋们查询。</p><p>通过文章，你会知道如何使用 Gitlab CI/CD 搭配 K8S 部署进行项目部署（当然，这只是最简单的使用，根据生产环境需要，可以自己做调整）。</p><h2 id="关于CI-CD"><a href="#关于CI-CD" class="headerlink" title="关于CI/CD"></a>关于CI/CD</h2><p>CI/CD中的CI，指的是持续集成，也就是代码的自动化流程，应用代码的更改会被自动测试、构建，发布到共享库。<br>CD 指的是持续交付/持续部署，自动化的部署可以减少人力成本，同时提高交付的速度。</p><p>现在的Gitlab CI，已经足够方便，在使用 Gitlab 作为代码仓库的同时，又拥有了部署项目的能力，是非常棒的。</p><p>要让项目集成Gitlab CI，只需要在项目中增加文件<code>.gitlab-ci.yml</code>就可以了。</p><h2 id="达到的效果"><a href="#达到的效果" class="headerlink" title="达到的效果"></a>达到的效果</h2><h2 id="基础概念"><a href="#基础概念" class="headerlink" title="基础概念"></a>基础概念</h2><h2 id="Gitlab-Runner"><a href="#Gitlab-Runner" class="headerlink" title="Gitlab Runner"></a>Gitlab Runner</h2><h2 id="如何做"><a href="#如何做" class="headerlink" title="如何做"></a>如何做</h2><h2 id="让我们实践一下"><a href="#让我们实践一下" class="headerlink" title="让我们实践一下"></a>让我们实践一下</h2><h2 id="尾声"><a href="#尾声" class="headerlink" title="尾声"></a>尾声</h2><p>（时已七月底）<br>本来在5月31日的时候就开了这篇记录，结果一直到现在才补上内容，主要还是因为最近空闲时间太少，回家倒头便睡，这会终于有空填上了。</p><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul><li><a href="https://docs.gitlab.com/ee/ci/docker/using_docker_images.html#define-an-image-from-a-private-container-registry" target="_blank" rel="noopener">using_docker_images.html</a></li><li><a href="https://docs.gitlab.com/ee/ci/docker/using_docker_build.html#use-docker-in-docker-workflow-with-docker-executor" target="_blank" rel="noopener">using_docker_build.html</a></li><li><a href="https://docs.gitlab.com/ee/ci/caching/#caching-go-dependencies" target="_blank" rel="noopener">caching-go-dependencies</a></li><li><a href="https://docs.gitlab.com/runner/install/docker.html" target="_blank" rel="noopener">Run GitLab Runner in a container</a></li><li><a href="https://docs.gitlab.com/runner/configuration/tls-self-signed.html" target="_blank" rel="noopener">Self-signed certificates or custom Certification Authorities</a></li><li><a href="https://gitlab.com/gitlab-org/gitlab-runner/-/issues/1350" target="_blank" rel="noopener">Getting x509: certificate signed by unknown authority when talking to docker registry</a></li></ul>]]></content>
+        <content type="html"><![CDATA[<p>五月的尾声，这个月有些许忙碌。这周主要是在调Gitlab的CI/CD，考虑替代Jenkins的可行性。<br>中途并没有那么顺利，也不是复杂度的问题，就是调试脚本这事情，总觉得不像debug程序那么顺畅，就类似搭建 Harbor 和简单的 K8S 集群，想一次点亮还真不容易，但是一旦你通过了一次，你发现第二次便无比顺利。</p><p>这次是想记录用Gitlab CI/CD的过程，也算是把遇到的问题做一个记录，供自己、其他童鞋们查询。</p><p>通过文章，你会知道如何使用 Gitlab CI/CD 搭配 K8S 部署进行项目部署（当然，这只是最简单的使用，根据生产环境需要，可以自己做调整）。</p><h2 id="关于CI-CD"><a href="#关于CI-CD" class="headerlink" title="关于CI/CD"></a>关于CI/CD</h2><p>CI/CD中的CI，指的是持续集成，也就是代码的自动化流程，应用代码的更改会被自动测试、构建，发布到共享库。<br>CD 指的是持续交付/持续部署，自动化的部署可以减少人力成本，同时提高交付的速度。</p><p>现在的Gitlab CI，已经足够方便，在使用 Gitlab 作为代码仓库的同时，又拥有了部署项目的能力，是非常棒的。</p><p>要让项目集成Gitlab CI，只需要在项目中增加文件<code>.gitlab-ci.yml</code>就可以了。</p><h2 id="达到的效果"><a href="#达到的效果" class="headerlink" title="达到的效果"></a>达到的效果</h2><p>通过Gitlab CI，我们想让每一条分支都有一个可以测试的环境。<br>同时，我们会将打了<code>Tag</code>的分支部署到<code>staging</code>环境，在<code>staging</code>测试完毕后，部署到<code>production</code>环境。</p><h2 id="启动-Gitlab-Runner"><a href="#启动-Gitlab-Runner" class="headerlink" title="启动 Gitlab Runner"></a>启动 Gitlab Runner</h2><p>在 Gitlab CI 中，有两个概念：Pipeline、Job。Pipeline 是一条自动化CI，由Job组成。<br>而这些工作，都需要由Gitlab Runner来完成，所以，首先我们要启动 Runner，并配置到项目中。</p><p>Runner 的安装有许多种方式，这里我们选择 Docker 来启动它。（如果你想使用其他方式，参考<a href="https://docs.gitlab.com/runner/#install-gitlab-runner" target="_blank" rel="noopener">这里</a>)</p><blockquote><p>Docker 的版本最少为<code>v1.13.0</code></p></blockquote><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> docker run -d --name gitlab-runner --restart always \</span><br><span class="line">   -v /srv/gitlab-runner/config:/etc/gitlab-runner \</span><br><span class="line">   -v /var/run/docker.sock:/var/run/docker.sock \</span><br><span class="line">   gitlab/gitlab-runner:latest</span><br></pre></td></tr></table></figure><p>配置文件存放于：<code>/srv/gitlab-runner/config</code>。</p><p>启动成功后，我们要对runner进行注册，注册完成的配置会写入到上面的配置文件中。</p><h2 id="编写-gitlab-ci-yml"><a href="#编写-gitlab-ci-yml" class="headerlink" title="编写 .gitlab-ci.yml"></a>编写 .gitlab-ci.yml</h2><h3 id="基础概念"><a href="#基础概念" class="headerlink" title="基础概念"></a>基础概念</h3><h3 id="让项目用起来"><a href="#让项目用起来" class="headerlink" title="让项目用起来"></a>让项目用起来</h3><h2 id="尾声"><a href="#尾声" class="headerlink" title="尾声"></a>尾声</h2><p>（时已七月底）<br>本来在5月31日的时候就开了这篇记录，结果一直到现在才补上内容，主要还是因为最近空闲时间太少，回家倒头便睡，这会终于有空填上了。</p><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul><li><a href="https://docs.gitlab.com/ee/ci/docker/using_docker_images.html#define-an-image-from-a-private-container-registry" target="_blank" rel="noopener">using_docker_images.html</a></li><li><a href="https://docs.gitlab.com/ee/ci/docker/using_docker_build.html#use-docker-in-docker-workflow-with-docker-executor" target="_blank" rel="noopener">using_docker_build.html</a></li><li><a href="https://docs.gitlab.com/ee/ci/caching/#caching-go-dependencies" target="_blank" rel="noopener">caching-go-dependencies</a></li><li><a href="https://docs.gitlab.com/runner/install/docker.html" target="_blank" rel="noopener">Run GitLab Runner in a container</a></li><li><a href="https://docs.gitlab.com/runner/configuration/tls-self-signed.html" target="_blank" rel="noopener">Self-signed certificates or custom Certification Authorities</a></li><li><a href="https://gitlab.com/gitlab-org/gitlab-runner/-/issues/1350" target="_blank" rel="noopener">Getting x509: certificate signed by unknown authority when talking to docker registry</a></li></ul>]]></content>
       
       
       <categories>

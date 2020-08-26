@@ -3,6 +3,55 @@
 
 
     <url>
+        <loc>https://keepmoving.ren/tags/git-commit/</loc>
+        <lastmod>2020-08-26T01:16:01.578Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://keepmoving.ren/tags/git/</loc>
+        <lastmod>2020-08-26T01:16:01.578Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://keepmoving.ren/tags/ci-cd/</loc>
+        <lastmod>2020-08-26T01:16:01.576Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://keepmoving.ren/tags/devops/</loc>
+        <lastmod>2020-08-26T01:16:01.576Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://keepmoving.ren/tags/gitlab/</loc>
+        <lastmod>2020-08-26T01:16:01.576Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://keepmoving.ren/tags/kubernetes/</loc>
+        <lastmod>2020-08-26T01:16:01.576Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://keepmoving.ren/tags/k8s/</loc>
+        <lastmod>2020-08-26T01:16:01.576Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>https://keepmoving.ren/tags/error/</loc>
         <lastmod>2020-08-26T01:11:49.437Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -19,41 +68,6 @@
     <url>
         <loc>https://keepmoving.ren/tags/go/</loc>
         <lastmod>2020-08-26T01:11:49.437Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://keepmoving.ren/tags/ci-cd/</loc>
-        <lastmod>2020-07-25T14:57:07.470Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://keepmoving.ren/tags/devops/</loc>
-        <lastmod>2020-07-25T14:57:07.470Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://keepmoving.ren/tags/gitlab/</loc>
-        <lastmod>2020-07-25T14:57:07.470Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://keepmoving.ren/tags/kubernetes/</loc>
-        <lastmod>2020-07-25T14:57:07.470Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://keepmoving.ren/tags/k8s/</loc>
-        <lastmod>2020-07-25T14:57:07.470Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
@@ -361,13 +375,6 @@
 
     <url>
         <loc>https://keepmoving.ren/tags/gitflow/</loc>
-        <lastmod>2019-05-19T05:30:00.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://keepmoving.ren/tags/git/</loc>
         <lastmod>2019-05-19T05:30:00.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>

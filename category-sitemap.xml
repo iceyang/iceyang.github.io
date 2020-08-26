@@ -8,15 +8,22 @@
     </url>
 
     <url>
-        <loc>https://keepmoving.ren/categories/Golang/</loc>
-        <lastmod>2020-08-26T01:11:49.437Z</lastmod>
+        <loc>https://keepmoving.ren/categories/%E5%B7%A5%E5%85%B7/</loc>
+        <lastmod>2020-08-26T01:16:01.578Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>https://keepmoving.ren/categories/Devops/</loc>
-        <lastmod>2020-07-25T14:57:07.470Z</lastmod>
+        <lastmod>2020-08-26T01:16:01.576Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://keepmoving.ren/categories/Golang/</loc>
+        <lastmod>2020-08-26T01:11:49.437Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
@@ -80,13 +87,6 @@
     <url>
         <loc>https://keepmoving.ren/categories/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/</loc>
         <lastmod>2019-07-03T08:24:20.263Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://keepmoving.ren/categories/%E5%B7%A5%E5%85%B7/</loc>
-        <lastmod>2019-06-02T14:15:29.233Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>

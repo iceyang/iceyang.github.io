@@ -8,8 +8,8 @@
     </url>
 
     <url>
-        <loc>https://keepmoving.ren/golang/error-handling-2/</loc>
-        <lastmod>2020-08-26T01:11:49.437Z</lastmod>
+        <loc>https://keepmoving.ren/tools/git-commit-msg/</loc>
+        <lastmod>2020-08-26T01:16:01.578Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -17,7 +17,15 @@
 
     <url>
         <loc>https://keepmoving.ren/devops/gitlab-ci-cd/</loc>
-        <lastmod>2020-07-25T14:57:07.470Z</lastmod>
+        <lastmod>2020-08-26T01:16:01.576Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://keepmoving.ren/golang/error-handling-2/</loc>
+        <lastmod>2020-08-26T01:11:49.437Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
