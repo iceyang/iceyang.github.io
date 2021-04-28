@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>关于Mongodb ObjectID顺序问题</title>
+      <link href="/database/mongo/objectid-order/"/>
+      <url>/database/mongo/objectid-order/</url>
+      
+        <content type="html"><![CDATA[<blockquote><p>在mongodb中，当业务希望按时间排序获取数据时，我们可能会直接采用 _id 来 sort ，因为我们知道默认 _id 的类型是ObjectID，它包含了时间戳信息，而且是有索引的。</p><p>最近一个情况却让我发现这样使用可能会出现意料之外的行为。表现就是：<br>两条新插入数据库的数据，在sort使用了<code>{_id: -1}</code>之后，慢插入的那条按理应该排在前面，然而它却排在后面。</p></blockquote><h2 id="为什么有顺序问题"><a href="#为什么有顺序问题" class="headerlink" title="为什么有顺序问题"></a>为什么有顺序问题</h2><p>首先我们要回归到ObjectID的组成结构，根据官方描述，ObjectID应该由下面几个部分构成：</p><ul><li>4个字节的时间戳，精确到秒级别</li><li>5个字节的随机数，其中应该包括3个字节的机器码以及2个字节的进程ID</li><li>3个字节的自增计数器，会有一个随机的初始化数值</li></ul><p>所以，为什么顺序不一定有序？<br><strong>原因在于，我们并不能保证组成id的中间5个字节是有序的</strong>。</p><ol><li>比如相同机器下，在同一时刻，进程ID大的进程所产生的ObjectID，会比进程ID小的要大。</li><li>比如在不同机器下的同一时刻，影响id排序的除了进程ID，还有机器码。</li><li>ObjectID由客户端生成时，机器的时间偏移，也可能导致时间戳的不一致</li></ol><h2 id="如何解决"><a href="#如何解决" class="headerlink" title="如何解决"></a>如何解决</h2><ul><li><p>时间粒度问题<br>  因为ObjectID只记录到秒级别，那我们可以提供多一个字段，将粒度更小一些，当时间信息十分紧要，而且需要严格按时间排序时，使用这个字段而非_id</p></li><li><p>由同一个进程生成ObjectID<br>  因为我们知道了为什么顺序不一定有序的原因在于除了时间戳之外的信息：机器码、进程ID、计数器。那只要保证机器码和进程ID一致，在同一时间下产生的ObjectID应该就是有序的。但缺点却是很明显的，因为ObjectID设计的初衷就是为了分布式，而此方案将会让服务变成了单点。</p></li><li><p>主动控制ObjectID的时间<br>  当我们有两条数据，他们有明显的先后顺序且对时间不是那么敏感时，那我们可以主动设置ObjectID让他们有序，比如拿到第一条的id后，第二条的id依赖第一条来让时间+1。</p></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 数据库 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> database </tag>
+            
+            <tag> mongo </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Go 错误处理（二）</title>
       <link href="/golang/error-handling-2/"/>
       <url>/golang/error-handling-2/</url>
