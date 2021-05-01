@@ -4,7 +4,7 @@
   
     
     <entry>
-      <title>Mongo - Go driver 连接池空闲设置</title>
+      <title>Mongodb - Go driver 连接池空闲设置</title>
       <link href="/database/mongo/mongo-go-driver-pool/"/>
       <url>/database/mongo/mongo-go-driver-pool/</url>
       
@@ -31,7 +31,7 @@
     
     
     <entry>
-      <title>关于Mongodb ObjectID顺序问题</title>
+      <title>Mongodb - ObjectID顺序问题</title>
       <link href="/database/mongo/objectid-order/"/>
       <url>/database/mongo/objectid-order/</url>
       
