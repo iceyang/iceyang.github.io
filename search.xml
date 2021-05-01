@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>Mongo - Go driver 连接池空闲设置</title>
+      <link href="/database/mongo/mongo-go-driver-pool/"/>
+      <url>/database/mongo/mongo-go-driver-pool/</url>
+      
+        <content type="html"><![CDATA[<p>最近线上的mongo出现了连接数报警，登上去查看后，发现连接数上去之后一直没有降下来，而很多会话都处于「不活跃」状态。</p><p>最开始是想是不是因为程序已经重启了，产生了新连接，而mongo服务端一直保持着旧连接没有释放。但通过对比连接数上涨的时间，已经过去蛮久了，作为TCP连接，假设一方连接已经中断，mongo服务端这时候理应也要释放了。</p><p>所以只能是：这些不活跃会话接其实还是保持着连接。<br>通过这个思路，最终找到了原因，客户端连接池的空闲连接一直没有释放。</p><p>mongo go driver的连接池，主要有这么几项设置：</p><figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> poolConfig <span class="keyword">struct</span> &#123;</span><br><span class="line">        Address     address.Address</span><br><span class="line">        MinPoolSize <span class="keyword">uint64</span></span><br><span class="line">        MaxPoolSize <span class="keyword">uint64</span></span><br><span class="line">        MaxIdleTime time.Duration</span><br><span class="line">        PoolMonitor *event.PoolMonitor</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>这次最主要的关注点就在<code>MaxIdleTime</code>，它代表着连接最大空闲时间。由于之前的使用当中并没有特意去配置，所以使用了默认配置，相当于没有限制。</p><p>另外还有PoolSize的设置，默认<code>MaxPoolSize</code>是100，也就是说，如果没有配置超时时间，一个连接池就有可能握住100个连接永不释放。</p><blockquote><p>针对上面的空闲连接没有释放问题，很简单，我们只需要根据业务场景，考虑是否需要加上连接的最大空闲时间即可，比如1小时，半小时。</p></blockquote><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://github.com/mongodb/mongo-go-driver/blob/master/x/mongo/driver/topology/pool.go" target="_blank" rel="noopener">mongo-go-driver/pool.go at master · mongodb/mongo-go-driver · GitHub</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 数据库 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> database </tag>
+            
+            <tag> mongo </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>关于Mongodb ObjectID顺序问题</title>
       <link href="/database/mongo/objectid-order/"/>
       <url>/database/mongo/objectid-order/</url>
