@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://keepmoving.ren/golang/channel/</loc>
+    <lastmod>2021-05-07</lastmod>
+  </url>  <url>
     <loc>https://keepmoving.ren/database/mongo/mongo-go-driver-pool/</loc>
     <lastmod>2021-05-01</lastmod>
   </url>  <url>
@@ -77,9 +80,6 @@
     <lastmod>2019-08-27</lastmod>
   </url>  <url>
     <loc>https://keepmoving.ren/golang/building-webservice-with-gin/</loc>
-    <lastmod>2019-08-19</lastmod>
-  </url>  <url>
-    <loc>https://keepmoving.ren/golang/channel/</loc>
     <lastmod>2019-08-19</lastmod>
   </url>  <url>
     <loc>https://keepmoving.ren/golang/array-and-slice/</loc>
